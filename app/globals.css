@@ -1,26 +1,220 @@
 @import "tailwindcss";
 
+/* ─── Design Tokens ──────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:          #07070a;
+  --bg-2:        #0e0e14;
+  --surface:     rgba(255,255,255,0.035);
+  --surface-2:   rgba(255,255,255,0.06);
+  --border:      rgba(255,255,255,0.08);
+  --border-2:    rgba(255,255,255,0.14);
+  --fg:          #c4c4d8;
+  --fg-2:        #7878a0;
+  --fg-3:        #48485e;
+
+  --violet:      #6258c8;
+  --violet-2:    #8878d0;
+  --violet-glow: rgba(98,88,200,0.18);
+  --rose:        #b84e74;
+  --emerald:     #28a07a;
+  --amber:       #c49318;
+
+  --radius-sm:   6px;
+  --radius:      12px;
+  --radius-lg:   18px;
+  --radius-xl:   24px;
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.4);
+  --shadow:      0 4px 24px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.6);
+  --shadow-lg:   0 8px 48px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.5);
+  --glow:        0 0 40px var(--violet-glow);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ─── Reset & Base ───────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; color-scheme: dark; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ─── Glass Card ─────────────────────────────────── */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.0);
+  -webkit-backdrop-filter: blur(16px) saturate(1.0);
+}
+
+.glass-2 {
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  backdrop-filter: blur(20px) saturate(1.05);
+  -webkit-backdrop-filter: blur(20px) saturate(1.05);
+}
+
+/* ─── Gradient Text ──────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #8878d0 0%, #6258c8 50%, #b84e74 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-violet {
+  background: linear-gradient(135deg, #9890cc 0%, #6258c8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Glow Button ────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, #6258c8, #5048b0);
+  color: #c4c4d8;
+  border: none;
+  box-shadow: 0 0 0 1px rgba(98,88,200,0.3), 0 4px 16px rgba(98,88,200,0.18);
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 0 1px rgba(98,88,200,0.45), 0 6px 22px rgba(98,88,200,0.25);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--fg);
+  border: 1px solid var(--border-2);
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  background: var(--surface-2);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
+/* ─── Animated Gradient Mesh ─────────────────────── */
+.mesh-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.mesh-bg::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(124,111,247,0.15) 0%, transparent 60%);
+  top: -200px; left: 50%;
+  transform: translateX(-50%);
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+.mesh-bg::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(240,98,146,0.08) 0%, transparent 60%);
+  top: 100px; right: -100px;
+  animation: pulse-slow 10s ease-in-out infinite reverse;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 1;   transform: translateX(-50%) scale(1.1); }
+}
+
+/* ─── Shimmer ────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Fade In ────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.5s ease forwards; }
+.fade-up-2 { animation: fadeUp 0.5s 0.1s ease both; }
+.fade-up-3 { animation: fadeUp 0.5s 0.2s ease both; }
+.fade-up-4 { animation: fadeUp 0.5s 0.3s ease both; }
+
+/* ─── Category Pills ─────────────────────────────── */
+.pill-f2l     { background: rgba(98,88,200,0.12);  color: #8878d0; border: 1px solid rgba(98,88,200,0.22); }
+.pill-oll     { background: rgba(184,78,116,0.12); color: #c07898; border: 1px solid rgba(184,78,116,0.22); }
+.pill-pll     { background: rgba(40,160,122,0.12); color: #50a888; border: 1px solid rgba(40,160,122,0.22); }
+.pill-adv     { background: rgba(196,147,24,0.12); color: #b89040; border: 1px solid rgba(196,147,24,0.22); }
+
+/* ─── Code / Algorithm ───────────────────────────── */
+.alg-text {
+  font-family: var(--font-geist-mono, 'Fira Code', monospace);
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+  color: var(--violet-2);
+}
+
+/* ─── Divider ────────────────────────────────────── */
+.section-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-2), transparent);
+}
+
+/* ─── Solid Card ─────────────────────────────────── */
+.card-solid {
+  background: #0e0e18;
+  border: 1px solid var(--border);
+}
+
+/* ─── Card Hover ─────────────────────────────────── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── Horizon Hero ───────────────────────────────── */
+@keyframes horizonFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.horizon-section-fade {
+  animation: horizonFadeIn 0.5s ease forwards;
 }
