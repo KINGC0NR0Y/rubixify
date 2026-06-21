@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, X, ArrowRight, Command } from 'lucide-react';
+import { Search, X, ArrowRight } from 'lucide-react';
 import { searchAlgorithms } from '@/lib/algorithms';
 
 interface Props {
@@ -25,9 +25,7 @@ export default function GlobalSearch({ onClose }: Props) {
 
   useEffect(() => {
     inputRef.current?.focus();
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [onClose]);
@@ -39,94 +37,179 @@ export default function GlobalSearch({ onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4"
-      style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)' }}
+      className="fixed inset-0 z-100 flex items-start justify-center pt-16 px-4"
+      style={{ background: 'rgba(10,10,10,0.75)', backdropFilter: 'blur(4px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
+      {/* Comic modal panel */}
       <div
-        className="w-full max-w-xl rounded-2xl overflow-hidden"
+        className="w-full max-w-xl overflow-hidden"
         style={{
-          background: 'rgba(14,14,20,0.95)',
-          border: '1px solid var(--border-2)',
-          boxShadow: 'var(--shadow-lg), 0 0 60px rgba(124,111,247,0.1)',
+          background: '#FFFDF4',
+          backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px)',
+          backgroundSize: '16px 16px',
+          border: '4px solid #0A0A0A',
+          boxShadow: '8px 8px 0 #0A0A0A',
+          borderRadius: 4,
         }}
       >
-        {/* Input row */}
+        {/* Yellow header bar */}
         <div
-          className="flex items-center gap-3 px-4 py-3.5 border-b"
-          style={{ borderColor: 'var(--border)' }}
+          style={{
+            background: '#FFD500',
+            borderBottom: '3px solid #0A0A0A',
+            padding: '10px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
         >
-          <Search size={15} style={{ color: 'var(--violet-2)', flexShrink: 0 }} />
-          <input
-            ref={inputRef}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search algorithms, cases, notation..."
-            className="flex-1 bg-transparent text-sm outline-none placeholder:text-(--fg-3)"
-            style={{ color: 'var(--fg)' }}
-          />
+          <span style={{
+            fontFamily: 'var(--font-bangers, Bangers, cursive)',
+            fontSize: '1rem',
+            letterSpacing: '0.2em',
+            color: '#0A0A0A',
+          }}>
+            SEARCH ALGORITHMS
+          </span>
           <button
             onClick={onClose}
-            className="p-1 rounded-md transition-colors hover:bg-white/8"
-            style={{ color: 'var(--fg-3)' }}
+            style={{
+              background: '#0A0A0A',
+              color: '#FFFFFF',
+              border: 'none',
+              borderRadius: 2,
+              padding: '3px 6px',
+              cursor: 'pointer',
+            }}
           >
             <X size={14} />
           </button>
         </div>
 
+        {/* Input row */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            padding: '12px 16px',
+            borderBottom: '3px solid #0A0A0A',
+            background: '#FFFFFF',
+          }}
+        >
+          <Search size={15} style={{ color: '#0045AD', flexShrink: 0 }} />
+          <input
+            ref={inputRef}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search by name, notation, or case..."
+            style={{
+              flex: 1,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              fontSize: '0.95rem',
+              color: '#0A0A0A',
+              fontWeight: 600,
+            }}
+          />
+          {query && (
+            <button
+              onClick={() => setQuery('')}
+              style={{ color: '#888888', background: 'none', border: 'none', cursor: 'pointer', padding: 2 }}
+            >
+              <X size={13} />
+            </button>
+          )}
+        </div>
+
         {/* Results */}
         {results.length > 0 ? (
-          <ul className="max-h-80 overflow-y-auto py-1">
-            {results.map((alg) => (
-              <li key={alg.id}>
+          <ul style={{ maxHeight: 320, overflowY: 'auto' }}>
+            {results.map((alg, i) => (
+              <li key={alg.id} style={{ borderBottom: i < results.length - 1 ? '2px solid #0A0A0A' : 'none' }}>
                 <button
                   onClick={() => goTo(alg.id)}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-white/4 group"
+                  className="group"
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    padding: '12px 16px',
+                    textAlign: 'left',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'background 0.1s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,213,0,0.2)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <span className={`text-xs font-mono px-2 py-0.5 rounded-full shrink-0 ${pillClass[alg.category] ?? 'pill-f2l'}`}>
+                  <span className={`text-xs font-bold px-2 py-0.5 shrink-0 ${pillClass[alg.category] ?? 'pill-f2l'}`}
+                    style={{ borderRadius: 2 }}>
                     {alg.category}
                   </span>
-                  <div className="flex-1 min-w-0">
-                    <p
-                      className="text-sm font-medium truncate"
-                      style={{ color: 'var(--fg)' }}
-                    >
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0A0A0A', margin: 0 }} className="truncate">
                       {alg.name}
                     </p>
-                    <p
-                      className="text-xs truncate alg-text"
-                      style={{ fontSize: '11px', color: 'var(--fg-3)' }}
-                    >
+                    <p className="alg-text truncate" style={{ fontSize: '0.72rem', margin: 0, color: '#555555' }}>
                       {alg.alg || 'Skip'}
                     </p>
                   </div>
-                  <ArrowRight
-                    size={13}
-                    className="opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ color: 'var(--violet-2)' }}
-                  />
+                  <ArrowRight size={13} style={{ color: '#B90000', flexShrink: 0 }} />
                 </button>
               </li>
             ))}
           </ul>
         ) : query.trim().length > 0 ? (
-          <div className="px-4 py-10 text-center text-sm" style={{ color: 'var(--fg-2)' }}>
+          <div style={{ padding: '32px 16px', textAlign: 'center', color: '#555555', fontSize: '0.88rem', fontWeight: 600 }}>
             No algorithms found for &quot;{query}&quot;
           </div>
         ) : (
-          <div className="px-4 py-8 text-center" style={{ color: 'var(--fg-3)' }}>
-            <Command size={20} className="mx-auto mb-3 opacity-50" />
-            <p className="text-sm">Type to search F2L, OLL, PLL or Advanced algorithms</p>
+          <div style={{ padding: '28px 16px', textAlign: 'center' }}>
+            <div style={{
+              fontFamily: 'var(--font-bangers, Bangers, cursive)',
+              fontSize: '1.2rem',
+              letterSpacing: '0.1em',
+              color: '#B90000',
+              marginBottom: 6,
+            }}>
+              START TYPING!
+            </div>
+            <p style={{ fontSize: '0.8rem', color: '#555555', fontWeight: 600 }}>
+              Search F2L, OLL, PLL, or Advanced algorithms
+            </p>
           </div>
         )}
 
-        {/* Footer hint */}
+        {/* Footer */}
         <div
-          className="px-4 py-2.5 flex items-center gap-3 border-t text-xs"
-          style={{ borderColor: 'var(--border)', color: 'var(--fg-3)' }}
+          style={{
+            padding: '8px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            borderTop: '3px solid #0A0A0A',
+            background: '#0A0A0A',
+          }}
         >
-          <span><kbd className="px-1 rounded" style={{ background: '#181828', border: '1px solid var(--border)' }}>↵</kbd> to select</span>
-          <span><kbd className="px-1 rounded" style={{ background: '#181828', border: '1px solid var(--border)' }}>esc</kbd> to close</span>
+          {[['↵', 'select'], ['esc', 'close']].map(([key, label]) => (
+            <span key={key} style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <kbd style={{
+                background: '#FFD500',
+                color: '#0A0A0A',
+                border: '1px solid rgba(255,255,255,0.3)',
+                borderRadius: 2,
+                padding: '1px 5px',
+                fontSize: '0.7rem',
+                fontWeight: 700,
+              }}>{key}</kbd>
+              {label}
+            </span>
+          ))}
         </div>
       </div>
     </div>

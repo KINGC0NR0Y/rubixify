@@ -28,12 +28,12 @@ export default async function AlgorithmPage({ params }: { params: Promise<{ id: 
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
-      <div className="flex items-center gap-2 text-xs mb-6" style={{ color: 'var(--muted)' }}>
-        <Link href="/" style={{ color: 'var(--muted)' }}>Home</Link>
-        <span>/</span>
-        <Link href="/algorithms" style={{ color: 'var(--muted)' }}>Algorithms</Link>
-        <span>/</span>
-        <span style={{ color: 'var(--foreground)' }}>{alg.name}</span>
+      <div className="flex items-center gap-2 text-xs mb-6 font-semibold" style={{ color: '#555555' }}>
+        <Link href="/" style={{ color: '#555555' }}>Home</Link>
+        <span style={{ color: '#B90000', fontWeight: 900 }}>›</span>
+        <Link href="/algorithms" style={{ color: '#555555' }}>Algorithms</Link>
+        <span style={{ color: '#B90000', fontWeight: 900 }}>›</span>
+        <span style={{ color: '#0A0A0A' }}>{alg.name}</span>
       </div>
 
       <AlgorithmDetail alg={alg} related={related} />

@@ -20,28 +20,38 @@ export default function FavoritesPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs mb-3 fade-up" style={{ color: 'var(--fg-3)' }}>
-        <Link href="/" className="hover:text-(--fg-2) transition-colors" style={{ color: 'var(--fg-3)' }}>Home</Link>
-        <span>/</span>
-        <span style={{ color: 'var(--fg-2)' }}>Favorites</span>
-      </div>
-
-      <div className="flex items-center gap-3 mb-8 fade-up">
-        <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-          style={{ background: 'rgba(240,98,146,0.15)' }}
-        >
-          <Heart size={18} fill="var(--rose)" style={{ color: 'var(--rose)' }} />
+      {/* Header */}
+      <div className="mb-8 fade-up" style={{ borderBottom: '3px solid #0A0A0A', paddingBottom: 20 }}>
+        <div className="flex items-center gap-2 text-xs mb-4 font-semibold" style={{ color: '#555555' }}>
+          <Link href="/" style={{ color: '#555555' }}>Home</Link>
+          <span style={{ color: '#B90000', fontWeight: 900 }}>›</span>
+          <span style={{ color: '#0A0A0A' }}>Favorites</span>
         </div>
-        <div>
-          <h1 className="text-4xl font-black">
-            <span style={{ color: 'var(--fg)' }}>Saved </span>
-            <span className="gradient-text">Algorithms</span>
-          </h1>
-          <p className="text-sm mt-0.5" style={{ color: 'var(--fg-2)' }}>
-            Your personal algorithm reference collection
-          </p>
+        <div className="flex items-center gap-3">
+          <div
+            style={{
+              width: 44,
+              height: 44,
+              background: '#B90000',
+              border: '3px solid #0A0A0A',
+              boxShadow: '3px 3px 0 #0A0A0A',
+              borderRadius: 4,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <Heart size={20} fill="#FFFFFF" style={{ color: '#FFFFFF' }} />
+          </div>
+          <div>
+            <h1 style={{ fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: 'clamp(2rem, 6vw, 3rem)', letterSpacing: '0.03em', color: '#0A0A0A', lineHeight: 1, margin: 0 }}>
+              SAVED <span style={{ color: '#B90000' }}>ALGORITHMS</span>
+            </h1>
+            <p className="text-sm mt-1 font-semibold" style={{ color: '#555555' }}>
+              Your personal algorithm reference collection
+            </p>
+          </div>
         </div>
       </div>
 
@@ -50,22 +60,48 @@ export default function FavoritesPage() {
           {algorithms.map((alg) => alg && <AlgorithmCard key={alg.id} alg={alg} />)}
         </div>
       ) : (
-        <div className="card-solid rounded-2xl p-16 text-center fade-up-2">
+        <div
+          className="text-center py-16 px-8 fade-up-2"
+          style={{
+            background: '#FFFFFF',
+            border: '3px solid #0A0A0A',
+            boxShadow: '4px 4px 0 #0A0A0A',
+            borderRadius: 4,
+          }}
+        >
           <div
-            className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
-            style={{ background: 'rgba(240,98,146,0.1)' }}
+            style={{
+              width: 72,
+              height: 72,
+              background: '#B90000',
+              border: '3px solid #0A0A0A',
+              boxShadow: '4px 4px 0 #0A0A0A',
+              borderRadius: 4,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 20px',
+            }}
           >
-            <Heart size={28} style={{ color: 'var(--rose)', opacity: 0.5 }} />
+            <Heart size={32} style={{ color: 'rgba(255,255,255,0.5)' }} />
           </div>
-          <p className="font-bold text-lg mb-2" style={{ color: 'var(--fg)' }}>
+          <p
+            className="font-bold text-lg mb-2"
+            style={{
+              fontFamily: 'var(--font-bangers, Bangers, cursive)',
+              fontSize: '1.4rem',
+              letterSpacing: '0.06em',
+              color: '#0A0A0A',
+            }}
+          >
             No saved algorithms yet
           </p>
-          <p className="text-sm mb-8 max-w-xs mx-auto leading-relaxed" style={{ color: 'var(--fg-2)' }}>
+          <p className="text-sm mb-8 max-w-xs mx-auto leading-relaxed font-semibold" style={{ color: '#555555' }}>
             Browse the algorithm database and click the heart icon to save algorithms you&apos;re learning.
           </p>
           <Link
             href="/algorithms"
-            className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold"
+            className="btn-primary inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold"
           >
             Browse Algorithms <ArrowRight size={14} />
           </Link>

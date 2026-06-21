@@ -14,6 +14,13 @@ const pillClass: Record<string, string> = {
   Advanced: 'pill-adv',
 };
 
+const categoryAccent: Record<string, string> = {
+  F2L: '#0045AD',
+  OLL: '#B90000',
+  PLL: '#009B48',
+  Advanced: '#FF5900',
+};
+
 interface Props {
   alg: Algorithm;
 }
@@ -31,70 +38,85 @@ export default function AlgorithmCard({ alg }: Props) {
     setFav(next.includes(alg.id));
   }
 
+  const accent = categoryAccent[alg.category] ?? '#0045AD';
+
   return (
     <Link
       href={`/algorithms/${alg.id}`}
-      className="card-solid rounded-2xl p-4 flex flex-col gap-3 card-hover group"
+      className="card-solid card-hover flex flex-col gap-0 group"
+      style={{ borderRadius: 4, overflow: 'hidden', textDecoration: 'none' }}
     >
-      {/* Header */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex-1 min-w-0">
-          <span
-            className={`inline-flex text-xs font-mono px-2 py-0.5 rounded-full ${pillClass[alg.category] ?? 'pill-f2l'}`}
-          >
-            {alg.category}
-            {alg.subCategory ? ` · ${alg.subCategory}` : ''}
-          </span>
-          <h3
-            className="mt-2 text-sm font-semibold leading-tight truncate"
-            style={{ color: 'var(--fg)' }}
-          >
-            {alg.name}
-          </h3>
-        </div>
-
+      {/* Colored category header bar */}
+      <div
+        style={{
+          background: accent,
+          borderBottom: '3px solid #0A0A0A',
+          padding: '8px 12px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <span className={`inline-flex text-xs font-bold px-2 py-0.5 ${pillClass[alg.category] ?? 'pill-f2l'}`}
+          style={{ borderRadius: 2 }}>
+          {alg.category}{alg.subCategory ? ` · ${alg.subCategory}` : ''}
+        </span>
         <button
           onClick={handleFav}
-          className="p-1.5 rounded-lg transition-all hover:bg-white/8 shrink-0 mt-0.5"
+          className="p-1 rounded transition-all shrink-0"
           title={fav ? 'Remove from favorites' : 'Add to favorites'}
+          style={{ background: 'rgba(255,255,255,0.2)' }}
         >
           <Heart
-            size={14}
-            fill={fav ? 'var(--rose)' : 'none'}
-            style={{ color: fav ? 'var(--rose)' : 'var(--fg-3)' }}
+            size={13}
+            fill={fav ? '#FFFFFF' : 'none'}
+            style={{ color: '#FFFFFF' }}
           />
         </button>
       </div>
 
-      {/* Diagram */}
-      <div className="flex justify-center py-1">
-        <CubeViz alg={alg.alg} category={alg.category} size={64} />
-      </div>
-
-      {/* Algorithm notation */}
-      <div
-        className="alg-text rounded-xl px-3 py-2 truncate"
-        style={{ background: '#181828', border: '1px solid var(--border)' }}
-        title={alg.alg}
-      >
-        {alg.alg || 'Skip (already solved)'}
-      </div>
-
-      {/* Footer */}
-      <div
-        className="flex items-center justify-between text-xs"
-        style={{ color: 'var(--fg-3)' }}
-      >
-        <span className="flex items-center gap-1">
-          <Move size={11} />
-          {alg.moves} moves
-        </span>
-        <span
-          className="flex items-center gap-1"
-          style={{ color: alg.popularity >= 8 ? 'var(--emerald)' : 'var(--fg-3)' }}
+      <div style={{ padding: '12px' }}>
+        {/* Name */}
+        <h3
+          className="text-sm font-bold leading-tight mb-3"
+          style={{
+            color: '#0A0A0A',
+            fontFamily: 'var(--font-bangers, Bangers, cursive)',
+            fontSize: '1rem',
+            letterSpacing: '0.04em',
+          }}
         >
-          {'★'.repeat(Math.round(alg.popularity / 2))}{'☆'.repeat(5 - Math.round(alg.popularity / 2))}
-        </span>
+          {alg.name}
+        </h3>
+
+        {/* Diagram */}
+        <div className="flex justify-center py-1 mb-3">
+          <CubeViz alg={alg.alg} category={alg.category} size={64} />
+        </div>
+
+        {/* Algorithm notation */}
+        <div
+          className="alg-text px-3 py-2 truncate mb-3"
+          style={{
+            border: '2px solid #0A0A0A',
+            borderRadius: 2,
+            background: 'rgba(0,69,173,0.06)',
+          }}
+          title={alg.alg}
+        >
+          {alg.alg || 'Skip (already solved)'}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between text-xs" style={{ color: '#555555' }}>
+          <span className="flex items-center gap-1 font-semibold">
+            <Move size={11} />
+            {alg.moves} moves
+          </span>
+          <span style={{ color: alg.popularity >= 8 ? '#009B48' : '#888888', fontSize: '0.7rem' }}>
+            {'★'.repeat(Math.round(alg.popularity / 2))}{'☆'.repeat(5 - Math.round(alg.popularity / 2))}
+          </span>
+        </div>
       </div>
     </Link>
   );

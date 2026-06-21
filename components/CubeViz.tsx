@@ -30,19 +30,21 @@ export default function CubeViz({ alg, category, size = 80 }: Props) {
         cubeColor: '#1a1a24',
       };
 
-      if (category === 'OLL') {
-        cubeSVG(el, { ...base, case: alg || undefined, view: 'plan', mask: Masking.OLL });
-      } else if (category === 'PLL') {
-        cubeSVG(el, { ...base, case: alg || undefined, view: 'plan', mask: Masking.LL });
-      } else if (category === 'F2L') {
-        cubeSVG(el, { ...base, case: alg || undefined, mask: Masking.F2L });
-      } else {
-        // Advanced — show full cube with algorithm applied
-        cubeSVG(el, { ...base, algorithm: alg || undefined });
+      try {
+        if (category === 'OLL') {
+          cubeSVG(el, { ...base, case: alg || undefined, view: 'plan', mask: Masking.OLL });
+        } else if (category === 'PLL') {
+          cubeSVG(el, { ...base, case: alg || undefined, view: 'plan', mask: Masking.LL });
+        } else if (category === 'F2L') {
+          cubeSVG(el, { ...base, case: alg || undefined, mask: Masking.F2L });
+        } else {
+          cubeSVG(el, { ...base, algorithm: alg || undefined });
+        }
+        if (!cancelled) setReady(true);
+      } catch {
+        // silently ignore rendering errors for unsupported algorithm strings
       }
-
-      if (!cancelled) setReady(true);
-    });
+    }).catch(() => {});
 
     return () => { cancelled = true; };
   }, [alg, category, size]);

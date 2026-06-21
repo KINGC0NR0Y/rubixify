@@ -14,14 +14,36 @@ const pillClass: Record<string, string> = {
   Advanced: 'pill-adv',
 };
 
+const categoryColor: Record<string, string> = {
+  F2L: '#0045AD',
+  OLL: '#B90000',
+  PLL: '#009B48',
+  Advanced: '#FF5900',
+};
+
 interface Props {
   alg: Algorithm;
   related: Algorithm[];
 }
 
+// Shared style helpers
+const comicBox = {
+  background: '#FFFFFF',
+  border: '3px solid #0A0A0A',
+  boxShadow: '4px 4px 0 #0A0A0A',
+  borderRadius: 4,
+} as const;
+
+const algBox = {
+  background: 'rgba(0,69,173,0.06)',
+  border: '2px solid #0A0A0A',
+  borderRadius: 2,
+} as const;
+
 export default function AlgorithmDetail({ alg, related }: Props) {
   const [fav, setFav]       = useState(false);
   const [copied, setCopied] = useState(false);
+  const accent = categoryColor[alg.category] ?? '#0045AD';
 
   useEffect(() => {
     setFav(isFavorite(alg.id));
@@ -33,7 +55,7 @@ export default function AlgorithmDetail({ alg, related }: Props) {
   }
 
   function handleCopy() {
-    navigator.clipboard.writeText(alg.alg);
+    navigator.clipboard?.writeText(alg.alg).catch(() => {});
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   }
@@ -43,26 +65,38 @@ export default function AlgorithmDetail({ alg, related }: Props) {
       {/* ── Header ─────────────────────────────────────── */}
       <div className="flex flex-wrap items-start justify-between gap-4 mb-8 fade-up">
         <div>
-          <span className={`inline-flex text-xs font-mono px-2 py-0.5 rounded-full ${pillClass[alg.category] ?? 'pill-f2l'}`}>
+          <span className={`inline-flex text-xs font-bold px-2 py-0.5 ${pillClass[alg.category] ?? 'pill-f2l'}`}
+            style={{ borderRadius: 2 }}>
             {alg.category}{alg.subCategory ? ` · ${alg.subCategory}` : ''}
           </span>
-          <h1 className="text-4xl font-black mt-2 mb-1" style={{ color: 'var(--fg)' }}>
+          <h1
+            className="mt-2 mb-1"
+            style={{
+              fontFamily: 'var(--font-bangers, Bangers, cursive)',
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              letterSpacing: '0.03em',
+              color: '#0A0A0A',
+              lineHeight: 1,
+            }}
+          >
             {alg.name}
           </h1>
-          <p className="text-sm leading-relaxed max-w-lg" style={{ color: 'var(--fg-2)' }}>
+          <p className="text-sm leading-relaxed max-w-lg" style={{ color: '#2a2a2a' }}>
             {alg.recognition}
           </p>
         </div>
         <button
           onClick={handleFav}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-medium transition-all"
+          className="flex items-center gap-2 px-4 py-2 text-sm font-bold transition-all"
           style={
             fav
-              ? { background: 'rgba(184,78,116,0.15)', borderColor: 'rgba(184,78,116,0.4)', color: 'var(--rose)' }
-              : { background: '#181828', borderColor: 'var(--border)', color: 'var(--fg-2)' }
+              ? { background: '#B90000', border: '3px solid #0A0A0A', boxShadow: '3px 3px 0 #0A0A0A', color: '#FFFFFF', borderRadius: 2 }
+              : { background: '#FFFFFF', border: '3px solid #0A0A0A', boxShadow: '3px 3px 0 #0A0A0A', color: '#0A0A0A', borderRadius: 2 }
           }
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translate(-1px,-1px)'; (e.currentTarget as HTMLElement).style.boxShadow = '4px 4px 0 #0A0A0A'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ''; (e.currentTarget as HTMLElement).style.boxShadow = '3px 3px 0 #0A0A0A'; }}
         >
-          <Heart size={14} fill={fav ? 'var(--rose)' : 'none'} />
+          <Heart size={14} fill={fav ? '#FFFFFF' : 'none'} />
           {fav ? 'Saved' : 'Save'}
         </button>
       </div>
@@ -70,19 +104,35 @@ export default function AlgorithmDetail({ alg, related }: Props) {
       <div className="grid lg:grid-cols-3 gap-5">
         {/* ── Left: details ─────────────────────────────── */}
         <div className="lg:col-span-2 flex flex-col gap-5">
+
           {/* Main algorithm */}
-          <div className="card-solid rounded-2xl p-5 fade-up-2">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold" style={{ color: 'var(--fg)' }}>
-                Main Algorithm
-              </h2>
+          <div style={{ ...comicBox, padding: 20 }} className="fade-up-2">
+            <div
+              style={{
+                background: accent,
+                borderBottom: '3px solid #0A0A0A',
+                margin: '-20px -20px 16px -20px',
+                padding: '10px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <span style={{
+                fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                fontSize: '0.95rem',
+                letterSpacing: '0.1em',
+                color: '#FFFFFF',
+              }}>
+                MAIN ALGORITHM
+              </span>
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-all"
+                className="flex items-center gap-1.5 text-xs px-3 py-1.5 font-bold transition-all"
                 style={
                   copied
-                    ? { background: 'rgba(52,211,153,0.15)', color: 'var(--emerald)', border: '1px solid rgba(52,211,153,0.3)' }
-                    : { background: '#181828', color: 'var(--fg-2)', border: '1px solid var(--border)' }
+                    ? { background: '#009B48', color: '#FFFFFF', border: '2px solid #0A0A0A', borderRadius: 2 }
+                    : { background: '#FFD500', color: '#0A0A0A', border: '2px solid #0A0A0A', borderRadius: 2 }
                 }
               >
                 {copied ? <Check size={12} /> : <Copy size={12} />}
@@ -90,28 +140,33 @@ export default function AlgorithmDetail({ alg, related }: Props) {
               </button>
             </div>
             <div
-              className="alg-text text-xl rounded-xl px-4 py-4"
-              style={{ background: '#181828', border: '1px solid var(--border)', letterSpacing: '0.08em' }}
+              className="alg-text text-xl px-4 py-4"
+              style={{ ...algBox, letterSpacing: '0.08em' }}
             >
-              {alg.alg || <span style={{ color: 'var(--fg-3)' }}>Skip – already solved</span>}
+              {alg.alg || <span style={{ color: '#888888' }}>Skip – already solved</span>}
             </div>
           </div>
 
           {/* Stats row */}
           <div className="grid grid-cols-3 gap-3 fade-up-2">
             {[
-              { icon: <Move size={14} />, label: 'Move Count', value: alg.moves.toString() },
-              { icon: <Star size={14} />, label: 'Popularity', value: `${alg.popularity}/10` },
-              { icon: <Tag size={14} />, label: 'Category', value: alg.category },
+              { icon: <Move size={14} />, label: 'Moves', value: alg.moves.toString(), color: '#0045AD' },
+              { icon: <Star size={14} />, label: 'Popularity', value: `${alg.popularity}/10`, color: '#FF5900' },
+              { icon: <Tag size={14} />, label: 'Category', value: alg.category, color: accent },
             ].map((s) => (
-              <div key={s.label} className="card-solid rounded-2xl p-4 text-center">
-                <div className="flex justify-center mb-1.5" style={{ color: 'var(--fg-3)' }}>
+              <div key={s.label} style={{ ...comicBox, padding: '16px 12px', textAlign: 'center' }}>
+                <div style={{ color: s.color, display: 'flex', justifyContent: 'center', marginBottom: 6 }}>
                   {s.icon}
                 </div>
-                <div className="text-xl font-black" style={{ color: 'var(--violet-2)' }}>
+                <div style={{
+                  fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                  fontSize: '1.6rem',
+                  color: s.color,
+                  lineHeight: 1,
+                }}>
                   {s.value}
                 </div>
-                <div className="text-xs mt-0.5" style={{ color: 'var(--fg-3)' }}>
+                <div className="text-xs mt-1 font-semibold" style={{ color: '#555555' }}>
                   {s.label}
                 </div>
               </div>
@@ -120,22 +175,34 @@ export default function AlgorithmDetail({ alg, related }: Props) {
 
           {/* Alternative algorithms */}
           {alg.alts.length > 0 && (
-            <div className="card-solid rounded-2xl p-5 fade-up-3">
-              <h2 className="text-sm font-semibold mb-3" style={{ color: 'var(--fg)' }}>
-                Alternative Algorithms
-              </h2>
+            <div style={{ ...comicBox, padding: 20 }} className="fade-up-3">
+              <div style={{
+                background: '#FFD500',
+                borderBottom: '3px solid #0A0A0A',
+                margin: '-20px -20px 16px -20px',
+                padding: '10px 16px',
+              }}>
+                <span style={{
+                  fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                  fontSize: '0.95rem',
+                  letterSpacing: '0.1em',
+                  color: '#0A0A0A',
+                }}>
+                  ALTERNATIVE ALGORITHMS
+                </span>
+              </div>
               <div className="flex flex-col gap-2">
                 {alg.alts.map((alt, i) => (
                   <div
                     key={i}
-                    className="alg-text text-sm rounded-xl px-3 py-2.5 flex items-center justify-between"
-                    style={{ background: '#181828', border: '1px solid var(--border)' }}
+                    className="alg-text text-sm px-3 py-2.5 flex items-center justify-between"
+                    style={algBox}
                   >
                     <span>{alt}</span>
                     <button
-                      onClick={() => navigator.clipboard.writeText(alt)}
-                      className="p-1 rounded hover:bg-white/8 transition-colors"
-                      style={{ color: 'var(--fg-3)' }}
+                      onClick={() => navigator.clipboard?.writeText(alt).catch(() => {})}
+                      className="p-1 rounded transition-colors"
+                      style={{ color: '#0045AD', border: '1px solid #0A0A0A', borderRadius: 2, background: '#FFFFFF' }}
                     >
                       <Copy size={12} />
                     </button>
@@ -146,42 +213,67 @@ export default function AlgorithmDetail({ alg, related }: Props) {
           )}
 
           {/* Recognition & fingertricks */}
-          <div className="card-solid rounded-2xl p-5 fade-up-3">
-            <div className="flex items-center gap-2 mb-3">
-              <Lightbulb size={14} style={{ color: 'var(--amber)' }} />
-              <h2 className="text-sm font-semibold" style={{ color: 'var(--fg)' }}>
-                Recognition Tips
-              </h2>
+          <div style={{ ...comicBox, padding: 20 }} className="fade-up-3">
+            <div style={{
+              background: '#FF5900',
+              borderBottom: '3px solid #0A0A0A',
+              margin: '-20px -20px 16px -20px',
+              padding: '10px 16px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+            }}>
+              <Lightbulb size={14} style={{ color: '#FFFFFF' }} />
+              <span style={{
+                fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                fontSize: '0.95rem',
+                letterSpacing: '0.1em',
+                color: '#FFFFFF',
+              }}>
+                RECOGNITION TIPS
+              </span>
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--fg-2)' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#2a2a2a' }}>
               {alg.recognition}
             </p>
             {alg.fingertricks && (
               <div
-                className="mt-4 pt-4 border-t"
-                style={{ borderColor: 'var(--border)' }}
+                className="mt-4 pt-4"
+                style={{ borderTop: '2px dashed #0A0A0A' }}
               >
-                <p className="text-xs font-semibold mb-1" style={{ color: 'var(--fg)' }}>
+                <p className="text-xs font-bold mb-1" style={{ color: '#0A0A0A' }}>
                   Fingertrick Suggestion
                 </p>
-                <p className="text-xs leading-relaxed" style={{ color: 'var(--fg-2)' }}>
+                <p className="text-xs leading-relaxed" style={{ color: '#2a2a2a' }}>
                   {alg.fingertricks}
                 </p>
               </div>
             )}
           </div>
-
         </div>
 
         {/* ── Right: diagram + related ───────────────────── */}
         <div className="flex flex-col gap-4">
           {/* Case diagram */}
-          <div className="card-solid rounded-2xl p-5 flex flex-col items-center gap-3 fade-up-2">
-            <h2 className="text-sm font-semibold self-start" style={{ color: 'var(--fg)' }}>
-              Case Diagram
-            </h2>
+          <div style={{ ...comicBox, padding: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }} className="fade-up-2">
+            <div style={{
+              background: accent,
+              borderBottom: '3px solid #0A0A0A',
+              margin: '-20px -20px 4px -20px',
+              padding: '10px 16px',
+              alignSelf: 'stretch',
+            }}>
+              <span style={{
+                fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                fontSize: '0.9rem',
+                letterSpacing: '0.1em',
+                color: '#FFFFFF',
+              }}>
+                CASE DIAGRAM
+              </span>
+            </div>
             <CubeViz alg={alg.alg} category={alg.category} size={150} />
-            <p className="text-xs text-center" style={{ color: 'var(--fg-3)' }}>
+            <p className="text-xs text-center font-semibold" style={{ color: '#555555' }}>
               {alg.caseShape ?? alg.category} pattern
             </p>
           </div>
@@ -190,10 +282,15 @@ export default function AlgorithmDetail({ alg, related }: Props) {
           {related.length > 0 && (
             <div className="fade-up-3">
               <div className="flex items-center gap-1.5 mb-3 px-1">
-                <ChevronRight size={13} style={{ color: 'var(--fg-3)' }} />
-                <h2 className="text-sm font-semibold" style={{ color: 'var(--fg)' }}>
+                <ChevronRight size={13} style={{ color: '#B90000' }} />
+                <span style={{
+                  fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                  fontSize: '0.95rem',
+                  letterSpacing: '0.06em',
+                  color: '#0A0A0A',
+                }}>
                   Related {alg.category} Cases
-                </h2>
+                </span>
               </div>
               <div className="flex flex-col gap-3">
                 {related.map((r) => (

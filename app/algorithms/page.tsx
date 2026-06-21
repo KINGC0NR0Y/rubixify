@@ -6,36 +6,28 @@ import { allAlgorithms, Category } from '@/lib/algorithms';
 import AlgorithmCard from '@/components/AlgorithmCard';
 import Link from 'next/link';
 
-const categories: { label: string; value: Category | 'All' }[] = [
-  { label: 'All', value: 'All' },
-  { label: 'F2L', value: 'F2L' },
-  { label: 'OLL', value: 'OLL' },
-  { label: 'PLL', value: 'PLL' },
-  { label: 'Advanced', value: 'Advanced' },
+const categories: { label: string; value: Category | 'All'; color: string; textLight: boolean }[] = [
+  { label: 'All',      value: 'All',      color: '#0A0A0A', textLight: true },
+  { label: 'F2L',      value: 'F2L',      color: '#0045AD', textLight: true },
+  { label: 'OLL',      value: 'OLL',      color: '#B90000', textLight: true },
+  { label: 'PLL',      value: 'PLL',      color: '#009B48', textLight: true },
+  { label: 'Advanced', value: 'Advanced', color: '#FF5900', textLight: true },
 ];
 
-const pillClass: Record<string, string> = {
-  All:      'pill-f2l',
-  F2L:      'pill-f2l',
-  OLL:      'pill-oll',
-  PLL:      'pill-pll',
-  Advanced: 'pill-adv',
-};
-
 export default function AlgorithmsPage() {
-  const [query, setQuery]         = useState('');
-  const [category, setCategory]   = useState<Category | 'All'>('All');
-  const [maxMoves, setMaxMoves]   = useState<number>(30);
-  const [sort, setSort]           = useState<'popularity' | 'moves'>('popularity');
+  const [query, setQuery]       = useState('');
+  const [category, setCategory] = useState<Category | 'All'>('All');
+  const [maxMoves, setMaxMoves] = useState<number>(30);
+  const [sort, setSort]         = useState<'popularity' | 'moves'>('popularity');
   const [showFilters, setShowFilters] = useState(false);
 
   const results = useMemo(() => {
     return allAlgorithms
       .filter((a) => {
         const q = query.toLowerCase().trim();
-        const matchCat    = category === 'All' || a.category === category;
-        const matchMoves  = a.moves <= maxMoves;
-        const matchQ      =
+        const matchCat   = category === 'All' || a.category === category;
+        const matchMoves = a.moves <= maxMoves;
+        const matchQ     =
           !q ||
           a.name.toLowerCase().includes(q) ||
           a.alg.toLowerCase().includes(q) ||
@@ -48,55 +40,74 @@ export default function AlgorithmsPage() {
       );
   }, [query, category, maxMoves, sort]);
 
+  const comicPanel = {
+    background: '#FFFFFF',
+    border: '3px solid #0A0A0A',
+    boxShadow: '4px 4px 0 #0A0A0A',
+    borderRadius: 4,
+  } as const;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-      {/* Header */}
-      <div className="mb-8 fade-up">
-        <div className="flex items-center gap-2 text-xs mb-3" style={{ color: 'var(--fg-3)' }}>
-          <Link href="/" style={{ color: 'var(--fg-3)' }} className="hover:text-[var(--fg-2)] transition-colors">Home</Link>
-          <span>/</span>
-          <span style={{ color: 'var(--fg-2)' }}>Algorithms</span>
+
+      {/* ── Page header ─────────────────────────────── */}
+      <div className="mb-8 fade-up" style={{ borderBottom: '3px solid #0A0A0A', paddingBottom: 20 }}>
+        <div className="flex items-center gap-2 text-xs mb-4 font-semibold" style={{ color: '#555555' }}>
+          <Link href="/" style={{ color: '#555555' }}>Home</Link>
+          <span style={{ color: '#B90000', fontWeight: 900 }}>›</span>
+          <span style={{ color: '#0A0A0A' }}>Algorithms</span>
         </div>
-        <h1 className="text-4xl font-black mb-1">
-          <span style={{ color: 'var(--fg)' }}>Algorithm </span>
-          <span className="gradient-text-violet">Explorer</span>
+        <div style={{ display: 'inline-block', background: '#0045AD', border: '3px solid #0A0A0A', boxShadow: '3px 3px 0 #0A0A0A', padding: '2px 14px', marginBottom: 10 }}>
+          <span style={{ fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: '0.8rem', letterSpacing: '0.2em', color: '#FFFFFF' }}>
+            DATABASE
+          </span>
+        </div>
+        <h1 style={{ fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: 'clamp(2.2rem, 6vw, 3.5rem)', letterSpacing: '0.03em', color: '#0A0A0A', lineHeight: 1, margin: 0 }}>
+          ALGORITHM <span style={{ color: '#B90000' }}>EXPLORER</span>
         </h1>
-        <p className="text-sm mt-1" style={{ color: 'var(--fg-2)' }}>
+        <p className="text-sm mt-2 font-semibold" style={{ color: '#555555' }}>
           {allAlgorithms.length} algorithms across F2L, OLL, PLL, and Advanced categories
         </p>
       </div>
 
-      {/* Search + Filter bar */}
+      {/* ── Search + filter bar ──────────────────────── */}
       <div className="flex flex-col sm:flex-row gap-3 mb-5 fade-up-2">
         <div
-          className="flex items-center gap-2.5 flex-1 px-4 py-2.5 rounded-xl border transition-all focus-within:border-[rgba(124,111,247,0.5)]"
-          style={{ background: '#0e0e18', borderColor: 'var(--border)' }}
+          className="flex items-center gap-2.5 flex-1 px-4 py-2.5"
+          style={{
+            background: '#FFFFFF',
+            border: '3px solid #0A0A0A',
+            boxShadow: '3px 3px 0 #0A0A0A',
+            borderRadius: 2,
+          }}
         >
-          <Search size={14} style={{ color: 'var(--fg-3)', flexShrink: 0 }} />
+          <Search size={14} style={{ color: '#0045AD', flexShrink: 0 }} />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by name, notation, or recognition pattern..."
-            className="flex-1 bg-transparent text-sm outline-none placeholder:text-(--fg-3)"
-            style={{ color: 'var(--fg)' }}
+            style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', fontSize: '0.88rem', color: '#0A0A0A', fontWeight: 600 }}
           />
           {query && (
-            <button
-              onClick={() => setQuery('')}
-              className="p-0.5 rounded hover:bg-white/8 transition-colors"
-              style={{ color: 'var(--fg-3)' }}
-            >
-              <X size={12} />
+            <button onClick={() => setQuery('')} style={{ color: '#888', background: 'none', border: 'none', cursor: 'pointer' }}>
+              <X size={13} />
             </button>
           )}
         </div>
         <button
           onClick={() => setShowFilters((v) => !v)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold transition-all"
           style={{
-            background: showFilters ? 'rgba(98,88,200,0.2)' : '#0e0e18',
-            borderColor: showFilters ? 'rgba(124,111,247,0.5)' : 'var(--border)',
-            color: showFilters ? 'var(--violet-2)' : 'var(--fg-2)',
+            background: showFilters ? '#FFD500' : '#FFFFFF',
+            border: '3px solid #0A0A0A',
+            boxShadow: showFilters ? '2px 2px 0 #0A0A0A' : '3px 3px 0 #0A0A0A',
+            borderRadius: 2,
+            color: '#0A0A0A',
+            transform: showFilters ? 'translate(1px,1px)' : '',
+            cursor: 'pointer',
+            fontFamily: 'var(--font-bangers, Bangers, cursive)',
+            letterSpacing: '0.08em',
+            fontSize: '1rem',
           }}
         >
           <SlidersHorizontal size={14} />
@@ -104,7 +115,7 @@ export default function AlgorithmsPage() {
         </button>
       </div>
 
-      {/* Category tabs */}
+      {/* ── Category tabs ────────────────────────────── */}
       <div className="flex flex-wrap gap-2 mb-4 fade-up-3">
         {categories.map((c) => {
           const active = category === c.value;
@@ -112,12 +123,20 @@ export default function AlgorithmsPage() {
             <button
               key={c.value}
               onClick={() => setCategory(c.value)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${active ? pillClass[c.value] : ''}`}
-              style={!active ? {
-                background: '#0e0e18',
-                color: 'var(--fg-2)',
-                border: '1px solid var(--border)',
-              } : { border: 'none' }}
+              style={{
+                background: active ? c.color : '#FFFFFF',
+                color: active ? '#FFFFFF' : '#0A0A0A',
+                border: '2px solid #0A0A0A',
+                boxShadow: active ? '2px 2px 0 #0A0A0A' : '3px 3px 0 #0A0A0A',
+                borderRadius: 2,
+                padding: '5px 14px',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transform: active ? 'translate(1px,1px)' : '',
+                fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                letterSpacing: '0.08em',
+              }}
             >
               {c.label}
             </button>
@@ -125,18 +144,16 @@ export default function AlgorithmsPage() {
         })}
       </div>
 
-      {/* Expanded filters */}
+      {/* ── Expanded filters ─────────────────────────── */}
       {showFilters && (
         <div
-          className="mb-6 p-5 rounded-2xl border grid sm:grid-cols-2 gap-5 fade-up"
-          style={{ background: '#0e0e18', borderColor: 'var(--border)' }}
+          className="mb-6 p-5 grid sm:grid-cols-2 gap-5 fade-up"
+          style={comicPanel}
         >
           <div>
-            <label className="text-xs font-medium mb-2 block" style={{ color: 'var(--fg-2)' }}>
-              Max move count:{' '}
-              <span style={{ color: 'var(--violet-2)' }}>
-                {maxMoves === 30 ? 'Any' : maxMoves}
-              </span>
+            <label className="text-xs font-bold mb-2 block" style={{ color: '#0A0A0A', fontFamily: 'var(--font-bangers, Bangers, cursive)', letterSpacing: '0.1em', fontSize: '0.85rem' }}>
+              Max moves:{' '}
+              <span style={{ color: '#B90000' }}>{maxMoves === 30 ? 'Any' : maxMoves}</span>
             </label>
             <input
               type="range"
@@ -144,11 +161,12 @@ export default function AlgorithmsPage() {
               max={30}
               value={maxMoves}
               onChange={(e) => setMaxMoves(Number(e.target.value))}
-              className="w-full accent-[#7c6ff7]"
+              className="w-full"
+              style={{ accentColor: '#B90000' }}
             />
           </div>
           <div>
-            <label className="text-xs font-medium mb-2 block" style={{ color: 'var(--fg-2)' }}>
+            <label className="text-xs font-bold mb-2 block" style={{ color: '#0A0A0A', fontFamily: 'var(--font-bangers, Bangers, cursive)', letterSpacing: '0.1em', fontSize: '0.85rem' }}>
               Sort by
             </label>
             <div className="flex gap-2">
@@ -156,11 +174,17 @@ export default function AlgorithmsPage() {
                 <button
                   key={s}
                   onClick={() => setSort(s)}
-                  className="px-3 py-1.5 rounded-lg text-xs border font-medium transition-all"
                   style={{
-                    background: sort === s ? 'rgba(98,88,200,0.2)' : '#181828',
-                    color: sort === s ? 'var(--violet-2)' : 'var(--fg-2)',
-                    borderColor: sort === s ? 'rgba(124,111,247,0.5)' : 'var(--border)',
+                    background: sort === s ? '#0045AD' : '#FFFFFF',
+                    color: sort === s ? '#FFFFFF' : '#0A0A0A',
+                    border: '2px solid #0A0A0A',
+                    boxShadow: sort === s ? '1px 1px 0 #0A0A0A' : '3px 3px 0 #0A0A0A',
+                    borderRadius: 2,
+                    padding: '5px 12px',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    transform: sort === s ? 'translate(1px,1px)' : '',
                   }}
                 >
                   {s === 'popularity' ? 'Popularity' : 'Move Count'}
@@ -171,12 +195,12 @@ export default function AlgorithmsPage() {
         </div>
       )}
 
-      {/* Results count */}
-      <p className="text-xs mb-5" style={{ color: 'var(--fg-3)' }}>
-        Showing <span style={{ color: 'var(--fg-2)' }}>{results.length}</span> result{results.length !== 1 ? 's' : ''}
+      {/* ── Results count ────────────────────────────── */}
+      <p className="text-xs mb-5 font-bold" style={{ color: '#555555' }}>
+        Showing <span style={{ color: '#B90000', fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: '1rem' }}>{results.length}</span> result{results.length !== 1 ? 's' : ''}
       </p>
 
-      {/* Grid */}
+      {/* ── Grid ─────────────────────────────────────── */}
       {results.length > 0 ? (
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {results.map((alg) => (
@@ -184,13 +208,14 @@ export default function AlgorithmsPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-24" style={{ color: 'var(--fg-3)' }}>
-          <Filter size={36} className="mx-auto mb-4 opacity-30" />
-          <p className="text-sm mb-1" style={{ color: 'var(--fg-2)' }}>No algorithms match your filters.</p>
+        <div className="text-center py-20" style={comicPanel}>
+          <Filter size={36} className="mx-auto mb-4" style={{ color: '#B90000', opacity: 0.5 }} />
+          <p className="font-bold mb-1" style={{ fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: '1.2rem', letterSpacing: '0.06em', color: '#0A0A0A' }}>
+            No algorithms match your filters.
+          </p>
           <button
             onClick={() => { setQuery(''); setCategory('All'); setMaxMoves(30); }}
-            className="mt-4 text-xs px-4 py-2 rounded-lg transition-all hover:opacity-80"
-            style={{ background: 'rgba(124,111,247,0.15)', color: 'var(--violet-2)', border: '1px solid rgba(124,111,247,0.3)' }}
+            className="mt-4 btn-secondary px-5 py-2 text-sm font-bold"
           >
             Clear filters
           </button>
