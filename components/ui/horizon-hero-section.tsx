@@ -48,7 +48,7 @@ export function ComicHero() {
       >
         {/* Dither WebGL background */}
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <Dither waveColor={[0.73, 0, 0]} enableMouseInteraction={true} />
+          <Dither waveColor={[0.392, 0.584, 0.929]} enableMouseInteraction={true} />
         </div>
 
         <motion.div
