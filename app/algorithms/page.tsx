@@ -8,10 +8,10 @@ import Link from 'next/link';
 
 const categories: { label: string; value: Category | 'All'; color: string; textLight: boolean }[] = [
   { label: 'All',      value: 'All',      color: '#0A0A0A', textLight: true },
-  { label: 'F2L',      value: 'F2L',      color: '#0045AD', textLight: true },
-  { label: 'OLL',      value: 'OLL',      color: '#6495ED', textLight: true },
+  { label: 'F2L',      value: 'F2L',      color: '#B90000', textLight: true },
+  { label: 'OLL',      value: 'OLL',      color: '#FF5900', textLight: true },
   { label: 'PLL',      value: 'PLL',      color: '#009B48', textLight: true },
-  { label: 'Advanced', value: 'Advanced', color: '#FF5900', textLight: true },
+  { label: 'Advanced', value: 'Advanced', color: '#0045AD', textLight: true },
 ];
 
 export default function AlgorithmsPage() {

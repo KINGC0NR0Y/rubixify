@@ -233,7 +233,7 @@ export function AnalyticsTab() {
             >
               <div style={{
                 width: 34, height: 34, flexShrink: 0,
-                background: r.category === 'OLL' ? '#6495ED' : '#009B48',
+                background: r.category === 'OLL' ? '#FF5900' : '#009B48',
                 border: '2px solid #0A0A0A', borderRadius: 2,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '0.65rem', fontWeight: 900, color: '#fff',
@@ -294,7 +294,7 @@ export function AnalyticsTab() {
             >
               <div style={{
                 width: 34, height: 34, flexShrink: 0,
-                background: r.category === 'OLL' ? '#6495ED' : '#009B48',
+                background: r.category === 'OLL' ? '#FF5900' : '#009B48',
                 border: '2px solid #0A0A0A', borderRadius: 2,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '0.65rem', fontWeight: 900, color: '#fff',

@@ -15,10 +15,10 @@ const pillClass: Record<string, string> = {
 };
 
 const categoryColor: Record<string, string> = {
-  F2L: '#0045AD',
-  OLL: '#6495ED',
+  F2L: '#B90000',
+  OLL: '#FF5900',
   PLL: '#009B48',
-  Advanced: '#FF5900',
+  Advanced: '#0045AD',
 };
 
 interface Props {

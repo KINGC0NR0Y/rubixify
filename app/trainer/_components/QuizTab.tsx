@@ -14,7 +14,7 @@ interface Result {
   correct: boolean;
 }
 
-const modeColor: Record<Mode, string> = { OLL: '#6495ED', PLL: '#009B48' };
+const modeColor: Record<Mode, string> = { OLL: '#FF5900', PLL: '#009B48' };
 
 const comicBox = {
   background: '#FFFFFF',
