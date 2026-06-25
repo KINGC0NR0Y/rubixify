@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+const Dither = dynamic(() => import('./Dither'), { ssr: false });
 
 // Stagger variants for text elements
 const textEnter = {
@@ -37,14 +40,17 @@ export function ComicHero() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: `linear-gradient(45deg, #000000 25%, transparent 25%), linear-gradient(-135deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%, #000000)`,
-          backgroundSize: '50px 50px',
-          perspective: '1000px',
+          background: '#000',
           position: 'relative',
           overflow: 'hidden',
           minHeight: '100vh',
         }}
       >
+        {/* Dither WebGL background */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <Dither waveColor={[0.73, 0, 0]} enableMouseInteraction={true} />
+        </div>
+
         <motion.div
           style={{
             y: textY,
@@ -53,6 +59,8 @@ export function ComicHero() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            position: 'relative',
+            zIndex: 1,
           }}
         >
           <motion.div
