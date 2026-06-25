@@ -16,7 +16,7 @@ const pillClass: Record<string, string> = {
 
 const categoryColor: Record<string, string> = {
   F2L: '#0045AD',
-  OLL: '#B90000',
+  OLL: '#6495ED',
   PLL: '#009B48',
   Advanced: '#FF5900',
 };
@@ -90,7 +90,7 @@ export default function AlgorithmDetail({ alg, related }: Props) {
           className="flex items-center gap-2 px-4 py-2 text-sm font-bold transition-all"
           style={
             fav
-              ? { background: '#B90000', border: '3px solid #0A0A0A', boxShadow: '3px 3px 0 #0A0A0A', color: '#FFFFFF', borderRadius: 2 }
+              ? { background: '#6495ED', border: '3px solid #0A0A0A', boxShadow: '3px 3px 0 #0A0A0A', color: '#FFFFFF', borderRadius: 2 }
               : { background: '#FFFFFF', border: '3px solid #0A0A0A', boxShadow: '3px 3px 0 #0A0A0A', color: '#0A0A0A', borderRadius: 2 }
           }
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translate(-1px,-1px)'; (e.currentTarget as HTMLElement).style.boxShadow = '4px 4px 0 #0A0A0A'; }}
@@ -282,7 +282,7 @@ export default function AlgorithmDetail({ alg, related }: Props) {
           {related.length > 0 && (
             <div className="fade-up-3">
               <div className="flex items-center gap-1.5 mb-3 px-1">
-                <ChevronRight size={13} style={{ color: '#B90000' }} />
+                <ChevronRight size={13} style={{ color: '#6495ED' }} />
                 <span style={{
                   fontFamily: 'var(--font-bangers, Bangers, cursive)',
                   fontSize: '0.95rem',

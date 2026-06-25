@@ -3,24 +3,24 @@
 // Deterministic floating background elements — no random values to avoid hydration mismatch
 
 const WORDS = [
-  { text: 'POW!',    color: '#B90000', x: '6%',  y: '18%', rotate: -14, size: '1.3rem', dur: '7s',  del: '0s'   },
+  { text: 'POW!',    color: '#6495ED', x: '6%',  y: '18%', rotate: -14, size: '1.3rem', dur: '7s',  del: '0s'   },
   { text: 'BAM!',    color: '#0045AD', x: '80%', y: '9%',  rotate:  9,  size: '1.1rem', dur: '9s',  del: '1.4s' },
   { text: 'SNAP!',   color: '#009B48', x: '88%', y: '44%', rotate: -6,  size: '1rem',   dur: '11s', del: '2.8s' },
   { text: 'TWIST!',  color: '#FF5900', x: '4%',  y: '58%', rotate: 11,  size: '1rem',   dur: '8s',  del: '0.7s' },
   { text: 'SOLVED!', color: '#FFD500', x: '62%', y: '82%', rotate: -8,  size: '1.15rem',dur: '10s', del: '2s'   },
-  { text: 'ZAP!',    color: '#B90000', x: '32%', y: '72%', rotate: 13,  size: '0.9rem', dur: '12s', del: '1s'   },
+  { text: 'ZAP!',    color: '#6495ED', x: '32%', y: '72%', rotate: 13,  size: '0.9rem', dur: '12s', del: '1s'   },
   { text: 'CRUNCH!', color: '#0045AD', x: '48%', y: '11%', rotate: -5,  size: '0.85rem',dur: '9s',  del: '3s'   },
   { text: 'SPIN!',   color: '#009B48', x: '18%', y: '90%', rotate: 7,   size: '0.9rem', dur: '8s',  del: '1.6s' },
 ];
 
 // Cube color swatches drifting in the background
 const FRAGMENTS = [
-  { color: '#B90000', size: 20, x: '22%',  y: '28%', rotate:  15, dur: '11s', del: '0.4s' },
+  { color: '#6495ED', size: 20, x: '22%',  y: '28%', rotate:  15, dur: '11s', del: '0.4s' },
   { color: '#0045AD', size: 16, x: '72%',  y: '18%', rotate: -20, dur: '9s',  del: '1.1s' },
   { color: '#FFD500', size: 26, x: '91%',  y: '62%', rotate:  30, dur: '13s', del: '2s'   },
   { color: '#009B48', size: 18, x: '10%',  y: '78%', rotate: -10, dur: '10s', del: '0.2s' },
   { color: '#FF5900', size: 14, x: '54%',  y: '55%', rotate:  22, dur: '8s',  del: '1.7s' },
-  { color: '#B90000', size: 22, x: '38%',  y: '88%', rotate: -18, dur: '12s', del: '0.9s' },
+  { color: '#6495ED', size: 22, x: '38%',  y: '88%', rotate: -18, dur: '12s', del: '0.9s' },
   { color: '#0045AD', size: 12, x: '76%',  y: '73%', rotate:  28, dur: '7s',  del: '3.1s' },
   { color: '#FFD500', size: 18, x: '2%',   y: '40%', rotate: -25, dur: '10s', del: '2.3s' },
   { color: '#009B48', size: 24, x: '60%',  y: '30%', rotate:  10, dur: '14s', del: '1.5s' },

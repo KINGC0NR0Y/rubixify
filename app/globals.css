@@ -2,7 +2,7 @@
 
 /* ─── Rubik's Cube Colors ─────────────────────────── */
 :root {
-  --cube-red:    #B90000;
+  --cube-red:    #6495ED;
   --cube-blue:   #0045AD;
   --cube-yellow: #FFD500;
   --cube-green:  #009B48;
@@ -22,7 +22,7 @@
   --violet:      #0045AD;
   --violet-2:    #0045AD;
   --violet-glow: rgba(0,69,173,0.15);
-  --rose:        #B90000;
+  --rose:        #6495ED;
   --emerald:     #009B48;
   --amber:       #FFD500;
 
@@ -67,7 +67,7 @@ body {
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: #FFD500; }
 ::-webkit-scrollbar-thumb { background: #0A0A0A; border-radius: 0; }
-::-webkit-scrollbar-thumb:hover { background: #B90000; }
+::-webkit-scrollbar-thumb:hover { background: #6495ED; }
 
 /* ─── Comic Panel / Card ─────────────────────────── */
 .glass, .card-solid {
@@ -84,11 +84,11 @@ body {
 
 /* ─── Comic Text Accents ─────────────────────────── */
 .gradient-text {
-  color: #B90000;
+  color: #6495ED;
   background: none;
   -webkit-background-clip: unset;
   background-clip: unset;
-  -webkit-text-fill-color: #B90000;
+  -webkit-text-fill-color: #6495ED;
 }
 
 .gradient-text-violet {
@@ -125,7 +125,7 @@ body {
 }
 
 .btn-primary {
-  background: #B90000;
+  background: #6495ED;
   color: #FFFFFF;
   border: 3px solid #0A0A0A;
   box-shadow: 4px 4px 0 #0A0A0A;
@@ -181,7 +181,7 @@ body {
   font-weight: 700;
 }
 .pill-oll {
-  background: #B90000;
+  background: #6495ED;
   color: #FFFFFF;
   border: 2px solid #0A0A0A;
   font-weight: 700;

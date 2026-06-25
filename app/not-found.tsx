@@ -10,7 +10,7 @@ export default function NotFound() {
           fontSize: 'clamp(5rem, 18vw, 9rem)',
           letterSpacing: '0.04em',
           lineHeight: 1,
-          color: '#B90000',
+          color: '#6495ED',
           textShadow: '5px 5px 0 #0A0A0A',
         }}
       >

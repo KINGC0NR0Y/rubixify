@@ -5,7 +5,7 @@ import { ExternalLink } from 'lucide-react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 // ─── palette ─────────────────────────────────────────────────────────────────
-const RED    = '#B90000';
+const RED    = '#6495ED';
 const BLUE   = '#0045AD';
 const YELLOW = '#FFD500';
 const GREEN  = '#009B48';

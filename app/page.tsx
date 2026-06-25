@@ -22,8 +22,8 @@ const features = [
     icon: <Target size={20} />,
     title: 'Recognition Trainer',
     desc: 'Identify OLL and PLL cases from diagrams, track your accuracy, and drill your weakest cases with spaced repetition.',
-    accent: '#B90000',
-    bg: '#B90000',
+    accent: '#6495ED',
+    bg: '#6495ED',
   },
   {
     icon: <Star size={20} />,
@@ -76,7 +76,7 @@ const cfopSteps = [
   {
     letter: 'O',
     word: 'Orient Last Layer',
-    bg: '#B90000',
+    bg: '#6495ED',
     textColor: '#FFFFFF',
     desc: 'Orient all pieces on the top layer so the top face is one color. 57 unique cases, each with a dedicated algorithm.',
   },
@@ -128,7 +128,7 @@ export default function HomePage() {
                 }}
               >
                 CUBE WITH{' '}
-                <span style={{ color: '#B90000', textShadow: '2px 2px 0 #0A0A0A' }}>
+                <span style={{ color: '#6495ED', textShadow: '2px 2px 0 #0A0A0A' }}>
                   EXCELLENCE
                 </span>
               </h2>
@@ -228,7 +228,7 @@ export default function HomePage() {
                   <strong style={{ color: '#0A0A0A' }}>Jessica Fridrich</strong> while studying at
                   Binghamton University, published online in 1997. It reduces the average solve length
                   to{' '}
-                  <strong style={{ color: '#B90000' }}>50–60 moves</strong> vs. 100+ for beginner
+                  <strong style={{ color: '#6495ED' }}>50–60 moves</strong> vs. 100+ for beginner
                   methods. Top competitors average ~45 moves and achieve sub-5-second solves.
                 </p>
                 <p>
@@ -437,7 +437,7 @@ export default function HomePage() {
               fontFamily: 'var(--font-bangers, Bangers, cursive)',
               fontSize: 'clamp(0.75rem, 1.5vw, 0.95rem)',
               letterSpacing: '0.3em',
-              color: '#B90000',
+              color: '#6495ED',
               marginBottom: 12,
               textTransform: 'uppercase',
             }}
@@ -457,7 +457,7 @@ export default function HomePage() {
           >
             START YOUR
             <br />
-            <span style={{ color: '#B90000', textShadow: '3px 3px 0 #0A0A0A' }}>
+            <span style={{ color: '#6495ED', textShadow: '3px 3px 0 #0A0A0A' }}>
               SPEEDCUBING
             </span>
             <br />

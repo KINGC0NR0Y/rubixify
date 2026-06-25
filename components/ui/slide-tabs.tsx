@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
   { href: '/',           label: 'Home',       color: '#FFD500', textDark: true },
-  { href: '/algorithms', label: 'Algorithms', color: '#B90000', textDark: false },
+  { href: '/algorithms', label: 'Algorithms', color: '#6495ED', textDark: false },
   { href: '/trainer',    label: 'Trainer',    color: '#0045AD', textDark: false },
   { href: '/favorites',  label: 'Favorites',  color: '#009B48', textDark: false },
   { href: '/about',      label: 'About',      color: '#FF5900', textDark: false },

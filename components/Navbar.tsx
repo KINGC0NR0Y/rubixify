@@ -107,7 +107,7 @@ export default function Navbar() {
               }}
             >
               Cubo
-              <span style={{ color: '#B90000' }}>Pedia</span>
+              <span style={{ color: '#6495ED' }}>Pedia</span>
             </span>
           </Link>
 
@@ -186,7 +186,7 @@ export default function Navbar() {
           >
             {navLinks.map((l, i) => {
               const active = pathname === l.href;
-              const panelColors = ['#FFD500', '#B90000', '#0045AD', '#009B48', '#FF5900'];
+              const panelColors = ['#FFD500', '#6495ED', '#0045AD', '#009B48', '#FF5900'];
               return (
                 <Link
                   key={l.href}

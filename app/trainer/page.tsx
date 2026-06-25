@@ -9,7 +9,7 @@ import { AnalyticsTab } from './_components/AnalyticsTab';
 type Tab = 'quiz' | 'timer' | 'analytics';
 
 const TABS: { id: Tab; label: string; color: string }[] = [
-  { id: 'quiz',      label: 'QUIZ',      color: '#B90000' },
+  { id: 'quiz',      label: 'QUIZ',      color: '#6495ED' },
   { id: 'timer',     label: 'TIMER',     color: '#0045AD' },
   { id: 'analytics', label: 'ANALYTICS', color: '#009B48' },
 ];
@@ -23,7 +23,7 @@ export default function TrainerPage() {
       <div className="mb-8 fade-up" style={{ borderBottom: '3px solid #0A0A0A', paddingBottom: 20 }}>
         <div className="flex items-center gap-2 text-xs mb-4 font-semibold" style={{ color: '#555555' }}>
           <Link href="/" style={{ color: '#555555' }}>Home</Link>
-          <span style={{ color: '#B90000', fontWeight: 900 }}>›</span>
+          <span style={{ color: '#6495ED', fontWeight: 900 }}>›</span>
           <span style={{ color: '#0A0A0A' }}>Trainer</span>
         </div>
         <div style={{
@@ -43,7 +43,7 @@ export default function TrainerPage() {
           fontSize: 'clamp(2rem, 6vw, 3rem)', letterSpacing: '0.03em',
           color: '#0A0A0A', lineHeight: 1, margin: 0,
         }}>
-          SPEEDCUBING <span style={{ color: '#B90000' }}>HUB</span>
+          SPEEDCUBING <span style={{ color: '#6495ED' }}>HUB</span>
         </h1>
         <p className="text-sm mt-2 font-semibold" style={{ color: '#555555' }}>
           Practice recognition, time your solves, and track your progress — all in one place.

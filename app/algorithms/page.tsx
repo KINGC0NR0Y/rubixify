@@ -9,7 +9,7 @@ import Link from 'next/link';
 const categories: { label: string; value: Category | 'All'; color: string; textLight: boolean }[] = [
   { label: 'All',      value: 'All',      color: '#0A0A0A', textLight: true },
   { label: 'F2L',      value: 'F2L',      color: '#0045AD', textLight: true },
-  { label: 'OLL',      value: 'OLL',      color: '#B90000', textLight: true },
+  { label: 'OLL',      value: 'OLL',      color: '#6495ED', textLight: true },
   { label: 'PLL',      value: 'PLL',      color: '#009B48', textLight: true },
   { label: 'Advanced', value: 'Advanced', color: '#FF5900', textLight: true },
 ];
@@ -54,7 +54,7 @@ export default function AlgorithmsPage() {
       <div className="mb-8 fade-up" style={{ borderBottom: '3px solid #0A0A0A', paddingBottom: 20 }}>
         <div className="flex items-center gap-2 text-xs mb-4 font-semibold" style={{ color: '#555555' }}>
           <Link href="/" style={{ color: '#555555' }}>Home</Link>
-          <span style={{ color: '#B90000', fontWeight: 900 }}>›</span>
+          <span style={{ color: '#6495ED', fontWeight: 900 }}>›</span>
           <span style={{ color: '#0A0A0A' }}>Algorithms</span>
         </div>
         <div style={{ display: 'inline-block', background: '#0045AD', border: '3px solid #0A0A0A', boxShadow: '3px 3px 0 #0A0A0A', padding: '2px 14px', marginBottom: 10 }}>
@@ -63,7 +63,7 @@ export default function AlgorithmsPage() {
           </span>
         </div>
         <h1 style={{ fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: 'clamp(2.2rem, 6vw, 3.5rem)', letterSpacing: '0.03em', color: '#0A0A0A', lineHeight: 1, margin: 0 }}>
-          ALGORITHM <span style={{ color: '#B90000' }}>EXPLORER</span>
+          ALGORITHM <span style={{ color: '#6495ED' }}>EXPLORER</span>
         </h1>
         <p className="text-sm mt-2 font-semibold" style={{ color: '#555555' }}>
           {allAlgorithms.length} algorithms across F2L, OLL, PLL, and Advanced categories
@@ -153,7 +153,7 @@ export default function AlgorithmsPage() {
           <div>
             <label className="text-xs font-bold mb-2 block" style={{ color: '#0A0A0A', fontFamily: 'var(--font-bangers, Bangers, cursive)', letterSpacing: '0.1em', fontSize: '0.85rem' }}>
               Max moves:{' '}
-              <span style={{ color: '#B90000' }}>{maxMoves === 30 ? 'Any' : maxMoves}</span>
+              <span style={{ color: '#6495ED' }}>{maxMoves === 30 ? 'Any' : maxMoves}</span>
             </label>
             <input
               type="range"
@@ -162,7 +162,7 @@ export default function AlgorithmsPage() {
               value={maxMoves}
               onChange={(e) => setMaxMoves(Number(e.target.value))}
               className="w-full"
-              style={{ accentColor: '#B90000' }}
+              style={{ accentColor: '#6495ED' }}
             />
           </div>
           <div>
@@ -197,7 +197,7 @@ export default function AlgorithmsPage() {
 
       {/* ── Results count ────────────────────────────── */}
       <p className="text-xs mb-5 font-bold" style={{ color: '#555555' }}>
-        Showing <span style={{ color: '#B90000', fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: '1rem' }}>{results.length}</span> result{results.length !== 1 ? 's' : ''}
+        Showing <span style={{ color: '#6495ED', fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: '1rem' }}>{results.length}</span> result{results.length !== 1 ? 's' : ''}
       </p>
 
       {/* ── Grid ─────────────────────────────────────── */}
@@ -209,7 +209,7 @@ export default function AlgorithmsPage() {
         </div>
       ) : (
         <div className="text-center py-20" style={comicPanel}>
-          <Filter size={36} className="mx-auto mb-4" style={{ color: '#B90000', opacity: 0.5 }} />
+          <Filter size={36} className="mx-auto mb-4" style={{ color: '#6495ED', opacity: 0.5 }} />
           <p className="font-bold mb-1" style={{ fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: '1.2rem', letterSpacing: '0.06em', color: '#0A0A0A' }}>
             No algorithms match your filters.
           </p>

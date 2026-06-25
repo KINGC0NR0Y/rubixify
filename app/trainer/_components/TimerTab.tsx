@@ -158,7 +158,7 @@ export function TimerTab() {
 
   const timerColor = () => {
     if (phase === 'running') return '#009B48';
-    if (phase === 'inspecting') return inspectionLeft <= 3 ? '#B90000' : '#FFD500';
+    if (phase === 'inspecting') return inspectionLeft <= 3 ? '#6495ED' : '#FFD500';
     return '#0A0A0A';
   };
 
@@ -262,8 +262,8 @@ export function TimerTab() {
                     style={{
                       background: i < playerStep ? '#0A0A0A' : '#fff',
                       color: i < playerStep ? '#fff' : '#0A0A0A',
-                      border: `1.5px solid ${i === playerStep - 1 ? '#B90000' : '#0A0A0A'}`,
-                      outline: i === playerStep - 1 ? '2px solid #B90000' : 'none',
+                      border: `1.5px solid ${i === playerStep - 1 ? '#6495ED' : '#0A0A0A'}`,
+                      outline: i === playerStep - 1 ? '2px solid #6495ED' : 'none',
                       outlineOffset: 1,
                       borderRadius: 2, padding: '2px 6px',
                       fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer',
@@ -301,7 +301,7 @@ export function TimerTab() {
         {phase === 'inspecting' && (
           <div style={{
             fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.2em',
-            color: inspectionLeft <= 3 ? '#B90000' : '#888',
+            color: inspectionLeft <= 3 ? '#6495ED' : '#888',
             fontFamily: 'var(--font-bangers, Bangers, cursive)', marginBottom: 6,
           }}>
             INSPECTION
@@ -393,7 +393,7 @@ export function TimerTab() {
                   <span style={{
                     fontFamily: 'var(--font-bangers, Bangers, cursive)',
                     fontSize: '1rem', letterSpacing: '0.04em',
-                    color: solve.dnf ? '#B90000' : '#0A0A0A',
+                    color: solve.dnf ? '#6495ED' : '#0A0A0A',
                     flex: 1,
                   }}>
                     {display}
@@ -412,7 +412,7 @@ export function TimerTab() {
                     <button
                       onClick={() => toggleDnf(solve.id)}
                       style={{
-                        background: solve.dnf ? '#B90000' : '#fff',
+                        background: solve.dnf ? '#6495ED' : '#fff',
                         color: solve.dnf ? '#fff' : '#555',
                         border: '1.5px solid #0A0A0A', borderRadius: 2,
                         padding: '2px 6px', fontSize: '0.6rem', fontWeight: 700, cursor: 'pointer',

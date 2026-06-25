@@ -16,7 +16,7 @@ const pillClass: Record<string, string> = {
 
 const categoryAccent: Record<string, string> = {
   F2L: '#0045AD',
-  OLL: '#B90000',
+  OLL: '#6495ED',
   PLL: '#009B48',
   Advanced: '#FF5900',
 };

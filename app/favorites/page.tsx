@@ -24,7 +24,7 @@ export default function FavoritesPage() {
       <div className="mb-8 fade-up" style={{ borderBottom: '3px solid #0A0A0A', paddingBottom: 20 }}>
         <div className="flex items-center gap-2 text-xs mb-4 font-semibold" style={{ color: '#555555' }}>
           <Link href="/" style={{ color: '#555555' }}>Home</Link>
-          <span style={{ color: '#B90000', fontWeight: 900 }}>›</span>
+          <span style={{ color: '#6495ED', fontWeight: 900 }}>›</span>
           <span style={{ color: '#0A0A0A' }}>Favorites</span>
         </div>
         <div className="flex items-center gap-3">
@@ -32,7 +32,7 @@ export default function FavoritesPage() {
             style={{
               width: 44,
               height: 44,
-              background: '#B90000',
+              background: '#6495ED',
               border: '3px solid #0A0A0A',
               boxShadow: '3px 3px 0 #0A0A0A',
               borderRadius: 4,
@@ -46,7 +46,7 @@ export default function FavoritesPage() {
           </div>
           <div>
             <h1 style={{ fontFamily: 'var(--font-bangers, Bangers, cursive)', fontSize: 'clamp(2rem, 6vw, 3rem)', letterSpacing: '0.03em', color: '#0A0A0A', lineHeight: 1, margin: 0 }}>
-              SAVED <span style={{ color: '#B90000' }}>ALGORITHMS</span>
+              SAVED <span style={{ color: '#6495ED' }}>ALGORITHMS</span>
             </h1>
             <p className="text-sm mt-1 font-semibold" style={{ color: '#555555' }}>
               Your personal algorithm reference collection
@@ -73,7 +73,7 @@ export default function FavoritesPage() {
             style={{
               width: 72,
               height: 72,
-              background: '#B90000',
+              background: '#6495ED',
               border: '3px solid #0A0A0A',
               boxShadow: '4px 4px 0 #0A0A0A',
               borderRadius: 4,

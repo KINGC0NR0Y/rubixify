@@ -137,7 +137,7 @@ export function AnalyticsTab() {
               { label: 'TOTAL SOLVES', value: solves.length, color: '#0A0A0A' },
               { label: 'BEST TIME',    value: best !== null ? formatTime(best) : '—', color: '#0045AD' },
               { label: 'SESSION MEAN', value: mean !== null ? formatTime(mean) : '—', color: '#009B48' },
-              { label: 'DNFs',         value: dnfCount, color: dnfCount > 0 ? '#B90000' : '#0A0A0A' },
+              { label: 'DNFs',         value: dnfCount, color: dnfCount > 0 ? '#6495ED' : '#0A0A0A' },
             ].map(s => (
               <div key={s.label} style={{ ...comicBox, padding: '14px 16px' }}>
                 <div style={{
@@ -157,7 +157,7 @@ export function AnalyticsTab() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
             {[
-              { label: 'AO5',  value: fmtAo(ao5),  color: '#B90000' },
+              { label: 'AO5',  value: fmtAo(ao5),  color: '#6495ED' },
               { label: 'AO12', value: fmtAo(ao12), color: '#0045AD' },
               { label: 'AO100',value: fmtAo(ao100),color: '#009B48' },
             ].map(s => (
@@ -215,7 +215,7 @@ export function AnalyticsTab() {
       {/* ── Weakest OLL/PLL cases ─────────────────────── */}
       {weakest.length > 0 && (
         <div style={{ ...comicBox, padding: 0, overflow: 'hidden', marginBottom: 20 }}>
-          <div style={{ background: '#B90000', padding: '8px 16px' }}>
+          <div style={{ background: '#6495ED', padding: '8px 16px' }}>
             <span style={{
               fontFamily: 'var(--font-bangers, Bangers, cursive)',
               fontSize: '0.85rem', letterSpacing: '0.12em', color: '#fff',
@@ -233,7 +233,7 @@ export function AnalyticsTab() {
             >
               <div style={{
                 width: 34, height: 34, flexShrink: 0,
-                background: r.category === 'OLL' ? '#B90000' : '#009B48',
+                background: r.category === 'OLL' ? '#6495ED' : '#009B48',
                 border: '2px solid #0A0A0A', borderRadius: 2,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '0.65rem', fontWeight: 900, color: '#fff',
@@ -253,7 +253,7 @@ export function AnalyticsTab() {
                 <div style={{
                   fontFamily: 'var(--font-bangers, Bangers, cursive)',
                   fontSize: '1.05rem', letterSpacing: '0.04em',
-                  color: r.accuracy < 0.5 ? '#B90000' : r.accuracy < 0.75 ? '#FF5900' : '#009B48',
+                  color: r.accuracy < 0.5 ? '#6495ED' : r.accuracy < 0.75 ? '#FF5900' : '#009B48',
                 }}>
                   {Math.round(r.accuracy * 100)}%
                 </div>
@@ -265,7 +265,7 @@ export function AnalyticsTab() {
               }}>
                 <div style={{
                   width: `${r.accuracy * 100}%`, height: '100%',
-                  background: r.accuracy < 0.5 ? '#B90000' : r.accuracy < 0.75 ? '#FF5900' : '#009B48',
+                  background: r.accuracy < 0.5 ? '#6495ED' : r.accuracy < 0.75 ? '#FF5900' : '#009B48',
                 }} />
               </div>
             </div>
@@ -294,7 +294,7 @@ export function AnalyticsTab() {
             >
               <div style={{
                 width: 34, height: 34, flexShrink: 0,
-                background: r.category === 'OLL' ? '#B90000' : '#009B48',
+                background: r.category === 'OLL' ? '#6495ED' : '#009B48',
                 border: '2px solid #0A0A0A', borderRadius: 2,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '0.65rem', fontWeight: 900, color: '#fff',

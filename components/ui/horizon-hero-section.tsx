@@ -97,7 +97,7 @@ export function ComicHero() {
                 lineHeight: 0.9,
                 letterSpacing: '0.02em',
                 color: '#FFFFFF',
-                textShadow: '5px 5px 0 #B90000',
+                textShadow: '5px 5px 0 #6495ED',
                 margin: 0,
               }}
             >

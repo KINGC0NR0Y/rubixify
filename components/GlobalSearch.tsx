@@ -159,7 +159,7 @@ export default function GlobalSearch({ onClose }: Props) {
                       {alg.alg || 'Skip'}
                     </p>
                   </div>
-                  <ArrowRight size={13} style={{ color: '#B90000', flexShrink: 0 }} />
+                  <ArrowRight size={13} style={{ color: '#6495ED', flexShrink: 0 }} />
                 </button>
               </li>
             ))}
@@ -174,7 +174,7 @@ export default function GlobalSearch({ onClose }: Props) {
               fontFamily: 'var(--font-bangers, Bangers, cursive)',
               fontSize: '1.2rem',
               letterSpacing: '0.1em',
-              color: '#B90000',
+              color: '#6495ED',
               marginBottom: 6,
             }}>
               START TYPING!

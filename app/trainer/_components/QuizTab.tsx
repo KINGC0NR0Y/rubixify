@@ -14,7 +14,7 @@ interface Result {
   correct: boolean;
 }
 
-const modeColor: Record<Mode, string> = { OLL: '#B90000', PLL: '#009B48' };
+const modeColor: Record<Mode, string> = { OLL: '#6495ED', PLL: '#009B48' };
 
 const comicBox = {
   background: '#FFFFFF',
@@ -140,7 +140,7 @@ export function QuizTab() {
             <CheckCircle size={13} />
             {results.filter(r => r.correct).length}
           </span>
-          <span className="flex items-center gap-1 font-bold" style={{ color: '#B90000' }}>
+          <span className="flex items-center gap-1 font-bold" style={{ color: '#6495ED' }}>
             <XCircle size={13} />
             {results.filter(r => !r.correct).length}
           </span>
@@ -150,7 +150,7 @@ export function QuizTab() {
               fontFamily: 'var(--font-bangers, Bangers, cursive)',
               fontSize: '1.3rem',
               letterSpacing: '0.06em',
-              color: accuracy && accuracy >= 70 ? '#009B48' : '#B90000',
+              color: accuracy && accuracy >= 70 ? '#009B48' : '#6495ED',
             }}
           >
             {accuracy}%
@@ -200,7 +200,7 @@ export function QuizTab() {
             let bg = '#FFFFFF', color = '#0A0A0A', shadow = '3px 3px 0 #0A0A0A';
             if (selected) {
               if (opt.id === current.id) { bg = '#009B48'; color = '#FFFFFF'; shadow = '2px 2px 0 #0A0A0A'; }
-              else if (opt.id === selected) { bg = '#B90000'; color = '#FFFFFF'; shadow = '2px 2px 0 #0A0A0A'; }
+              else if (opt.id === selected) { bg = '#6495ED'; color = '#FFFFFF'; shadow = '2px 2px 0 #0A0A0A'; }
             }
             return (
               <button
@@ -245,7 +245,7 @@ export function QuizTab() {
               selected
                 ? selected === current.id
                   ? { background: 'rgba(0,155,72,0.08)', border: '2px solid #009B48', borderRadius: 4 }
-                  : { background: 'rgba(185,0,0,0.08)', border: '2px solid #B90000', borderRadius: 4 }
+                  : { background: 'rgba(185,0,0,0.08)', border: '2px solid #6495ED', borderRadius: 4 }
                 : { background: '#FFFDF4', border: '2px solid #0A0A0A', borderRadius: 4 }
             }
           >
