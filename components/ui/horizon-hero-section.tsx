@@ -30,30 +30,6 @@ export function ComicHero() {
         flexDirection: 'column',
       }}
     >
-      {/* ── Top yellow banner ────────────────────────── */}
-      <div
-        style={{
-          background: '#FFD500',
-          borderBottom: '3px solid #0A0A0A',
-          height: 42,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-        }}
-      >
-        <span
-          style={{
-            fontFamily: 'var(--font-bangers, Bangers, Impact, cursive)',
-            fontSize: 'clamp(0.75rem, 2vw, 1rem)',
-            letterSpacing: '0.28em',
-            color: '#0A0A0A',
-          }}
-        >
-          ★ THE ULTIMATE SPEEDCUBING RESOURCE ★
-        </span>
-      </div>
-
       {/* ── Centered text panel ──────────────────────── */}
       <div
         style={{
@@ -66,7 +42,7 @@ export function ComicHero() {
           backgroundSize: '20px 20px',
           position: 'relative',
           overflow: 'hidden',
-          minHeight: 'calc(100vh - 42px)',
+          minHeight: '100vh',
         }}
       >
         <motion.div
