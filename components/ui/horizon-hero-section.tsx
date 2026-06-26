@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { RubiksCube3D } from './RubiksCube3D';
 
-// Speed lines SVG radiating from center (pre-computed)
+// Speed lines radiating from centre
 function SpeedLines() {
   const lines = Array.from({ length: 28 }, (_, i) => {
     const a  = (i / 28) * Math.PI * 2;
@@ -34,22 +34,20 @@ function SpeedLines() {
   );
 }
 
-// Stagger variants for the left-panel text elements
 const textEnter = {
-  hidden:   { opacity: 0, y: 24 },
-  visible:  { opacity: 1, y: 0 },
+  hidden:  { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0 },
 };
 
 export function ComicHero() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Parallax: maps scroll progress 0→0.5 to Y offsets
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
-  const textY  = useTransform(scrollYProgress, [0, 1], ['0%', '-18%']);
-  const cubeY  = useTransform(scrollYProgress, [0, 1], ['0%', '-9%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-18%']);
+  const cubeY = useTransform(scrollYProgress, [0, 1], ['0%', '-9%']);
 
   return (
     <section
@@ -62,7 +60,7 @@ export function ComicHero() {
         flexDirection: 'column',
       }}
     >
-      {/* ── Top yellow banner ────────────────────────── */}
+      {/* ── Top yellow banner ──────────────────────── */}
       <div
         style={{
           background: '#FFD500',
@@ -86,7 +84,7 @@ export function ComicHero() {
         </span>
       </div>
 
-      {/* ── Two-panel grid ───────────────────────────── */}
+      {/* ── Two-panel grid ─────────────────────────── */}
       <div
         style={{
           display: 'grid',
@@ -96,7 +94,7 @@ export function ComicHero() {
         }}
         className="hero-grid"
       >
-        {/* LEFT: Text ─────────────────────────────── */}
+        {/* LEFT: Text ──────────────────────────────── */}
         <div
           className="hero-text-panel"
           style={{
@@ -104,14 +102,14 @@ export function ComicHero() {
             flexDirection: 'column',
             justifyContent: 'center',
             background: '#0A0A0A',
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1.2px, transparent 1.2px)',
+            backgroundImage:
+              'radial-gradient(circle, rgba(255,255,255,0.07) 1.2px, transparent 1.2px)',
             backgroundSize: '20px 20px',
             borderRight: '4px solid #0A0A0A',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
-          {/* Parallax content wrapper */}
           <motion.div
             style={{
               y: textY,
@@ -121,9 +119,11 @@ export function ComicHero() {
             <motion.div
               initial="hidden"
               animate="visible"
-              variants={{ visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } } }}
+              variants={{
+                visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+              }}
             >
-              {/* Yellow tag */}
+              {/* Yellow badge */}
               <motion.div variants={textEnter} style={{ marginBottom: 18 }}>
                 <span
                   style={{
@@ -142,7 +142,7 @@ export function ComicHero() {
                 </span>
               </motion.div>
 
-              {/* Main headline */}
+              {/* Headline */}
               <motion.h1
                 variants={textEnter}
                 style={{
@@ -176,26 +176,38 @@ export function ComicHero() {
                 Algorithms, Tutorials, Speedcubing, and Community
               </motion.p>
 
-              {/* CTA buttons */}
-              <motion.div variants={textEnter} style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              {/* CTAs */}
+              <motion.div
+                variants={textEnter}
+                style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}
+              >
                 <Link
                   href="/algorithms"
                   className="btn-primary inline-flex items-center gap-2"
-                  style={{ padding: '11px 26px', fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)' }}
+                  style={{
+                    padding: '11px 26px',
+                    fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                  }}
                 >
                   Learn Algorithms
                 </Link>
                 <Link
                   href="/trainer"
                   className="btn-secondary inline-flex items-center gap-2"
-                  style={{ padding: '11px 26px', fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)' }}
+                  style={{
+                    padding: '11px 26px',
+                    fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                  }}
                 >
                   Start Solving
                 </Link>
               </motion.div>
 
-              {/* Rubik's color dots */}
-              <motion.div variants={textEnter} style={{ display: 'flex', gap: 8, marginTop: 44 }}>
+              {/* Rubik's colour dots */}
+              <motion.div
+                variants={textEnter}
+                style={{ display: 'flex', gap: 8, marginTop: 44 }}
+              >
                 {[
                   ['#B90000', 'Red'],
                   ['#0045AD', 'Blue'],
@@ -222,7 +234,7 @@ export function ComicHero() {
           </motion.div>
         </div>
 
-        {/* RIGHT: 3D Cube ──────────────────────────── */}
+        {/* RIGHT: 3D Cube ───────────────────────────── */}
         <div
           style={{
             background: '#0045AD',
@@ -234,22 +246,21 @@ export function ComicHero() {
             padding: '60px 24px 24px',
           }}
         >
-          {/* Speed lines */}
           <SpeedLines />
 
-          {/* Halftone dots */}
+          {/* Halftone overlay */}
           <div
             aria-hidden
             style={{
               position: 'absolute',
               inset: 0,
-              backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.14) 1.5px, transparent 1.5px)',
+              backgroundImage:
+                'radial-gradient(circle, rgba(255,255,255,0.14) 1.5px, transparent 1.5px)',
               backgroundSize: '24px 24px',
               pointerEvents: 'none',
             }}
           />
 
-          {/* 3D Cube canvas — with parallax drift */}
           <motion.div
             style={{
               width: '100%',
@@ -261,14 +272,14 @@ export function ComicHero() {
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
             <RubiksCube3D />
           </motion.div>
         </div>
       </div>
 
-      {/* Mobile stacking styles */}
+      {/* Mobile stacking */}
       <style>{`
         @media (max-width: 767px) {
           .hero-grid {
@@ -279,18 +290,12 @@ export function ComicHero() {
             border-top: 4px solid #0A0A0A;
             order: 2;
           }
-          .hero-grid > :first-child {
-            order: 2;
-          }
-          .hero-grid > :last-child {
-            order: 1;
-            min-height: 55vw;
-          }
+          .hero-grid > :first-child { order: 2; }
+          .hero-grid > :last-child  { order: 1; min-height: 55vw; }
         }
       `}</style>
     </section>
   );
 }
 
-// Keep old export name for any potential imports
-export { ComicHero as HorizonHero };
+export { ComicHero as HorizonHero, ComicHero as CinematicHero };

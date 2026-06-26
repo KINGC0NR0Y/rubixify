@@ -294,7 +294,7 @@ export function TimerTab() {
           userSelect: 'none',
           background:
             phase === 'running'    ? 'rgba(0,155,72,0.05)'   :
-            phase === 'inspecting' ? 'rgba(255,213,0,0.08)'  : '#FFFDF4',
+            phase === 'inspecting' ? 'rgba(255,213,0,0.08)'  : '#FFFFFF',
           transition: 'background 0.2s',
         }}
       >
@@ -438,7 +438,7 @@ export function TimerTab() {
 
       {/* Empty state */}
       {solves.length === 0 && (
-        <div style={{ ...comicBox, padding: 32, textAlign: 'center', background: '#FFFDF4' }}>
+        <div style={{ ...comicBox, padding: 32, textAlign: 'center', background: '#FFFFFF' }}>
           <div style={{
             fontFamily: 'var(--font-bangers, Bangers, cursive)',
             fontSize: '1.2rem', letterSpacing: '0.08em', color: '#0A0A0A', marginBottom: 6,

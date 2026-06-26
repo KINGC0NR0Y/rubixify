@@ -1,62 +1,20 @@
 import Link from 'next/link';
-import { BookOpen, Zap, Target, Star, Timer, BarChart3, Cpu } from 'lucide-react';
-import { HorizonHero } from '@/components/ui/horizon-hero-section';
+import {
+  BookOpen,
+  Target,
+  Star,
+  Timer,
+  BarChart3,
+  Cpu,
+  Search,
+  Smartphone,
+  ArrowRight,
+} from 'lucide-react';
+import { AnimatedHero } from '@/components/ui/animated-hero-section-1';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { StatsSection } from '@/components/ui/StatsSection';
 
-const features = [
-  {
-    icon: <BookOpen size={20} />,
-    title: 'Complete Algorithm Database',
-    desc: 'Every F2L, OLL, and PLL case with multiple algorithm options, move counts, and recognition tips.',
-    accent: '#0045AD',
-    bg: '#0045AD',
-  },
-  {
-    icon: <Zap size={20} />,
-    title: 'Instant Search',
-    desc: 'Find any algorithm in milliseconds. Search by name, notation, case shape, or category.',
-    accent: '#FFD500',
-    bg: '#FFD500',
-  },
-  {
-    icon: <Target size={20} />,
-    title: 'Recognition Trainer',
-    desc: 'Identify OLL and PLL cases from diagrams, track your accuracy, and drill your weakest cases with spaced repetition.',
-    accent: '#B90000',
-    bg: '#B90000',
-  },
-  {
-    icon: <Star size={20} />,
-    title: 'Add Favorites',
-    desc: 'Save algorithms you are learning and build your personal reference collection.',
-    accent: '#009B48',
-    bg: '#009B48',
-  },
-];
-
-const speedcubingTools = [
-  {
-    icon: <Timer size={22} />,
-    title: 'Session Timer',
-    desc: 'WCA-compliant scrambles, 15-second inspection countdown, spacebar/tap control, and a session list with +2 / DNF support.',
-    bg: '#0045AD',
-    textColor: '#FFFFFF',
-  },
-  {
-    icon: <Cpu size={22} />,
-    title: 'Virtual Cube',
-    desc: 'Step through any scramble move-by-move with a live cube visualizer — practice without a physical cube.',
-    bg: '#FFD500',
-    textColor: '#0A0A0A',
-  },
-  {
-    icon: <BarChart3 size={22} />,
-    title: 'Analytics',
-    desc: 'Track Ao5, Ao12, Ao100, session mean, and best time. See your time distribution and pinpoint weakest OLL/PLL cases.',
-    bg: '#009B48',
-    textColor: '#FFFFFF',
-  },
-];
+// ── Data ───────────────────────────────────────────────────────────────────────
 
 const cfopSteps = [
   {
@@ -64,6 +22,7 @@ const cfopSteps = [
     word: 'Cross',
     bg: '#FFD500',
     textColor: '#0A0A0A',
+    cases: '1 Pattern',
     desc: 'Solve the four edge pieces on the bottom layer forming a cross. Typically 5–8 moves and done intuitively.',
   },
   {
@@ -71,6 +30,7 @@ const cfopSteps = [
     word: 'First Two Layers',
     bg: '#0045AD',
     textColor: '#FFFFFF',
+    cases: '41 Cases',
     desc: 'Insert corner-edge pairs into the middle and bottom layers simultaneously. 41 algorithmic cases.',
   },
   {
@@ -78,48 +38,125 @@ const cfopSteps = [
     word: 'Orient Last Layer',
     bg: '#B90000',
     textColor: '#FFFFFF',
-    desc: 'Orient all pieces on the top layer so the top face is one color. 57 unique cases, each with a dedicated algorithm.',
+    cases: '57 Cases',
+    desc: 'Orient all pieces on the top layer so the top face is one colour. 57 unique cases, each with a dedicated algorithm.',
   },
   {
     letter: 'P',
     word: 'Permute Last Layer',
     bg: '#009B48',
     textColor: '#FFFFFF',
-    desc: 'Move top-layer pieces into correct positions without disturbing orientation. 21 unique PLL cases.',
+    cases: '21 Cases',
+    desc: 'Move top-layer pieces into their correct positions without disturbing orientation. 21 unique PLL cases.',
   },
 ];
+
+const algCategories = [
+  {
+    id: 'oll',
+    name: 'OLL',
+    full: 'Orient Last Layer',
+    cases: 57,
+    color: '#B90000',
+    bg: 'rgba(185,0,0,0.07)',
+    desc: 'All 57 OLL cases with recognition tips, multiple algorithm options, and finger-trick guides.',
+  },
+  {
+    id: 'pll',
+    name: 'PLL',
+    full: 'Permute Last Layer',
+    cases: 21,
+    color: '#009B48',
+    bg: 'rgba(0,155,72,0.07)',
+    desc: 'Every PLL algorithm with finger tricks, AUF cases, and recognition patterns from every angle.',
+  },
+  {
+    id: 'f2l',
+    name: 'F2L',
+    full: 'First Two Layers',
+    cases: 41,
+    color: '#0045AD',
+    bg: 'rgba(0,69,173,0.07)',
+    desc: 'All F2L pair cases covering standard, edge / corner separated, and advanced intuitive approaches.',
+  },
+];
+
+const tools = [
+  {
+    icon: <Timer size={22} />,
+    title: 'Session Timer',
+    desc: 'WCA-compliant scrambles, 15-second inspection countdown, spacebar / tap control, and a session list with +2 / DNF support.',
+    bg: '#0045AD',
+    textColor: '#FFFFFF',
+  },
+  {
+    icon: <Cpu size={22} />,
+    title: 'Virtual Cube',
+    desc: 'Step through any scramble move-by-move with a live cube visualiser — practice without a physical cube.',
+    bg: '#FFD500',
+    textColor: '#0A0A0A',
+  },
+  {
+    icon: <BarChart3 size={22} />,
+    title: 'Analytics',
+    desc: 'Track Ao5, Ao12, Ao100, session mean, and best time. See your time distribution and pinpoint weakest OLL / PLL cases.',
+    bg: '#009B48',
+    textColor: '#FFFFFF',
+  },
+];
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
+function Badge({ text, color = '#FFD500' }: { text: string; color?: string }) {
+  const isLight = color === '#FFD500';
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        background: color,
+        border: '3px solid #0A0A0A',
+        boxShadow: '3px 3px 0 #0A0A0A',
+        padding: '3px 16px',
+        fontFamily: 'var(--font-bangers)',
+        fontSize: 'clamp(0.62rem, 0.9vw, 0.78rem)',
+        letterSpacing: '0.3em',
+        color: isLight ? '#0A0A0A' : '#FFFFFF',
+        marginBottom: 16,
+      }}
+    >
+      {text}
+    </span>
+  );
+}
+
+// ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
   return (
     <div>
-      {/* ── Hero ─────────────────────────────────────── */}
-      <HorizonHero />
 
-      {/* ── CFOP Method ──────────────────────────────── */}
-      <section className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
-          {/* Section header */}
+      {/* ══ 1. HERO ══════════════════════════════════════════════════════════ */}
+      <AnimatedHero />
+
+      {/* ══ 2. STATS BAND ════════════════════════════════════════════════════ */}
+      <StatsSection />
+
+      {/* ══ 3. CFOP METHOD ═══════════════════════════════════════════════════ */}
+      <section
+        style={{
+          borderTop: '4px solid #0A0A0A',
+          padding: '80px 0',
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4">
+
+          {/* Heading */}
           <ScrollReveal direction="up">
-            <div className="text-center mb-14">
-              <div
-                style={{
-                  display: 'inline-block',
-                  background: '#0045AD',
-                  border: '3px solid #0A0A0A',
-                  boxShadow: '3px 3px 0 #0A0A0A',
-                  padding: '3px 16px',
-                  fontFamily: 'var(--font-bangers, Bangers, cursive)',
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.25em',
-                  color: '#FFFFFF',
-                  marginBottom: 16,
-                }}
-              >
-                THE FASTEST METHOD
-              </div>
+            <div style={{ textAlign: 'center', marginBottom: 52 }}>
+              <Badge text="★ THE FASTEST METHOD ★" />
               <h2
                 style={{
-                  fontFamily: 'var(--font-bangers, Bangers, Impact, cursive)',
+                  fontFamily: 'var(--font-bangers)',
                   fontSize: 'clamp(2.4rem, 6vw, 4rem)',
                   letterSpacing: '0.03em',
                   color: '#0A0A0A',
@@ -128,22 +165,28 @@ export default function HomePage() {
                 }}
               >
                 CUBE WITH{' '}
-                <span style={{ color: '#B90000', textShadow: '2px 2px 0 #0A0A0A' }}>
+                <span style={{ color: '#B90000', textShadow: '3px 3px 0 rgba(0,0,0,0.15)' }}>
                   EXCELLENCE
                 </span>
               </h2>
               <p
-                className="text-sm max-w-md mx-auto leading-relaxed mt-3"
-                style={{ color: '#2a2a2a' }}
+                style={{
+                  color: '#555555',
+                  fontSize: '0.88rem',
+                  marginTop: 12,
+                  maxWidth: 420,
+                  margin: '12px auto 0',
+                  lineHeight: 1.65,
+                }}
               >
                 With CFOP, unlock your true potential by transforming solves into a structured,
-                algorithm-driven process that maximizes speed, efficiency, and consistency.
+                algorithm-driven process that maximises speed, efficiency, and consistency.
               </p>
             </div>
           </ScrollReveal>
 
-          {/* 4 CFOP step cards — staggered reveal */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+          {/* 4 CFOP step cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
             {cfopSteps.map((step, i) => (
               <ScrollReveal key={step.letter} direction="panel" delay={i * 0.1}>
                 <div
@@ -157,20 +200,20 @@ export default function HomePage() {
                     position: 'relative',
                     overflow: 'hidden',
                     color: step.textColor,
-                    height: '100%',
+                    minHeight: 210,
                   }}
                 >
-                  {/* Huge letter watermark */}
+                  {/* Ghost watermark */}
                   <div
                     aria-hidden
                     style={{
                       position: 'absolute',
                       top: -10,
                       right: -8,
-                      fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                      fontFamily: 'var(--font-bangers)',
                       fontSize: '5.5rem',
                       lineHeight: 1,
-                      opacity: 0.12,
+                      opacity: 0.1,
                       color: step.textColor === '#FFFFFF' ? '#FFFFFF' : '#0A0A0A',
                       userSelect: 'none',
                       pointerEvents: 'none',
@@ -181,18 +224,32 @@ export default function HomePage() {
 
                   <div
                     style={{
-                      fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                      fontFamily: 'var(--font-bangers)',
                       fontSize: '3.5rem',
                       lineHeight: 1,
-                      marginBottom: 8,
+                      marginBottom: 6,
                     }}
                   >
                     {step.letter}
                   </div>
-                  <div style={{ fontWeight: 800, fontSize: '0.85rem', marginBottom: 8 }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.82rem', marginBottom: 6, opacity: 0.92 }}>
                     {step.word}
                   </div>
-                  <p style={{ fontSize: '0.78rem', lineHeight: 1.65, opacity: 0.9 }}>
+                  <div
+                    style={{
+                      display: 'inline-block',
+                      background: 'rgba(0,0,0,0.18)',
+                      borderRadius: 2,
+                      padding: '2px 8px',
+                      fontSize: '0.66rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.12em',
+                      marginBottom: 10,
+                    }}
+                  >
+                    {step.cases}
+                  </div>
+                  <p style={{ fontSize: '0.76rem', lineHeight: 1.65, opacity: 0.88 }}>
                     {step.desc}
                   </p>
                 </div>
@@ -204,7 +261,10 @@ export default function HomePage() {
           <ScrollReveal direction="up" delay={0.1}>
             <div
               className="card-solid"
-              style={{ borderRadius: 4, padding: '32px 28px' }}
+              style={{
+                borderRadius: 4,
+                padding: '32px 28px',
+              }}
             >
               <div
                 style={{
@@ -213,7 +273,7 @@ export default function HomePage() {
                   border: '3px solid #0A0A0A',
                   boxShadow: '3px 3px 0 #0A0A0A',
                   padding: '4px 14px',
-                  fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                  fontFamily: 'var(--font-bangers)',
                   fontSize: '1.15rem',
                   letterSpacing: '0.08em',
                   color: '#0A0A0A',
@@ -222,13 +282,15 @@ export default function HomePage() {
               >
                 WHY LEARN CFOP?
               </div>
-              <div className="grid sm:grid-cols-2 gap-6 text-sm leading-relaxed" style={{ color: '#2a2a2a' }}>
+              <div
+                className="grid sm:grid-cols-2 gap-6 text-sm leading-relaxed"
+                style={{ color: '#2a2a2a' }}
+              >
                 <p>
                   CFOP was created by{' '}
                   <strong style={{ color: '#0A0A0A' }}>Jessica Fridrich</strong> while studying at
                   Binghamton University, published online in 1997. It reduces the average solve length
-                  to{' '}
-                  <strong style={{ color: '#B90000' }}>50–60 moves</strong> vs. 100+ for beginner
+                  to <strong style={{ color: '#B90000' }}>50–60 moves</strong> vs. 100+ for beginner
                   methods. Top competitors average ~45 moves and achieve sub-5-second solves.
                 </p>
                 <p>
@@ -237,7 +299,7 @@ export default function HomePage() {
                   F2L can be planned during inspection, and fixed last-layer algorithms allow pure
                   muscle memory. Over{' '}
                   <strong style={{ color: '#0045AD' }}>90% of WCA top competitors</strong> use it.
-                  World records (3.13s by Max Park) were set using this method.
+                  World records (3.13 s by Max Park) were set using this method.
                 </p>
               </div>
             </div>
@@ -245,17 +307,191 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Dashed divider ───────────────────────────── */}
-      <hr className="section-divider" />
+      {/* ══ 4. ALGORITHM CATEGORIES ══════════════════════════════════════════ */}
+      <section
+        style={{
+          borderTop: '4px solid #0A0A0A',
+          padding: '80px 0',
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4">
 
-      {/* ── Features ─────────────────────────────────── */}
-      <section className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
           <ScrollReveal direction="up">
-            <div className="text-center mb-14">
+            <div style={{ textAlign: 'center', marginBottom: 52 }}>
+              <Badge text="★ THE DATABASE ★" color="#B90000" />
               <h2
                 style={{
-                  fontFamily: 'var(--font-bangers, Bangers, Impact, cursive)',
+                  fontFamily: 'var(--font-bangers)',
+                  fontSize: 'clamp(2.4rem, 6vw, 4rem)',
+                  letterSpacing: '0.03em',
+                  color: '#0A0A0A',
+                  margin: 0,
+                  lineHeight: 1,
+                }}
+              >
+                EXPLORE{' '}
+                <span style={{ color: '#FFD500', textShadow: '3px 3px 0 rgba(0,0,0,0.2)' }}>
+                  ALGORITHMS
+                </span>
+              </h2>
+              <p
+                style={{
+                  color: '#555555',
+                  fontSize: '0.88rem',
+                  marginTop: 12,
+                }}
+              >
+                Every case documented. Multiple algorithm options. Full recognition guides.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {algCategories.map((cat, i) => (
+              <ScrollReveal key={cat.id} direction="panel" delay={i * 0.12}>
+                <Link
+                  href={`/algorithms?category=${cat.id}`}
+                  style={{ textDecoration: 'none', display: 'block', height: '100%' }}
+                >
+                  <div
+                    className="card-hover"
+                    style={{
+                      background: cat.bg,
+                      border: `3px solid ${cat.color}`,
+                      boxShadow: `4px 4px 0 ${cat.color}`,
+                      borderRadius: 4,
+                      padding: '28px 24px',
+                      height: '100%',
+                      minHeight: 220,
+                      position: 'relative',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 10,
+                    }}
+                  >
+                    {/* Ghost name */}
+                    <div
+                      aria-hidden
+                      style={{
+                        position: 'absolute',
+                        right: -14,
+                        bottom: -24,
+                        fontFamily: 'var(--font-bangers)',
+                        fontSize: '7rem',
+                        lineHeight: 1,
+                        color: cat.color,
+                        opacity: 0.08,
+                        userSelect: 'none',
+                        pointerEvents: 'none',
+                        letterSpacing: '0.04em',
+                      }}
+                    >
+                      {cat.name}
+                    </div>
+
+                    <div>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-bangers)',
+                          fontSize: '2.4rem',
+                          color: cat.color,
+                          display: 'block',
+                          lineHeight: 1,
+                          marginBottom: 4,
+                        }}
+                      >
+                        {cat.name}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: '0.7rem',
+                          color: '#555555',
+                          letterSpacing: '0.16em',
+                          fontWeight: 700,
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {cat.full}
+                      </span>
+                    </div>
+
+                    <div
+                      style={{
+                        background: cat.color,
+                        color: cat.color === '#FFD500' ? '#0A0A0A' : '#FFFFFF',
+                        display: 'inline-block',
+                        padding: '3px 12px',
+                        fontFamily: 'var(--font-bangers)',
+                        fontSize: '1.05rem',
+                        letterSpacing: '0.05em',
+                        borderRadius: 2,
+                        alignSelf: 'flex-start',
+                      }}
+                    >
+                      {cat.cases} Cases
+                    </div>
+
+                    <p
+                      style={{
+                        fontSize: '0.78rem',
+                        color: '#555555',
+                        lineHeight: 1.65,
+                        marginTop: 'auto',
+                      }}
+                    >
+                      {cat.desc}
+                    </p>
+
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        color: cat.color,
+                        fontSize: '0.76rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.06em',
+                      }}
+                    >
+                      <ArrowRight size={13} />
+                      View All {cat.name}
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal direction="up" delay={0.28}>
+            <div style={{ textAlign: 'center', marginTop: 40 }}>
+              <Link
+                href="/algorithms"
+                className="btn-secondary inline-flex items-center gap-2"
+                style={{ padding: '13px 32px', fontSize: '1.05rem' }}
+              >
+                <BookOpen size={16} /> Browse Full Database
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ══ 5. WHY CUBOPEDIA — BENTO GRID ════════════════════════════════════ */}
+      <section
+        style={{
+          borderTop: '4px solid #0A0A0A',
+          padding: '80px 0',
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4">
+
+          <ScrollReveal direction="up">
+            <div style={{ textAlign: 'center', marginBottom: 52 }}>
+              <Badge text="★ WHY CUBOPEDIA ★" color="#009B48" />
+              <h2
+                style={{
+                  fontFamily: 'var(--font-bangers)',
                   fontSize: 'clamp(2.4rem, 6vw, 4rem)',
                   letterSpacing: '0.03em',
                   color: '#0A0A0A',
@@ -264,85 +500,274 @@ export default function HomePage() {
                 }}
               >
                 EVERYTHING{' '}
-                <span style={{ color: '#009B48', textShadow: '2px 2px 0 #0A0A0A' }}>
+                <span style={{ color: '#009B48', textShadow: '3px 3px 0 rgba(0,0,0,0.15)' }}>
                   YOU NEED
                 </span>
               </h2>
-              <p className="text-sm mt-3" style={{ color: '#2a2a2a' }}>
-                Built for speedcubers, from beginner to world-class.
+              <p style={{ color: '#555555', fontSize: '0.88rem', marginTop: 12 }}>
+                Built for speedcubers, from absolute beginner to world-class.
               </p>
             </div>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            {features.map((f, i) => (
-              <ScrollReveal key={f.title} direction={i % 2 === 0 ? 'left' : 'right'} delay={i * 0.08}>
+          {/* Bento grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            {/* ① Lightning Search — wide on sm+ */}
+            <ScrollReveal direction="left" delay={0} className="sm:col-span-2">
+              <div
+                className="card-solid card-hover"
+                style={{
+                  borderRadius: 4,
+                  padding: '28px 26px',
+                  minHeight: 168,
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
                 <div
-                  className="card-solid card-hover"
-                  style={{ borderRadius: 4, overflow: 'hidden', padding: 0 }}
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    right: -20,
+                    bottom: -24,
+                    color: '#FFD500',
+                    opacity: 0.14,
+                  }}
                 >
-                  {/* Colored top bar with icon */}
+                  <Search size={130} />
+                </div>
+                <div style={{ color: '#FFD500', marginBottom: 12, filter: 'drop-shadow(1px 1px 0 #0A0A0A)' }}>
+                  <Search size={22} />
+                </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-bangers)',
+                    fontSize: '1.4rem',
+                    letterSpacing: '0.06em',
+                    color: '#0A0A0A',
+                    marginBottom: 8,
+                  }}
+                >
+                  Lightning-Fast Search
+                </div>
+                <p
+                  style={{
+                    fontSize: '0.8rem',
+                    color: '#555555',
+                    lineHeight: 1.68,
+                    maxWidth: 360,
+                  }}
+                >
+                  Find any algorithm in milliseconds. Search by name, notation, case shape, or
+                  category — results update as you type.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* ② Recognition Guides */}
+            <ScrollReveal direction="right" delay={0.06}>
+              <div
+                className="card-solid card-hover"
+                style={{
+                  borderRadius: 4,
+                  padding: '28px 26px',
+                  minHeight: 168,
+                  borderLeftColor: '#B90000',
+                  borderLeftWidth: 5,
+                }}
+              >
+                <div style={{ color: '#B90000', marginBottom: 12 }}>
+                  <Target size={22} />
+                </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-bangers)',
+                    fontSize: '1.2rem',
+                    letterSpacing: '0.06em',
+                    color: '#0A0A0A',
+                    marginBottom: 8,
+                  }}
+                >
+                  Recognition Guides
+                </div>
+                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
+                  Visual patterns for every OLL and PLL case. Learn to identify cases at a glance.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* ③ Interactive Visualiser */}
+            <ScrollReveal direction="up" delay={0.1}>
+              <div
+                className="card-solid card-hover"
+                style={{
+                  borderRadius: 4,
+                  padding: '28px 26px',
+                  minHeight: 168,
+                  borderLeftColor: '#0045AD',
+                  borderLeftWidth: 5,
+                }}
+              >
+                <div style={{ color: '#0045AD', marginBottom: 12 }}>
+                  <Cpu size={22} />
+                </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-bangers)',
+                    fontSize: '1.2rem',
+                    letterSpacing: '0.06em',
+                    color: '#0A0A0A',
+                    marginBottom: 8,
+                  }}
+                >
+                  Interactive Viz
+                </div>
+                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
+                  Step through any algorithm move-by-move with a live 3D cube visualiser.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* ④ Save Favourites */}
+            <ScrollReveal direction="up" delay={0.14}>
+              <div
+                className="card-solid card-hover"
+                style={{
+                  borderRadius: 4,
+                  padding: '28px 26px',
+                  minHeight: 168,
+                  borderLeftColor: '#009B48',
+                  borderLeftWidth: 5,
+                }}
+              >
+                <div style={{ color: '#009B48', marginBottom: 12 }}>
+                  <Star size={22} />
+                </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-bangers)',
+                    fontSize: '1.2rem',
+                    letterSpacing: '0.06em',
+                    color: '#0A0A0A',
+                    marginBottom: 8,
+                  }}
+                >
+                  Save Favourites
+                </div>
+                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
+                  Bookmark algorithms you&apos;re learning. Build your personal reference collection.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* ⑤ Complete Database */}
+            <ScrollReveal direction="right" delay={0.18} className="sm:col-span-2 lg:col-span-1">
+              <div
+                className="card-solid card-hover"
+                style={{
+                  borderRadius: 4,
+                  padding: '28px 26px',
+                  minHeight: 168,
+                  borderLeftColor: '#FF5900',
+                  borderLeftWidth: 5,
+                }}
+              >
+                <div style={{ color: '#FF5900', marginBottom: 12 }}>
+                  <BookOpen size={22} />
+                </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-bangers)',
+                    fontSize: '1.2rem',
+                    letterSpacing: '0.06em',
+                    color: '#0A0A0A',
+                    marginBottom: 8,
+                  }}
+                >
+                  Complete Database
+                </div>
+                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
+                  Every F2L, OLL, and PLL case with multiple algorithm options, move counts, and
+                  recognition tips.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            {/* ⑥ Mobile Optimised — full-width on lg */}
+            <ScrollReveal direction="up" delay={0.22} className="sm:col-span-2 lg:col-span-3">
+              <div
+                className="card-solid card-hover"
+                style={{
+                  borderRadius: 4,
+                  padding: '24px 26px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 20,
+                }}
+              >
+                <div style={{ color: '#0A0A0A', flexShrink: 0 }}>
+                  <Smartphone size={22} />
+                </div>
+                <div>
                   <div
                     style={{
-                      background: f.bg,
-                      borderBottom: '3px solid #0A0A0A',
-                      padding: '12px 20px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 10,
-                      color: f.accent === '#FFD500' ? '#0A0A0A' : '#FFFFFF',
+                      fontFamily: 'var(--font-bangers)',
+                      fontSize: '1.1rem',
+                      letterSpacing: '0.06em',
+                      color: '#0A0A0A',
+                      marginBottom: 4,
                     }}
                   >
-                    {f.icon}
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-bangers, Bangers, cursive)',
-                        fontSize: '1rem',
-                        letterSpacing: '0.06em',
-                      }}
-                    >
-                      {f.title}
-                    </span>
+                    Mobile Optimised
                   </div>
-                  <div style={{ padding: '16px 20px' }}>
-                    <p className="text-xs leading-relaxed" style={{ color: '#2a2a2a' }}>
-                      {f.desc}
-                    </p>
-                  </div>
+                  <p style={{ fontSize: '0.76rem', color: '#555555', lineHeight: 1.6, margin: 0 }}>
+                    Perfectly responsive across every screen size. Practice and reference algorithms from
+                    any device, anywhere.
+                  </p>
                 </div>
-              </ScrollReveal>
-            ))}
+                <div
+                  style={{
+                    marginLeft: 'auto',
+                    flexShrink: 0,
+                    display: 'flex',
+                    gap: 6,
+                  }}
+                >
+                  {['#B90000', '#0045AD', '#FFD500', '#009B48', '#FF5900', '#EEEEEE'].map((c) => (
+                    <div
+                      key={c}
+                      style={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: '50%',
+                        background: c,
+                        border: '1.5px solid #0A0A0A',
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ── Dashed divider ───────────────────────────── */}
-      <hr className="section-divider" />
+      {/* ══ 6. SPEEDCUBING TOOLS ═════════════════════════════════════════════ */}
+      <section
+        style={{
+          borderTop: '4px solid #0A0A0A',
+          padding: '80px 0',
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4">
 
-      {/* ── Speedcubing Tools ────────────────────────── */}
-      <section className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
           <ScrollReveal direction="up">
-            <div className="text-center mb-14">
-              <div
-                style={{
-                  display: 'inline-block',
-                  background: '#0045AD',
-                  border: '3px solid #0A0A0A',
-                  boxShadow: '3px 3px 0 #0A0A0A',
-                  padding: '3px 16px',
-                  fontFamily: 'var(--font-bangers, Bangers, cursive)',
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.25em',
-                  color: '#FFFFFF',
-                  marginBottom: 16,
-                }}
-              >
-                BUILT FOR SPEED
-              </div>
+            <div style={{ textAlign: 'center', marginBottom: 52 }}>
+              <Badge text="★ BUILT FOR SPEED ★" color="#0045AD" />
               <h2
                 style={{
-                  fontFamily: 'var(--font-bangers, Bangers, Impact, cursive)',
+                  fontFamily: 'var(--font-bangers)',
                   fontSize: 'clamp(2.4rem, 6vw, 4rem)',
                   letterSpacing: '0.03em',
                   color: '#0A0A0A',
@@ -351,20 +776,32 @@ export default function HomePage() {
                 }}
               >
                 SPEEDCUBING{' '}
-                <span style={{ color: '#0045AD', textShadow: '2px 2px 0 #0A0A0A' }}>
+                <span style={{ color: '#0045AD', textShadow: '3px 3px 0 rgba(0,0,0,0.15)' }}>
                   TOOLS
                 </span>
               </h2>
-              <p className="text-sm mt-3 max-w-md mx-auto" style={{ color: '#2a2a2a' }}>
+              <p
+                style={{
+                  color: '#555555',
+                  fontSize: '0.88rem',
+                  marginTop: 12,
+                  maxWidth: 420,
+                  margin: '12px auto 0',
+                  lineHeight: 1.65,
+                }}
+              >
                 Everything you need to train smarter — from WCA-style scrambles to session analytics.
               </p>
             </div>
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-3 gap-5 mb-10">
-            {speedcubingTools.map((tool, i) => (
+            {tools.map((tool, i) => (
               <ScrollReveal key={tool.title} direction="panel" delay={i * 0.1}>
-                <Link href="/trainer" style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
+                <Link
+                  href="/trainer"
+                  style={{ textDecoration: 'none', display: 'block', height: '100%' }}
+                >
                   <div
                     className="card-hover"
                     style={{
@@ -378,10 +815,14 @@ export default function HomePage() {
                     }}
                   >
                     <div style={{ marginBottom: 12 }}>{tool.icon}</div>
-                    <div style={{
-                      fontFamily: 'var(--font-bangers, Bangers, cursive)',
-                      fontSize: '1.15rem', letterSpacing: '0.06em', marginBottom: 8,
-                    }}>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-bangers)',
+                        fontSize: '1.15rem',
+                        letterSpacing: '0.06em',
+                        marginBottom: 8,
+                      }}
+                    >
                       {tool.title}
                     </div>
                     <p style={{ fontSize: '0.78rem', lineHeight: 1.65, opacity: 0.9 }}>
@@ -394,7 +835,7 @@ export default function HomePage() {
           </div>
 
           <ScrollReveal direction="up" delay={0.1}>
-            <div className="text-center">
+            <div style={{ textAlign: 'center' }}>
               <Link
                 href="/trainer"
                 className="btn-primary inline-flex items-center gap-2"
@@ -407,86 +848,109 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Dashed divider ───────────────────────────── */}
-      <hr className="section-divider" />
-
-      {/* ── CTA ──────────────────────────────────────── */}
-      <section className="py-20 px-4 text-center relative overflow-hidden">
-        {/* Diagonal stripe background */}
+      {/* ══ 7. FINAL CTA ═════════════════════════════════════════════════════ */}
+      <section
+        style={{
+          background: '#FFD500',
+          borderTop: '4px solid #0A0A0A',
+          position: 'relative',
+          overflow: 'hidden',
+          padding: '100px 0',
+          textAlign: 'center',
+        }}
+      >
+        {/* Diagonal stripe overlay */}
         <div
           aria-hidden
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `
-              repeating-linear-gradient(
-                45deg,
-                rgba(255,213,0,0.06) 0px,
-                rgba(255,213,0,0.06) 10px,
-                transparent 10px,
-                transparent 20px
-              )
-            `,
+            backgroundImage: `repeating-linear-gradient(
+              45deg,
+              rgba(0,0,0,0.04) 0px,
+              rgba(0,0,0,0.04) 10px,
+              transparent 10px,
+              transparent 22px
+            )`,
+            pointerEvents: 'none',
           }}
         />
 
-        <ScrollReveal direction="scale" className="relative max-w-2xl mx-auto">
-          <div
-            aria-hidden
-            style={{
-              fontFamily: 'var(--font-bangers, Bangers, cursive)',
-              fontSize: 'clamp(0.75rem, 1.5vw, 0.95rem)',
-              letterSpacing: '0.3em',
-              color: '#B90000',
-              marginBottom: 12,
-              textTransform: 'uppercase',
-            }}
-          >
-            ★ ★ ★
-          </div>
-
-          <h2
-            style={{
-              fontFamily: 'var(--font-bangers, Bangers, Impact, cursive)',
-              fontSize: 'clamp(2.2rem, 7vw, 4.5rem)',
-              letterSpacing: '0.02em',
-              color: '#0A0A0A',
-              lineHeight: 0.95,
-              marginBottom: 16,
-            }}
-          >
-            START YOUR
-            <br />
-            <span style={{ color: '#B90000', textShadow: '3px 3px 0 #0A0A0A' }}>
-              SPEEDCUBING
-            </span>
-            <br />
-            JOURNEY
-          </h2>
-
-          <p
-            className="mb-10 text-sm leading-relaxed max-w-md mx-auto"
-            style={{ color: '#2a2a2a' }}
-          >
-            Browse the complete algorithm database or jump straight into training mode to test your
-            recognition skills.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/algorithms"
-              className="btn-primary inline-flex items-center gap-2"
-              style={{ padding: '14px 32px', fontSize: '1.1rem' }}
+        <ScrollReveal direction="scale" className="relative" style={{ zIndex: 1 }}>
+          <div className="max-w-2xl mx-auto px-4">
+            <div
+              style={{
+                fontFamily: 'var(--font-bangers)',
+                fontSize: 'clamp(0.75rem, 1.5vw, 0.95rem)',
+                letterSpacing: '0.3em',
+                color: '#B90000',
+                marginBottom: 14,
+              }}
             >
-              Browse Algorithms
-            </Link>
-            <Link
-              href="/trainer"
-              className="btn-secondary inline-flex items-center gap-2"
-              style={{ padding: '14px 32px', fontSize: '1.1rem' }}
+              ★ ★ ★
+            </div>
+
+            <h2
+              style={{
+                fontFamily: 'var(--font-bangers)',
+                fontSize: 'clamp(2.2rem, 7vw, 4.5rem)',
+                letterSpacing: '0.02em',
+                color: '#0A0A0A',
+                lineHeight: 0.95,
+                marginBottom: 20,
+              }}
             >
-              Open Trainer
-            </Link>
+              START YOUR
+              <br />
+              <span style={{ color: '#B90000', textShadow: '4px 4px 0 rgba(0,0,0,0.2)' }}>
+                SPEEDCUBING
+              </span>
+              <br />
+              JOURNEY
+            </h2>
+
+            <p
+              style={{
+                color: '#2a2a2a',
+                fontSize: '0.9rem',
+                lineHeight: 1.72,
+                maxWidth: 400,
+                margin: '0 auto 40px',
+              }}
+            >
+              Browse the complete algorithm database or jump straight into training mode to test your
+              recognition skills.
+            </p>
+
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                href="/algorithms"
+                className="btn-primary inline-flex items-center gap-2"
+                style={{ padding: '14px 32px', fontSize: '1.1rem' }}
+              >
+                Browse Algorithms
+              </Link>
+              <Link
+                href="/trainer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '14px 32px',
+                  fontSize: '1.1rem',
+                  background: '#0A0A0A',
+                  color: '#FFD500',
+                  border: '3px solid #0A0A0A',
+                  boxShadow: '4px 4px 0 rgba(0,0,0,0.25)',
+                  borderRadius: 2,
+                  fontFamily: 'var(--font-bangers)',
+                  letterSpacing: '0.08em',
+                  textDecoration: 'none',
+                }}
+              >
+                Open Trainer
+              </Link>
+            </div>
           </div>
         </ScrollReveal>
       </section>

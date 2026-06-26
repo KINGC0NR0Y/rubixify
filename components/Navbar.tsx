@@ -81,7 +81,7 @@ export default function Navbar() {
         ref={headerRef}
         className="sticky top-0 z-50"
         style={{
-          background: '#FFFDF4',
+          background: '#FFFFFF',
           borderBottom: '3px solid #0A0A0A',
           boxShadow: '0 3px 0 #0A0A0A',
         }}
@@ -179,7 +179,7 @@ export default function Navbar() {
             className="md:hidden flex flex-col"
             style={{
               borderTop: '3px solid #0A0A0A',
-              background: '#FFFDF4',
+              background: '#FFFFFF',
               backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px)',
               backgroundSize: '16px 16px',
             }}

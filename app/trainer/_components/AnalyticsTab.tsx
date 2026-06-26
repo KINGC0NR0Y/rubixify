@@ -91,7 +91,7 @@ export function AnalyticsTab() {
 
   if (isEmpty) {
     return (
-      <div style={{ ...comicBox, padding: 48, textAlign: 'center', background: '#FFFDF4' }}>
+      <div style={{ ...comicBox, padding: 48, textAlign: 'center', background: '#FFFFFF' }}>
         <BarChart3 size={36} style={{ margin: '0 auto 16px', color: '#CCC' }} />
         <div style={{
           fontFamily: 'var(--font-bangers, Bangers, cursive)',
@@ -347,7 +347,7 @@ export function AnalyticsTab() {
                   { label: 'OVERALL ACCURACY', value: `${Math.round(avgAccuracy * 100)}%` },
                   { label: 'AVG RECOGNITION',  value: `${(avgResponseMs / 1000).toFixed(1)}s` },
                 ].map(s => (
-                  <div key={s.label} style={{ background: '#FFFDF4', border: '1.5px solid #0A0A0A', borderRadius: 2, padding: '10px 14px' }}>
+                  <div key={s.label} style={{ background: '#FFFFFF', border: '1.5px solid #0A0A0A', borderRadius: 2, padding: '10px 14px' }}>
                     <div style={{ fontSize: '0.56rem', fontWeight: 800, letterSpacing: '0.1em', color: '#888', fontFamily: 'var(--font-bangers, Bangers, cursive)', marginBottom: 3 }}>
                       {s.label}
                     </div>

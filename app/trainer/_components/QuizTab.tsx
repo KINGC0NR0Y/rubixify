@@ -133,7 +133,7 @@ export function QuizTab() {
       {results.length > 0 && (
         <div
           className="flex items-center gap-4 px-4 py-3 mb-6 text-sm fade-up"
-          style={{ ...comicBox, background: '#FFFDF4' }}
+          style={{ ...comicBox, background: '#FFFFFF' }}
         >
           <span className="font-bold" style={{ color: '#555555' }}>{results.length} attempted</span>
           <span className="flex items-center gap-1 font-bold" style={{ color: '#009B48' }}>
@@ -246,7 +246,7 @@ export function QuizTab() {
                 ? selected === current.id
                   ? { background: 'rgba(0,155,72,0.08)', border: '2px solid #009B48', borderRadius: 4 }
                   : { background: 'rgba(185,0,0,0.08)', border: '2px solid #B90000', borderRadius: 4 }
-                : { background: '#FFFDF4', border: '2px solid #0A0A0A', borderRadius: 4 }
+                : { background: '#FFFFFF', border: '2px solid #0A0A0A', borderRadius: 4 }
             }
           >
             <p className="text-xs font-bold mb-1" style={{ color: '#555555', fontFamily: 'var(--font-bangers, Bangers, cursive)', letterSpacing: '0.1em', fontSize: '0.75rem' }}>

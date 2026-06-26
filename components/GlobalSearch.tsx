@@ -45,7 +45,7 @@ export default function GlobalSearch({ onClose }: Props) {
       <div
         className="w-full max-w-xl overflow-hidden"
         style={{
-          background: '#FFFDF4',
+          background: '#FFFFFF',
           backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px)',
           backgroundSize: '16px 16px',
           border: '4px solid #0A0A0A',
