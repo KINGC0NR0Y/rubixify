@@ -2,7 +2,7 @@
 
 CuboPedia is a fun, user-friendly platform dedicated for those getting into or want to refine their cubing skills! This project serves as a central place where cubers can quickly find the exact algorithm they need in the middle of practice, without having to search through scattered videos or inconsistent resources. Instead of memorizing long lists blindly, users can understand each case visually, recognize patterns more easily, and gradually build muscle memory through repeated exposure and practice.
 
-
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 🚀 Features
 
@@ -11,7 +11,7 @@ CuboPedia is a fun, user-friendly platform dedicated for those getting into or w
 * Built in algorithm quizzes to train pattern recognition to tackle any OLL and PLL case.
 * Integrated TNoodle API: the official WCA puzzle scrambler. Practice and time your solves efficiently and effectively, automatically averages your solves, and start or delete sessions.
 
-
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 🛠️ Tech Stack
 
@@ -20,7 +20,7 @@ CuboPedia is a fun, user-friendly platform dedicated for those getting into or w
 * TypeScript - type safety
 * Tailwind CSS - website styling
 
-
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 💫 Inspiration & Resources
 
