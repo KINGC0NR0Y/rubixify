@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Heart, Copy, Check, Move, Star, Tag, Lightbulb, ChevronRight } from 'lucide-react';
-import { Algorithm } from '@/lib/algorithms';
+import { Algorithm, getVizAlg } from '@/lib/algorithms';
+import type { CubeState } from '@/lib/cubeImage';
 import { toggleFavorite, isFavorite } from '@/lib/favorites';
 import CubeViz from './CubeViz';
 import AlgorithmCard from './AlgorithmCard';
@@ -43,6 +44,7 @@ const algBox = {
 export default function AlgorithmDetail({ alg, related }: Props) {
   const [fav, setFav]       = useState(false);
   const [copied, setCopied] = useState(false);
+  const [vizState, setVizState] = useState<CubeState>('recognition');
   const accent = categoryColor[alg.category] ?? '#0045AD';
 
   useEffect(() => {
@@ -250,6 +252,34 @@ export default function AlgorithmDetail({ alg, related }: Props) {
               </div>
             )}
           </div>
+
+          {/* Notes / tips */}
+          {alg.notes && (
+            <div style={{ ...comicBox, padding: 20 }} className="fade-up-3">
+              <div style={{
+                background: '#FFD500',
+                borderBottom: '3px solid #0A0A0A',
+                margin: '-20px -20px 16px -20px',
+                padding: '10px 16px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}>
+                <Lightbulb size={14} style={{ color: '#0A0A0A' }} />
+                <span style={{
+                  fontFamily: 'var(--font-bangers, Bangers, cursive)',
+                  fontSize: '0.95rem',
+                  letterSpacing: '0.1em',
+                  color: '#0A0A0A',
+                }}>
+                  NOTES &amp; TIPS
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed" style={{ color: '#2a2a2a' }}>
+                {alg.notes}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* ── Right: diagram + related ───────────────────── */}
@@ -272,9 +302,41 @@ export default function AlgorithmDetail({ alg, related }: Props) {
                 CASE DIAGRAM
               </span>
             </div>
-            <CubeViz alg={alg.alg} category={alg.category} size={150} />
+            <CubeViz alg={getVizAlg(alg)} category={alg.category} size={150} state={vizState} />
+
+            {/* Recognition / Solved state toggle */}
+            <div className="flex gap-2">
+              {([
+                { key: 'recognition', label: 'Recognition' },
+                { key: 'solved', label: 'Solved' },
+              ] as const).map((opt) => {
+                const active = vizState === opt.key;
+                return (
+                  <button
+                    key={opt.key}
+                    onClick={() => setVizState(opt.key)}
+                    style={{
+                      background: active ? accent : '#FFFFFF',
+                      color: active ? '#FFFFFF' : '#0A0A0A',
+                      border: '2px solid #0A0A0A',
+                      boxShadow: active ? '1px 1px 0 #0A0A0A' : '2px 2px 0 #0A0A0A',
+                      borderRadius: 2,
+                      padding: '3px 10px',
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      transform: active ? 'translate(1px,1px)' : '',
+                    }}
+                  >
+                    {opt.label}
+                  </button>
+                );
+              })}
+            </div>
             <p className="text-xs text-center font-semibold" style={{ color: '#555555' }}>
-              {alg.caseShape ?? alg.category} pattern
+              {vizState === 'solved'
+                ? 'Goal state after solving'
+                : `${alg.caseShape ?? alg.category} pattern`}
             </p>
           </div>
 

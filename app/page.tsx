@@ -287,19 +287,15 @@ export default function HomePage() {
                 style={{ color: '#2a2a2a' }}
               >
                 <p>
-                  CFOP was created by{' '}
-                  <strong style={{ color: '#0A0A0A' }}>Jessica Fridrich</strong> while studying at
-                  Binghamton University, published online in 1997. It reduces the average solve length
-                  to <strong style={{ color: '#B90000' }}>50–60 moves</strong> vs. 100+ for beginner
-                  methods. Top competitors average ~45 moves and achieve sub-5-second solves.
+                  CFOP was developed from early speedcubing techniques in the 1980s, with <strong style={{ color: '#0A0A0A' }}>Jessica Fridrich</strong> later 
+                  refining and popularizing the method by publishing it online in 1997. It combines Cross, F2L, OLL, and PLL, giving advanced solvers an efficient, 
+                  highly repeatable system that averages around 55 moves at the top level.
                 </p>
                 <p>
-                  CFOP&apos;s dominance comes from its{' '}
-                  <strong style={{ color: '#0A0A0A' }}>efficiency and parallelism</strong> — Cross and
-                  F2L can be planned during inspection, and fixed last-layer algorithms allow pure
-                  muscle memory. Over{' '}
-                  <strong style={{ color: '#0045AD' }}>90% of WCA top competitors</strong> use it.
-                  World records (3.13 s by Max Park) were set using this method.
+                 CFOP’s dominance comes from its <strong style={{ color: '#0A0A0A' }}>speed, efficiency, and predictability</strong>. Solvers can plan the Cross during inspection, 
+                 build F2L pairs intuitively, and use memorized OLL and PLL algorithms to finish the last layer quickly. 
+                 Its structured approach minimizes unnecessary moves while allowing fast, consistent execution, making CFOP the most widely used method among elite 3×3 speedcubers.
+
                 </p>
               </div>
             </div>
@@ -477,282 +473,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══ 5. WHY CUBOPEDIA — BENTO GRID ════════════════════════════════════ */}
-      <section
-        style={{
-          borderTop: '4px solid #0A0A0A',
-          padding: '80px 0',
-        }}
-      >
-        <div className="max-w-5xl mx-auto px-4">
-
-          <ScrollReveal direction="up">
-            <div style={{ textAlign: 'center', marginBottom: 52 }}>
-              <Badge text="★ WHY CUBOPEDIA ★" color="#009B48" />
-              <h2
-                style={{
-                  fontFamily: 'var(--font-bangers)',
-                  fontSize: 'clamp(2.4rem, 6vw, 4rem)',
-                  letterSpacing: '0.03em',
-                  color: '#0A0A0A',
-                  margin: 0,
-                  lineHeight: 1,
-                }}
-              >
-                EVERYTHING{' '}
-                <span style={{ color: '#009B48', textShadow: '3px 3px 0 rgba(0,0,0,0.15)' }}>
-                  YOU NEED
-                </span>
-              </h2>
-              <p style={{ color: '#555555', fontSize: '0.88rem', marginTop: 12 }}>
-                Built for speedcubers, from absolute beginner to world-class.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          {/* Bento grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
-            {/* ① Lightning Search — wide on sm+ */}
-            <ScrollReveal direction="left" delay={0} className="sm:col-span-2">
-              <div
-                className="card-solid card-hover"
-                style={{
-                  borderRadius: 4,
-                  padding: '28px 26px',
-                  minHeight: 168,
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  aria-hidden
-                  style={{
-                    position: 'absolute',
-                    right: -20,
-                    bottom: -24,
-                    color: '#FFD500',
-                    opacity: 0.14,
-                  }}
-                >
-                  <Search size={130} />
-                </div>
-                <div style={{ color: '#FFD500', marginBottom: 12, filter: 'drop-shadow(1px 1px 0 #0A0A0A)' }}>
-                  <Search size={22} />
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-bangers)',
-                    fontSize: '1.4rem',
-                    letterSpacing: '0.06em',
-                    color: '#0A0A0A',
-                    marginBottom: 8,
-                  }}
-                >
-                  Lightning-Fast Search
-                </div>
-                <p
-                  style={{
-                    fontSize: '0.8rem',
-                    color: '#555555',
-                    lineHeight: 1.68,
-                    maxWidth: 360,
-                  }}
-                >
-                  Find any algorithm in milliseconds. Search by name, notation, case shape, or
-                  category — results update as you type.
-                </p>
-              </div>
-            </ScrollReveal>
-
-            {/* ② Recognition Guides */}
-            <ScrollReveal direction="right" delay={0.06}>
-              <div
-                className="card-solid card-hover"
-                style={{
-                  borderRadius: 4,
-                  padding: '28px 26px',
-                  minHeight: 168,
-                  borderLeftColor: '#B90000',
-                  borderLeftWidth: 5,
-                }}
-              >
-                <div style={{ color: '#B90000', marginBottom: 12 }}>
-                  <Target size={22} />
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-bangers)',
-                    fontSize: '1.2rem',
-                    letterSpacing: '0.06em',
-                    color: '#0A0A0A',
-                    marginBottom: 8,
-                  }}
-                >
-                  Recognition Guides
-                </div>
-                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
-                  Visual patterns for every OLL and PLL case. Learn to identify cases at a glance.
-                </p>
-              </div>
-            </ScrollReveal>
-
-            {/* ③ Interactive Visualiser */}
-            <ScrollReveal direction="up" delay={0.1}>
-              <div
-                className="card-solid card-hover"
-                style={{
-                  borderRadius: 4,
-                  padding: '28px 26px',
-                  minHeight: 168,
-                  borderLeftColor: '#0045AD',
-                  borderLeftWidth: 5,
-                }}
-              >
-                <div style={{ color: '#0045AD', marginBottom: 12 }}>
-                  <Cpu size={22} />
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-bangers)',
-                    fontSize: '1.2rem',
-                    letterSpacing: '0.06em',
-                    color: '#0A0A0A',
-                    marginBottom: 8,
-                  }}
-                >
-                  Interactive Viz
-                </div>
-                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
-                  Step through any algorithm move-by-move with a live 3D cube visualiser.
-                </p>
-              </div>
-            </ScrollReveal>
-
-            {/* ④ Save Favourites */}
-            <ScrollReveal direction="up" delay={0.14}>
-              <div
-                className="card-solid card-hover"
-                style={{
-                  borderRadius: 4,
-                  padding: '28px 26px',
-                  minHeight: 168,
-                  borderLeftColor: '#009B48',
-                  borderLeftWidth: 5,
-                }}
-              >
-                <div style={{ color: '#009B48', marginBottom: 12 }}>
-                  <Star size={22} />
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-bangers)',
-                    fontSize: '1.2rem',
-                    letterSpacing: '0.06em',
-                    color: '#0A0A0A',
-                    marginBottom: 8,
-                  }}
-                >
-                  Save Favourites
-                </div>
-                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
-                  Bookmark algorithms you&apos;re learning. Build your personal reference collection.
-                </p>
-              </div>
-            </ScrollReveal>
-
-            {/* ⑤ Complete Database */}
-            <ScrollReveal direction="right" delay={0.18} className="sm:col-span-2 lg:col-span-1">
-              <div
-                className="card-solid card-hover"
-                style={{
-                  borderRadius: 4,
-                  padding: '28px 26px',
-                  minHeight: 168,
-                  borderLeftColor: '#FF5900',
-                  borderLeftWidth: 5,
-                }}
-              >
-                <div style={{ color: '#FF5900', marginBottom: 12 }}>
-                  <BookOpen size={22} />
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-bangers)',
-                    fontSize: '1.2rem',
-                    letterSpacing: '0.06em',
-                    color: '#0A0A0A',
-                    marginBottom: 8,
-                  }}
-                >
-                  Complete Database
-                </div>
-                <p style={{ fontSize: '0.78rem', color: '#555555', lineHeight: 1.65 }}>
-                  Every F2L, OLL, and PLL case with multiple algorithm options, move counts, and
-                  recognition tips.
-                </p>
-              </div>
-            </ScrollReveal>
-
-            {/* ⑥ Mobile Optimised — full-width on lg */}
-            <ScrollReveal direction="up" delay={0.22} className="sm:col-span-2 lg:col-span-3">
-              <div
-                className="card-solid card-hover"
-                style={{
-                  borderRadius: 4,
-                  padding: '24px 26px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 20,
-                }}
-              >
-                <div style={{ color: '#0A0A0A', flexShrink: 0 }}>
-                  <Smartphone size={22} />
-                </div>
-                <div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-bangers)',
-                      fontSize: '1.1rem',
-                      letterSpacing: '0.06em',
-                      color: '#0A0A0A',
-                      marginBottom: 4,
-                    }}
-                  >
-                    Mobile Optimised
-                  </div>
-                  <p style={{ fontSize: '0.76rem', color: '#555555', lineHeight: 1.6, margin: 0 }}>
-                    Perfectly responsive across every screen size. Practice and reference algorithms from
-                    any device, anywhere.
-                  </p>
-                </div>
-                <div
-                  style={{
-                    marginLeft: 'auto',
-                    flexShrink: 0,
-                    display: 'flex',
-                    gap: 6,
-                  }}
-                >
-                  {['#B90000', '#0045AD', '#FFD500', '#009B48', '#FF5900', '#EEEEEE'].map((c) => (
-                    <div
-                      key={c}
-                      style={{
-                        width: 10,
-                        height: 10,
-                        borderRadius: '50%',
-                        background: c,
-                        border: '1.5px solid #0A0A0A',
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
+     
       {/* ══ 6. SPEEDCUBING TOOLS ═════════════════════════════════════════════ */}
       <section
         style={{
@@ -851,7 +572,7 @@ export default function HomePage() {
       {/* ══ 7. FINAL CTA ═════════════════════════════════════════════════════ */}
       <section
         style={{
-          background: '#FFD500',
+          background: 'transparent',
           borderTop: '4px solid #0A0A0A',
           position: 'relative',
           overflow: 'hidden',
@@ -859,22 +580,6 @@ export default function HomePage() {
           textAlign: 'center',
         }}
       >
-        {/* Diagonal stripe overlay */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `repeating-linear-gradient(
-              45deg,
-              rgba(0,0,0,0.04) 0px,
-              rgba(0,0,0,0.04) 10px,
-              transparent 10px,
-              transparent 22px
-            )`,
-            pointerEvents: 'none',
-          }}
-        />
 
         <ScrollReveal direction="scale" className="relative" style={{ zIndex: 1 }}>
           <div className="max-w-2xl mx-auto px-4">
@@ -939,7 +644,7 @@ export default function HomePage() {
                   padding: '14px 32px',
                   fontSize: '1.1rem',
                   background: '#0A0A0A',
-                  color: '#FFD500',
+                  color: '#FFFFFF',
                   border: '3px solid #0A0A0A',
                   boxShadow: '4px 4px 0 rgba(0,0,0,0.25)',
                   borderRadius: 2,

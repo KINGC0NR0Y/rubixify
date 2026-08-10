@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Search, Filter, SlidersHorizontal, X } from 'lucide-react';
 import { allAlgorithms, Category } from '@/lib/algorithms';
 import AlgorithmCard from '@/components/AlgorithmCard';
@@ -18,26 +18,36 @@ export default function AlgorithmsPage() {
   const [query, setQuery]       = useState('');
   const [category, setCategory] = useState<Category | 'All'>('All');
   const [maxMoves, setMaxMoves] = useState<number>(30);
-  const [sort, setSort]         = useState<'popularity' | 'moves'>('popularity');
+  const [sort, setSort]         = useState<'number' | 'popularity' | 'moves'>('number');
   const [showFilters, setShowFilters] = useState(false);
 
+  // Honor a `?category=` link (e.g. from the homepage CFOP cards).
+  useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get('category');
+    if (!param) return;
+    const match = categories.find(
+      (c) => c.value !== 'All' && c.value.toLowerCase() === param.toLowerCase(),
+    );
+    if (match) setCategory(match.value);
+  }, []);
+
   const results = useMemo(() => {
-    return allAlgorithms
-      .filter((a) => {
-        const q = query.toLowerCase().trim();
-        const matchCat   = category === 'All' || a.category === category;
-        const matchMoves = a.moves <= maxMoves;
-        const matchQ     =
-          !q ||
-          a.name.toLowerCase().includes(q) ||
-          a.alg.toLowerCase().includes(q) ||
-          a.recognition.toLowerCase().includes(q) ||
-          a.subCategory?.toLowerCase().includes(q);
-        return matchCat && matchMoves && matchQ;
-      })
-      .sort((a, b) =>
-        sort === 'popularity' ? b.popularity - a.popularity : a.moves - b.moves
-      );
+    const filtered = allAlgorithms.filter((a) => {
+      const q = query.toLowerCase().trim();
+      const matchCat   = category === 'All' || a.category === category;
+      const matchMoves = a.moves <= maxMoves;
+      const matchQ     =
+        !q ||
+        a.name.toLowerCase().includes(q) ||
+        a.alg.toLowerCase().includes(q) ||
+        a.recognition.toLowerCase().includes(q) ||
+        a.subCategory?.toLowerCase().includes(q);
+      return matchCat && matchMoves && matchQ;
+    });
+    if (sort === 'number') return filtered;
+    return [...filtered].sort((a, b) =>
+      sort === 'popularity' ? b.popularity - a.popularity : a.moves - b.moves
+    );
   }, [query, category, maxMoves, sort]);
 
   const comicPanel = {
@@ -170,7 +180,7 @@ export default function AlgorithmsPage() {
               Sort by
             </label>
             <div className="flex gap-2">
-              {(['popularity', 'moves'] as const).map((s) => (
+              {(['number', 'popularity', 'moves'] as const).map((s) => (
                 <button
                   key={s}
                   onClick={() => setSort(s)}
@@ -187,7 +197,7 @@ export default function AlgorithmsPage() {
                     transform: sort === s ? 'translate(1px,1px)' : '',
                   }}
                 >
-                  {s === 'popularity' ? 'Popularity' : 'Move Count'}
+                  {s === 'number' ? 'Number' : s === 'popularity' ? 'Popularity' : 'Move Count'}
                 </button>
               ))}
             </div>

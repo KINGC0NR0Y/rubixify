@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Heart, Move } from 'lucide-react';
-import { Algorithm } from '@/lib/algorithms';
+import { Algorithm, getVizAlg } from '@/lib/algorithms';
 import { toggleFavorite, isFavorite } from '@/lib/favorites';
 import { useState, useEffect } from 'react';
 import CubeViz from './CubeViz';
@@ -91,7 +91,7 @@ export default function AlgorithmCard({ alg }: Props) {
 
         {/* Diagram */}
         <div className="flex justify-center py-1 mb-3">
-          <CubeViz alg={alg.alg} category={alg.category} size={64} />
+          <CubeViz alg={getVizAlg(alg)} category={alg.category} size={64} />
         </div>
 
         {/* Algorithm notation */}

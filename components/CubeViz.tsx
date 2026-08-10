@@ -1,16 +1,30 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import {
+  buildCubeOptions,
+  cubeCacheKey,
+  type CubeState,
+  type ViewportRotation,
+} from '@/lib/cubeImage';
+import type { Category } from '@/lib/algorithms';
 
 interface Props {
   alg: string;
   category: string;
   size?: number;
+  /** Which cube state to draw. Defaults to the category's recognition state. */
+  state?: CubeState;
 }
 
-const BG = '#0d0d12';
+// Rendered SVG markup is memoized across every card/detail mount. VisualCube is
+// deterministic, so an identical option-set always yields identical markup —
+// re-mounting a cached case is an innerHTML assignment with no re-computation.
+const svgCache = new Map<string, string>();
 
-export default function CubeViz({ alg, category, size = 80 }: Props) {
+const AXIS = { x: 0, y: 1, z: 2 } as const;
+
+export default function CubeViz({ alg, category, size = 80, state }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
 
@@ -19,35 +33,58 @@ export default function CubeViz({ alg, category, size = 80 }: Props) {
     const el = ref.current;
     let cancelled = false;
 
-    import('sr-visualizer').then(({ cubeSVG, Masking }) => {
-      if (cancelled || !el) return;
-      el.innerHTML = '';
+    const input = { alg, category: category as Category, state, style: { size } };
+    const key = cubeCacheKey(input);
 
-      const base = {
-        width: size,
-        height: size,
-        backgroundColor: BG,
-        cubeColor: '#1a1a24',
-      };
+    const cached = svgCache.get(key);
+    if (cached) {
+      el.innerHTML = cached;
+      setReady(true);
+      return;
+    }
 
-      try {
-        if (category === 'OLL') {
-          cubeSVG(el, { ...base, case: alg || undefined, view: 'plan', mask: Masking.OLL });
-        } else if (category === 'PLL') {
-          cubeSVG(el, { ...base, case: alg || undefined, view: 'plan', mask: Masking.LL });
-        } else if (category === 'F2L') {
-          cubeSVG(el, { ...base, case: alg || undefined, mask: Masking.F2L });
-        } else {
-          cubeSVG(el, { ...base, algorithm: alg || undefined });
+    import('sr-visualizer')
+      .then(({ cubeSVG }) => {
+        if (cancelled || !el) return;
+        el.innerHTML = '';
+
+        const o = buildCubeOptions(input);
+        try {
+          cubeSVG(el, {
+            width: o.width,
+            height: o.height,
+            backgroundColor: o.backgroundColor,
+            cubeColor: o.cubeColor,
+            maskColor: o.maskColor,
+            colorScheme: o.colorScheme,
+            // `mask` values match the library's Masking string-enum exactly.
+            mask: o.mask as never,
+            view: o.view,
+            viewportRotations: o.viewportRotations?.map(
+              ([axis, deg]: ViewportRotation) => [AXIS[axis], deg] as [number, number],
+            ) as never,
+            case: o.case,
+            algorithm: o.algorithm,
+          });
+
+          // Make the drawn SVG scale to its container (responsive).
+          const svg = el.querySelector('svg');
+          if (svg) {
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
+          }
+          svgCache.set(key, el.innerHTML);
+          if (!cancelled) setReady(true);
+        } catch {
+          // Silently ignore rendering errors for unsupported algorithm strings.
         }
-        if (!cancelled) setReady(true);
-      } catch {
-        // silently ignore rendering errors for unsupported algorithm strings
-      }
-    }).catch(() => {});
+      })
+      .catch(() => {});
 
-    return () => { cancelled = true; };
-  }, [alg, category, size]);
+    return () => {
+      cancelled = true;
+    };
+  }, [alg, category, size, state]);
 
   return (
     <div
@@ -55,9 +92,11 @@ export default function CubeViz({ alg, category, size = 80 }: Props) {
       style={{
         width: size,
         height: size,
+        maxWidth: '100%',
+        aspectRatio: '1 / 1',
         borderRadius: 8,
         overflow: 'hidden',
-        background: BG,
+        background: '#0d0d12',
         flexShrink: 0,
         opacity: ready ? 1 : 0,
         transition: 'opacity 0.18s ease',
