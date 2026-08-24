@@ -1,40 +1,32 @@
-hs project
+🧠 About this Project
 
+CuboPedia is a fun, user-friendly platform dedicated for those getting into or want to refine their cubing skills! This project serves as a central place where cubers can quickly find the exact algorithm they need in the middle of practice, without having to search through scattered videos or inconsistent resources. Instead of memorizing long lists blindly, users can understand each case visually, recognize patterns more easily, and gradually build muscle memory through repeated exposure and practice.
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-## Getting Started
+🚀 Features
 
-First, run the development server:
+* F2L, OLL, and PLL cases with official Rubik’s Cube algorithm notation, 3D/2D cube visualizer, difficulty rating, and move counter; unique for each case.
+* Add favorites! Choose which algorithm you struggle with the most and add them to your favorites for easy access.
+* Built in algorithm quizzes to train pattern recognition to tackle any OLL and PLL case.
+* TNoodle API: the official WCA puzzle scrambler. Practice and time your solves efficiently and effectively, automatically averages your solves, and start or delete sessions.
+* VisualCube API: generated Rubik's cube visuals
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Next.js - frontend framework
+* React - library of UI components
+* TypeScript - type safety
+* Tailwind CSS - website styling
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
-## Learn More
+💫 Inspiration & Resources
 
-To learn more about Next.js, take a look at the following resources:
+Please feel free to check these amazing tools! Hard-carried CuboPedia I must say :)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* jperm.net - built by Rubik’s Cubing YouTuber JPerm, definitely one of the best if not the best resources for cubing out there (this was my biggest inspiration for why I decided to make CuboPedia!)
+* wca.com - the OFFICIAL Rubik’s Cubing organization
+* 

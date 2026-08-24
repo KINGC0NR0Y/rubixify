@@ -139,7 +139,7 @@ export const AnimatedHero = ({
             color: '#0A0A0A',
           }}
         >
-          ★ THE ULTIMATE SPEEDCUBING RESOURCE ★
+          ★ THE ULTIMATE GUIDE TO SPEEDCUBING  ★
         </span>
       </motion.div>
 
