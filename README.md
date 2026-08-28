@@ -1,4 +1,5 @@
 🚧UNDER CONSTRUCTION🚧
+
 🧠 About this Project
 
 CuboPedia is a fun, user-friendly platform dedicated for those getting into or want to refine their cubing skills! This project serves as a central place where cubers can quickly find the exact algorithm they need in the middle of practice, without having to search through scattered videos or inconsistent resources. Instead of memorizing long lists blindly, users can understand each case visually, recognize patterns more easily, and gradually build muscle memory through repeated exposure and practice.
