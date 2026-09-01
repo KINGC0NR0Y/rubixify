@@ -68,9 +68,7 @@ Contributions, suggestions, and bug reports are welcome!
 
 If you have an idea that could make algorithm learning or speedcubing practice better, feel free to open an issue or submit a pull request.
 
-## ⭐ Support
-
-If Algently helps you improve your solves, consider giving the repository a **star ⭐**!
+Like Algently? consider giving the repository a **star ⭐**!
 
 ---
 ## 🔗 Resources
