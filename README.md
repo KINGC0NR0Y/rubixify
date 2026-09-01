@@ -74,6 +74,7 @@ If Algently helps you improve your solves, consider giving the repository a **st
 
 ---
 🔗 Resources
+
 [VisualCube](https://github.com/tdecker91/visualcube)
 
 [J Perm](https://jperm.net/)
