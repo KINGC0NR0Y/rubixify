@@ -75,12 +75,12 @@ If Algently helps you improve your solves, consider giving the repository a **st
 ---
 🔗 Resources
 
-[VisualCube](https://github.com/tdecker91/visualcube)
+* [VisualCube](https://github.com/tdecker91/visualcube)
 
-[J Perm](https://jperm.net/)
+* [J Perm](https://jperm.net/)
 
-[SpeedCubeShop](https://speedcubeshop.com/)
+* [SpeedCubeShop](https://speedcubeshop.com/)
 
-[World Cube Association](https://www.worldcubeassociation.org/)
+* [World Cube Association](https://www.worldcubeassociation.org/)
 
 Note: Algently is an independent project and is not affiliated with, endorsed by, or officially associated with the resources listed above unless explicitly stated otherwise.
