@@ -76,9 +76,9 @@ If Algently helps you improve your solves, consider giving the repository a **st
 
 ## 🔗 Quick Links
 Resource	What it's useful for
-🧊 VisualCube	Cube visualization
-🧑‍💻 J Perm	Tutorials & algorithm training
-🧩 SpeedCubeShop	Cubes & cubing equipment
-🌎 World Cube Association	Official competitions & rankings
+🧊 VisualCube: Cube visualization
+🧑‍💻 J Perm: Tutorials & algorithm training
+🧩 SpeedCubeShop: Cubes & cubing equipment
+🌎 World Cube Association: Official competitions & rankings
 
 Note: Algently is an independent project and is not affiliated with, endorsed by, or officially associated with the resources listed above unless explicitly stated otherwise.
