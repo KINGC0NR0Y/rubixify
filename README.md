@@ -73,7 +73,7 @@ If you have an idea that could make algorithm learning or speedcubing practice b
 If Algently helps you improve your solves, consider giving the repository a **star ⭐**!
 
 ---
-🔗 Resources
+## 🔗 Resources
 
 * [VisualCube](https://github.com/tdecker91/visualcube)
 
