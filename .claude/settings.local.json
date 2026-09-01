@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(Start-Sleep -Seconds 3; $routes = @\\(\"/\", \"/about\", \"/algorithms\", \"/algorithms/f2l-basic-right-slot\", \"/trainer\", \"/favorites\"\\); foreach \\($r in $routes\\) { try { $res = Invoke-WebRequest -Uri \"http://localhost:3000$r\" -UseBasicParsing -TimeoutSec 8; Write-Host \"$\\($res.StatusCode\\) $r\" } catch { Write-Host \"ERR $r - $\\($_.Exception.Message\\)\" } })",
-      "Bash(node --test \"lib/**/*.test.ts\")"
-    ]
-  }
-}
