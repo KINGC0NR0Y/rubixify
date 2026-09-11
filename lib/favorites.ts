@@ -1,7 +1,23 @@
-const KEY = 'cubopedia_favorites';
+const KEY = 'algently_favorites';
+const LEGACY_KEY = 'cubopedia_favorites';
+
+// One-time carry-over from the pre-rename key so existing users keep their favorites.
+function migrateLegacy() {
+  if (typeof window === 'undefined') return;
+  try {
+    const legacy = localStorage.getItem(LEGACY_KEY);
+    if (legacy !== null && localStorage.getItem(KEY) === null) {
+      localStorage.setItem(KEY, legacy);
+    }
+    if (legacy !== null) localStorage.removeItem(LEGACY_KEY);
+  } catch {
+    /* storage unavailable — nothing to migrate */
+  }
+}
 
 export function getFavorites(): string[] {
   if (typeof window === 'undefined') return [];
+  migrateLegacy();
   try {
     return JSON.parse(localStorage.getItem(KEY) ?? '[]');
   } catch {

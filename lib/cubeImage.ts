@@ -123,8 +123,10 @@ const CATEGORY_CONFIG: Record<Category, CategoryConfig> = {
   OLL: { mask: MASK.LL, planView: true, defaultState: 'recognition', colorScheme: OLL_COLOR_SCHEME },
   // PLL needs full colours to read the permutation.
   PLL: { mask: MASK.LL, planView: true, defaultState: 'recognition' },
-  Advanced: { planView: false, defaultState: 'execution' },
 };
+
+/** Fallback for a category with no entry above (e.g. data from an older build). */
+const DEFAULT_CONFIG: CategoryConfig = { planView: false, defaultState: 'execution' };
 
 // ── Notation helpers (pure, unit-tested) ────────────────────────────────────
 
@@ -184,7 +186,7 @@ export function moveCount(alg: string): number {
  * input this always returns a deeply-equal object.
  */
 export function buildCubeOptions(input: CubeImageInput): CubeRenderOptions {
-  const cfg = CATEGORY_CONFIG[input.category] ?? CATEGORY_CONFIG.Advanced;
+  const cfg = CATEGORY_CONFIG[input.category] ?? DEFAULT_CONFIG;
   const state = input.state ?? cfg.defaultState;
   const style = { ...DEFAULT_STYLE, ...input.style };
   const alg = input.alg.trim();
@@ -202,7 +204,7 @@ export function buildCubeOptions(input: CubeImageInput): CubeRenderOptions {
   if (cfg.planView) {
     options.view = 'plan';
   } else {
-    // Non-plan categories (F2L, Advanced) MUST carry explicit rotations. The
+    // Non-plan categories (F2L) MUST carry explicit rotations. The
     // renderer reads `viewportRotations` unconditionally when not in plan view,
     // so leaving it undefined throws and renders a blank cube. Default to the
     // standard 3D isometric view (VisualCube's own default angles).

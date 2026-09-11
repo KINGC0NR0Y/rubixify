@@ -21,9 +21,9 @@ const bangers = Bangers({
 });
 
 export const metadata: Metadata = {
-  title: "CuboPedia – The Ultimate Rubik's Cube Algorithm Database",
+  title: "Algently – The Ultimate Rubik's Cube Algorithm Database",
   description:
-    "Learn, search and practice CFOP algorithms. F2L, OLL, PLL and advanced algorithms for speedcubers.",
+    "Learn, search and practice CFOP algorithms. F2L, OLL and PLL algorithms for speedcubers.",
 };
 
 export default function RootLayout({
@@ -53,7 +53,7 @@ export default function RootLayout({
                 letterSpacing: '0.08em',
               }}
             >
-              CuboPedia
+              Algently
             </span>
             {' '}© {new Date().getFullYear()} — The Ultimate Speedcubing Algorithm Database
           </p>

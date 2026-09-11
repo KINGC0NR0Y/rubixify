@@ -31,7 +31,7 @@ import {
   OLL_COLOR_SCHEME,
 } from './cubeImage.ts';
 
-const CATEGORIES: Category[] = ['F2L', 'OLL', 'PLL', 'Advanced'];
+const CATEGORIES: Category[] = ['F2L', 'OLL', 'PLL'];
 
 // ── Dataset integrity ───────────────────────────────────────────────────────
 
@@ -182,17 +182,12 @@ test('each category maps to the correct mask and view', () => {
   const pll = buildCubeOptions({ alg: "R U R'", category: 'PLL' });
   assert.equal(pll.mask, 'll');
   assert.equal(pll.view, 'plan');
-
-  // Advanced has no mask and defaults to showing the executed algorithm.
-  const adv = buildCubeOptions({ alg: "R U R' U'", category: 'Advanced' });
-  assert.equal(adv.mask, undefined);
-  assert.equal(adv.algorithm, "R U R' U'");
 });
 
 test('non-plan categories always carry explicit rotations (no blank render)', () => {
   // The renderer reads viewportRotations unconditionally off plan view, so a
-  // missing value throws and renders a blank cube. F2L and Advanced must set it.
-  for (const category of ['F2L', 'Advanced'] as const) {
+  // missing value throws and renders a blank cube. F2L must set it.
+  for (const category of ['F2L'] as const) {
     const o = buildCubeOptions({ alg: "R U R'", category });
     assert.equal(o.view, undefined, `${category} should not use plan view`);
     assert.ok(

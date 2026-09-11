@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Algently cube logo">
+  <g>
+    <!-- top row -->
+    <rect x="20"  y="115" width="248" height="234" rx="40" fill="#B20000"/>
+    <rect x="310" y="115" width="248" height="234" rx="40" fill="#B20000"/>
+    <rect x="600" y="115" width="248" height="234" rx="40" fill="#004AAF"/>
+    <!-- middle row (offset) -->
+    <rect x="175" y="393" width="248" height="234" rx="40" fill="#00A14B"/>
+    <rect x="465" y="393" width="248" height="234" rx="40" fill="#FFF200"/>
+    <rect x="755" y="393" width="248" height="234" rx="40" fill="#004AAF"/>
+    <!-- bottom row -->
+    <rect x="20"  y="671" width="248" height="234" rx="40" fill="#00A14B"/>
+    <rect x="310" y="671" width="248" height="234" rx="40" fill="#FF6A00"/>
+    <rect x="600" y="671" width="248" height="234" rx="40" fill="#FF6A00"/>
+  </g>
+</svg>

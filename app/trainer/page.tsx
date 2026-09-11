@@ -5,20 +5,25 @@ import Link from 'next/link';
 import { QuizTab }      from './_components/QuizTab';
 import { TimerTab }     from './_components/TimerTab';
 import { AnalyticsTab } from './_components/AnalyticsTab';
+import { SolverTab }    from './_components/SolverTab';
 
-type Tab = 'quiz' | 'timer' | 'analytics';
+type Tab = 'quiz' | 'timer' | 'analytics' | 'solver';
 
 const TABS: { id: Tab; label: string; color: string }[] = [
   { id: 'quiz',      label: 'QUIZ',      color: '#B90000' },
   { id: 'timer',     label: 'TIMER',     color: '#0045AD' },
   { id: 'analytics', label: 'ANALYTICS', color: '#009B48' },
+  { id: 'solver',    label: 'SOLVER',    color: '#FF5900' },
 ];
 
 export default function TrainerPage() {
   const [tab, setTab] = useState<Tab>('quiz');
 
+  // The solver's cube net and playback need more room than the other tabs.
+  const width = tab === 'solver' ? 'max-w-4xl' : 'max-w-2xl';
+
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+    <div className={`${width} mx-auto px-4 sm:px-6 py-10`}>
       {/* Header */}
       <div className="mb-8 fade-up" style={{ borderBottom: '3px solid #0A0A0A', paddingBottom: 20 }}>
         <div className="flex items-center gap-2 text-xs mb-4 font-semibold" style={{ color: '#555555' }}>
@@ -46,12 +51,12 @@ export default function TrainerPage() {
           SPEEDCUBING <span style={{ color: '#B90000' }}>HUB</span>
         </h1>
         <p className="text-sm mt-2 font-semibold" style={{ color: '#555555' }}>
-          Practice recognition, time your solves, and track your progress — all in one place.
+          Practice recognition, time your solves, track your progress, and solve any cube you can hold.
         </p>
       </div>
 
       {/* Tab bar */}
-      <div className="flex gap-3 mb-6 fade-up-2">
+      <div className="flex flex-wrap gap-3 mb-6 fade-up-2">
         {TABS.map(t => {
           const active = tab === t.id;
           return (
@@ -84,6 +89,7 @@ export default function TrainerPage() {
         {tab === 'quiz'      && <QuizTab />}
         {tab === 'timer'     && <TimerTab />}
         {tab === 'analytics' && <AnalyticsTab />}
+        {tab === 'solver'    && <SolverTab />}
       </div>
     </div>
   );

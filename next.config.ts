@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
   // Disabled: conflicts with Framer Motion's internal hook patterns in React 19
   reactCompiler: false,
 
-  // Required: prevents Webpack/Turbopack from picking up the package.json
-  // in the parent Cube/ directory as the workspace root
+  // Pins the workspace root to this directory so Turbopack never infers it
+  // from a lockfile or package.json further up the OneDrive tree
   turbopack: {
     root: path.resolve(__dirname),
   },

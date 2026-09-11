@@ -11,14 +11,12 @@ const pillClass: Record<string, string> = {
   F2L: 'pill-f2l',
   OLL: 'pill-oll',
   PLL: 'pill-pll',
-  Advanced: 'pill-adv',
 };
 
 const categoryAccent: Record<string, string> = {
   F2L: '#0045AD',
   OLL: '#B90000',
   PLL: '#009B48',
-  Advanced: '#FF5900',
 };
 
 interface Props {

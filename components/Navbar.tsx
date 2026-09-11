@@ -15,33 +15,33 @@ const navLinks = [
   { href: '/about',      label: 'About' },
 ];
 
-// Mini Rubik's face logo
+// Brand mark — same artwork as the favicon (app/icon.svg)
+const LOGO_TILES = [
+  { x: 20,  y: 115, fill: '#B20000' },
+  { x: 310, y: 115, fill: '#B20000' },
+  { x: 600, y: 115, fill: '#004AAF' },
+  { x: 175, y: 393, fill: '#00A14B' },
+  { x: 465, y: 393, fill: '#FFF200' },
+  { x: 755, y: 393, fill: '#004AAF' },
+  { x: 20,  y: 671, fill: '#00A14B' },
+  { x: 310, y: 671, fill: '#FF6A00' },
+  { x: 600, y: 671, fill: '#FF6A00' },
+];
+
 function CubeLogo() {
-  const colors = [
-    '#B90000', '#FFD500', '#009B48',
-    '#0045AD', '#F8F8F8', '#FF5900',
-    '#FFD500', '#B90000', '#0045AD',
-  ];
   return (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden>
-      {colors.map((c, i) => {
-        const col = i % 3;
-        const row = Math.floor(i / 3);
-        return (
-          <rect
-            key={i}
-            x={col * 9 + 2}
-            y={row * 9 + 2}
-            width={7}
-            height={7}
-            rx={1}
-            fill={c}
-            stroke="#0A0A0A"
-            strokeWidth="0.8"
-          />
-        );
-      })}
-      <rect x="1" y="1" width="28" height="28" rx="3" stroke="#0A0A0A" strokeWidth="2" fill="none" />
+    <svg width="34" height="27" viewBox="20 115 984 790" fill="none" aria-hidden>
+      {LOGO_TILES.map((t, i) => (
+        <rect
+          key={i}
+          x={t.x}
+          y={t.y}
+          width={248}
+          height={234}
+          rx={40}
+          fill={t.fill}
+        />
+      ))}
     </svg>
   );
 }
@@ -106,8 +106,8 @@ export default function Navbar() {
                 lineHeight: 1,
               }}
             >
-              Cubo
-              <span style={{ color: '#B90000' }}>Pedia</span>
+              Alg
+              <span style={{ color: '#B90000' }}>ently</span>
             </span>
           </Link>
 

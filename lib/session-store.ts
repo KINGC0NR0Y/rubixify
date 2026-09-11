@@ -14,13 +14,27 @@ export interface QuizResult {
   totalResponseMs: number;
 }
 
-const SOLVES_KEY = 'cubopedia-solves';
-const QUIZ_KEY = 'cubopedia-quiz-results';
+const SOLVES_KEY = 'algently-solves';
+const QUIZ_KEY = 'algently-quiz-results';
+
+// One-time carry-over from the pre-rename keys so existing users keep their data.
+function migrateLegacy(key: string, legacyKey: string) {
+  if (typeof window === 'undefined') return;
+  try {
+    const legacy = localStorage.getItem(legacyKey);
+    if (legacy === null) return;
+    if (localStorage.getItem(key) === null) localStorage.setItem(key, legacy);
+    localStorage.removeItem(legacyKey);
+  } catch {
+    /* storage unavailable — nothing to migrate */
+  }
+}
 
 // ── Solves ──────────────────────────────────────────
 
 export function getSolves(): Solve[] {
   if (typeof window === 'undefined') return [];
+  migrateLegacy(SOLVES_KEY, 'cubopedia-solves');
   try { return JSON.parse(localStorage.getItem(SOLVES_KEY) ?? '[]'); }
   catch { return []; }
 }
@@ -53,6 +67,7 @@ export function clearSolves(): void {
 
 export function getQuizResults(): Record<string, QuizResult> {
   if (typeof window === 'undefined') return {};
+  migrateLegacy(QUIZ_KEY, 'cubopedia-quiz-results');
   try { return JSON.parse(localStorage.getItem(QUIZ_KEY) ?? '{}'); }
   catch { return {}; }
 }

@@ -13,7 +13,6 @@ const pillClass: Record<string, string> = {
   F2L: 'pill-f2l',
   OLL: 'pill-oll',
   PLL: 'pill-pll',
-  Advanced: 'pill-adv',
 };
 
 export default function GlobalSearch({ onClose }: Props) {
@@ -180,7 +179,7 @@ export default function GlobalSearch({ onClose }: Props) {
               START TYPING!
             </div>
             <p style={{ fontSize: '0.8rem', color: '#555555', fontWeight: 600 }}>
-              Search F2L, OLL, PLL, or Advanced algorithms
+              Search F2L, OLL, or PLL algorithms
             </p>
           </div>
         )}

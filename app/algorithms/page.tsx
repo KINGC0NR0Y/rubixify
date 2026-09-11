@@ -11,7 +11,6 @@ const categories: { label: string; value: Category | 'All'; color: string; textL
   { label: 'F2L',      value: 'F2L',      color: '#0045AD', textLight: true },
   { label: 'OLL',      value: 'OLL',      color: '#B90000', textLight: true },
   { label: 'PLL',      value: 'PLL',      color: '#009B48', textLight: true },
-  { label: 'Advanced', value: 'Advanced', color: '#FF5900', textLight: true },
 ];
 
 export default function AlgorithmsPage() {
@@ -76,7 +75,7 @@ export default function AlgorithmsPage() {
           ALGORITHM <span style={{ color: '#B90000' }}>EXPLORER</span>
         </h1>
         <p className="text-sm mt-2 font-semibold" style={{ color: '#555555' }}>
-          {allAlgorithms.length} algorithms across F2L, OLL, PLL, and Advanced categories
+          {allAlgorithms.length} algorithms across the F2L, OLL, and PLL categories
         </p>
       </div>
 

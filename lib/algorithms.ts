@@ -1,4 +1,4 @@
-export type Category = 'F2L' | 'OLL' | 'PLL' | 'Advanced';
+export type Category = 'F2L' | 'OLL' | 'PLL';
 
 export interface Algorithm {
   id: string;
@@ -1482,102 +1482,10 @@ export const pllAlgorithms: Algorithm[] = [
   },
 ];
 
-// ───────────── Advanced ─────────────
-export const advancedAlgorithms: Algorithm[] = [
-  {
-    id: 'adv-sexy',
-    name: 'Sexy Move',
-    category: 'Advanced',
-    subCategory: 'Triggers',
-    alg: "R U R' U'",
-    alts: [],
-    moves: 4,
-    recognition: 'Fundamental trigger used in many algorithms',
-    fingertricks: 'Index R flick',
-    popularity: 10,
-    caseShape: 'Trigger',
-  },
-  {
-    id: 'adv-sledge',
-    name: 'Sledgehammer',
-    category: 'Advanced',
-    subCategory: 'Triggers',
-    alg: "R' F R F'",
-    alts: [],
-    moves: 4,
-    recognition: 'F trigger variant — opposite of sexy move',
-    fingertricks: "Ring R' then pinch F",
-    popularity: 9,
-    caseShape: 'Trigger',
-  },
-  {
-    id: 'adv-hedge',
-    name: 'Hedgehammer',
-    category: 'Advanced',
-    subCategory: 'Triggers',
-    alg: "F R' F' R",
-    alts: [],
-    moves: 4,
-    recognition: 'Mirror of sledgehammer',
-    popularity: 8,
-    caseShape: 'Trigger',
-  },
-  {
-    id: 'adv-niklas',
-    name: 'Niklas',
-    category: 'Advanced',
-    subCategory: 'Corners',
-    alg: "R U' L' U R' U' L",
-    alts: [],
-    moves: 7,
-    recognition: 'Opposite corner 3-cycle, no edges disturbed',
-    popularity: 7,
-    caseShape: 'Corners',
-  },
-  {
-    id: 'adv-commutator',
-    name: 'Basic Commutator',
-    category: 'Advanced',
-    subCategory: 'Commutators',
-    alg: "R U R' U'",
-    alts: ["[R, U]"],
-    moves: 4,
-    recognition: 'Cycle pieces without disturbing others; building block of BLD',
-    popularity: 8,
-    caseShape: 'Commutator',
-  },
-  {
-    id: 'adv-m-slice',
-    name: 'M-Slice',
-    category: 'Advanced',
-    subCategory: 'Slices',
-    alg: "M' U M U2 M' U M",
-    alts: [],
-    moves: 7,
-    recognition: 'Orient and cycle M-slice edges',
-    fingertricks: 'Thumb M pull',
-    popularity: 7,
-    caseShape: 'MSlice',
-  },
-  {
-    id: 'adv-oll-skip',
-    name: 'OLL Skip Setup',
-    category: 'Advanced',
-    subCategory: 'Shortcuts',
-    alg: "x2 R U R' U R U2 R' x2",
-    alts: [],
-    moves: 8,
-    recognition: 'Forces an OLL skip in certain cube states',
-    popularity: 5,
-    caseShape: 'Skip',
-  },
-];
-
 export const allAlgorithms: Algorithm[] = [
   ...f2lAlgorithms,
   ...ollAlgorithms,
   ...pllAlgorithms,
-  ...advancedAlgorithms,
 ];
 
 export function searchAlgorithms(query: string, category?: Category): Algorithm[] {
