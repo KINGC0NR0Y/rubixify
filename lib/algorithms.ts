@@ -13,7 +13,6 @@ export interface Algorithm {
   popularity: number;
   caseShape?: string;
   arrows?: string;
-  /** Extra learning tips shown on the case detail page. */
   notes?: string;
 }
 

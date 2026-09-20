@@ -57,7 +57,6 @@ export default function CubeViz({ alg, category, size = 80, state }: Props) {
             cubeColor: o.cubeColor,
             maskColor: o.maskColor,
             colorScheme: o.colorScheme,
-            // `mask` values match the library's Masking string-enum exactly.
             mask: o.mask as never,
             view: o.view,
             viewportRotations: o.viewportRotations?.map(
@@ -67,7 +66,6 @@ export default function CubeViz({ alg, category, size = 80, state }: Props) {
             algorithm: o.algorithm,
           });
 
-          // Make the drawn SVG scale to its container (responsive).
           const svg = el.querySelector('svg');
           if (svg) {
             svg.setAttribute('width', '100%');
@@ -76,7 +74,6 @@ export default function CubeViz({ alg, category, size = 80, state }: Props) {
           svgCache.set(key, el.innerHTML);
           if (!cancelled) setReady(true);
         } catch {
-          // Silently ignore rendering errors for unsupported algorithm strings.
         }
       })
       .catch(() => {});

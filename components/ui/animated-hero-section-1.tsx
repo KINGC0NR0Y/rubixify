@@ -42,13 +42,20 @@ const itemVariants = {
   },
 };
 
+// Math.sin/Math.cos are not required to be correctly rounded, so Node and the
+// browser can disagree in the last bit and render coordinates that differ by one
+// ulp — enough for React to report a hydration mismatch. These lines are a
+// decorative backdrop on a 400-unit viewBox, so rounding away that noise costs
+// nothing visually and keeps the server and client markup identical.
+const round = (n: number) => Math.round(n * 1000) / 1000;
+
 function SpeedLines() {
   const lines = Array.from({ length: 28 }, (_, i) => {
     const a  = (i / 28) * Math.PI * 2;
-    const x1 = 200 + Math.cos(a) * 18;
-    const y1 = 200 + Math.sin(a) * 18;
-    const x2 = 200 + Math.cos(a) * 420;
-    const y2 = 200 + Math.sin(a) * 420;
+    const x1 = round(200 + Math.cos(a) * 18);
+    const y1 = round(200 + Math.sin(a) * 18);
+    const x2 = round(200 + Math.cos(a) * 420);
+    const y2 = round(200 + Math.sin(a) * 420);
     return { x1, y1, x2, y2 };
   });
   return (

@@ -4,7 +4,7 @@ const FACES: Face[] = ['U', 'D', 'R', 'L', 'F', 'B'];
 const MODS = ["", "'", "2"] as const;
 const AXIS: Record<Face, number> = { U: 0, D: 0, R: 1, L: 1, F: 2, B: 2 };
 
-// WCA-style random-move scramble: no same face twice, no same axis three in a row
+
 export function generateScramble(length = 20): string {
   const moves: string[] = [];
   let prev: Face | null = null;
