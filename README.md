@@ -1,9 +1,5 @@
 # 🧊 Rubixify — Master the Rubik’s Cube
-
-Rubixify is an interactive platform built for Rubik’s Cube enthusiasts who want to learn, practice, and master speedcubing algorithms. From learning your first F2L cases to refining OLL recognition and PLL execution, Rubixify brings essential CFOP training tools together in one place.
-
-Explore algorithms, visualize cube cases, test your recognition skills, and track your progress as you work toward faster, more consistent solves.
-
+THE ULTIMATE GUIDE TO SPEEDCUBING
 ---
 
 ## ✨ Features
