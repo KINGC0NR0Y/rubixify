@@ -1,8 +1,5 @@
 # 🧊 Algently — Master Rubik's Cube Algorithms
 
-<<<<<<< HEAD
-Algently is a fun, user-friendly platform dedicated for those getting into or want to refine their cubing skills! This project serves as a central place where cubers can quickly find the exact algorithm they need in the middle of practice, without having to search through scattered videos or inconsistent resources. Instead of memorizing long lists blindly, users can understand each case visually, recognize patterns more easily, and gradually build muscle memory through repeated exposure and practice.
-=======
 **Algently** is a fun, user-friendly web platform designed to help cubers **learn, practice, and master Rubik's Cube solving algorithms**.
 >>>>>>> 5fdf2bb6c3568072a814b1de14bffcbf928a83a7
 
