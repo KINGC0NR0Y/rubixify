@@ -1,6 +1,6 @@
-# 🧊 Algently — Master Rubik's Cube Algorithms
+# 🧊 Rubixify — Master Rubik's Cube Algorithms
 
-**Algently** is a fun, user-friendly web platform designed to help cubers **learn, practice, and master Rubik's Cube solving algorithms**.
+**Rubixify** is a fun, user-friendly web platform designed to help cubers **learn, practice, and master Rubik's Cube solving algorithms**.
 >>>>>>> 5fdf2bb6c3568072a814b1de14bffcbf928a83a7
 
 Whether you're learning F2L for the first time, drilling OLL cases, or trying to make your PLL recognition faster, Algently provides an interactive environment to turn algorithms into muscle memory.
