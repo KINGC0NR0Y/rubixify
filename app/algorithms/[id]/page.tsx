@@ -10,9 +10,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const alg = getAlgorithmById(id);
-  if (!alg) return { title: 'Not Found – Algently' };
+  if (!alg) return { title: 'Not Found – Rubixify' };
   return {
-    title: `${alg.name} – Algently`,
+    title: `${alg.name} – Rubixify`,
     description: alg.recognition,
   };
 }

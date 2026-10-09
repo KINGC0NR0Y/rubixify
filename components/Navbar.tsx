@@ -106,8 +106,8 @@ export default function Navbar() {
                 lineHeight: 1,
               }}
             >
-              Alg
-              <span style={{ color: '#B90000' }}>ently</span>
+              Rubix
+              <span style={{ color: '#B90000' }}>ify</span>
             </span>
           </Link>
 

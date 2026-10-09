@@ -1,4 +1,4 @@
-const KEY = 'algently_favorites';
+const KEY = 'rubixify_favorites';
 const LEGACY_KEY = 'cubopedia_favorites';
 
 // One-time carry-over from the pre-rename key so existing users keep their favorites.

@@ -14,8 +14,8 @@ export interface QuizResult {
   totalResponseMs: number;
 }
 
-const SOLVES_KEY = 'algently-solves';
-const QUIZ_KEY = 'algently-quiz-results';
+const SOLVES_KEY = 'rubixify-solves';
+const QUIZ_KEY = 'rubixify-quiz-results';
 
 // One-time carry-over from the pre-rename keys so existing users keep their data.
 function migrateLegacy(key: string, legacyKey: string) {

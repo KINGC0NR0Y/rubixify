@@ -83,7 +83,7 @@ export default function AboutPage() {
           <ScrollReveal direction="up">
             <SectionHeader
               tag="ABOUT US" tagColor={BLUE}
-              title="WHY" accent="ALGENTLY?" accentColor={RED}
+              title="WHY" accent="RUBIXIFY?" accentColor={RED}
             />
           </ScrollReveal>
 
@@ -107,9 +107,9 @@ export default function AboutPage() {
               {/* body */}
               <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {[
-                  { lead: true,  p: "The Story Behind Algently:" },
-                  { lead: false, p: "Hey cubers! My name is Satvik and I started this project as a high schooler to complement my love for Rubik's cubing! What began as a personal interest in solving the cube faster quickly turned into a deeper curiosity about the algorithms and formulated structure behind the Rubik's cube" },
-                  { lead: false, p: "I created Algently as a place where cubers of all skill levels can find algorithms, tutorials, guides, and other useful cubing resources in one organized platform. Fear not, whether it's your first time solving the cube or working toward faster solves, my primary focus with this project is to make learning cubing easier and more enjoyable." },
+                  { lead: true,  p: "The Story Behind Rubixify:" },
+                  { lead: false, p: "Hey cubers! My name is Satvik and I started this project as a high schooler to complement my love for Rubik's cubing! What began as a personal interest in solving the cube faster quickly turned into a deeper curiosity about the algorithms and formulated structure behind the Rubik's cube." },
+                  { lead: false, p: "I created Rubixify as a place where cubers of all skill levels can find algorithms, tutorials, guides, and other useful cubing resources in one organized platform. Fear not, whether it's your first time solving the cube or working toward faster solves, my primary focus with this project is to make learning cubing easier and more enjoyable." },
                   { lead: false, p: "  - Satvik Thakur"},
                 ].map(({ lead, p }, i) => (
                   <p

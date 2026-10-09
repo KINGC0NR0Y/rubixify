@@ -217,7 +217,7 @@ export function SolverTab() {
         <p className="text-sm leading-relaxed mb-3" style={{ color: '#2a2a2a' }}>
           Hold your cube with the <strong>yellow centre facing up</strong> and the{' '}
           <strong>blue centre facing you</strong>. That is the same view every diagram on
-          Algently uses, so red ends up on the right, orange on the left, green at the back and
+          Rubixify uses, so red ends up on the right, orange on the left, green at the back and
           white underneath.
         </p>
         <p className="text-xs leading-relaxed mb-3" style={{ color: '#555555' }}>

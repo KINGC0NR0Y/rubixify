@@ -1,12 +1,12 @@
-# 🧊 Algently — Master Rubik's Cube Algorithms
+# 🧊 Rubixify — Master Rubik's Cube Algorithms
 
 <<<<<<< HEAD
-Algently is a fun, user-friendly platform dedicated for those getting into or want to refine their cubing skills! This project serves as a central place where cubers can quickly find the exact algorithm they need in the middle of practice, without having to search through scattered videos or inconsistent resources. Instead of memorizing long lists blindly, users can understand each case visually, recognize patterns more easily, and gradually build muscle memory through repeated exposure and practice.
+Rubixify is a fun, user-friendly platform dedicated for those getting into or want to refine their cubing skills! This project serves as a central place where cubers can quickly find the exact algorithm they need in the middle of practice, without having to search through scattered videos or inconsistent resources. Instead of memorizing long lists blindly, users can understand each case visually, recognize patterns more easily, and gradually build muscle memory through repeated exposure and practice.
 =======
-**Algently** is a fun, user-friendly web platform designed to help cubers **learn, practice, and master Rubik's Cube solving algorithms**.
+**Rubixify** is a fun, user-friendly web platform designed to help cubers **learn, practice, and master Rubik's Cube solving algorithms**.
 >>>>>>> 5fdf2bb6c3568072a814b1de14bffcbf928a83a7
 
-Whether you're learning F2L for the first time, drilling OLL cases, or trying to make your PLL recognition faster, Algently provides an interactive environment to turn algorithms into muscle memory.
+Whether you're learning F2L for the first time, drilling OLL cases, or trying to make your PLL recognition faster, Rubixify provides an interactive environment to turn algorithms into muscle memory.
 
 ## ✨ Features
 
@@ -38,15 +38,15 @@ Whether you're learning F2L for the first time, drilling OLL cases, or trying to
   See difficulty ratings and move counts for individual cases to understand which algorithms may require more practice.
 
 <<<<<<< HEAD
-Please feel free to check these amazing tools! Hard-carried Algently I must say :)
+Please feel free to check these amazing tools! Hard-carried Rubixify I must say :)
 
-* jperm.net - built by Rubik’s Cubing YouTuber JPerm, definitely one of the best if not the best resources for cubing out there (this was my biggest inspiration for why I decided to make Algently!)
+* jperm.net - built by Rubik’s Cubing YouTuber JPerm, definitely one of the best if not the best resources for cubing out there (this was my biggest inspiration for why I decided to make Rubixify!)
 * wca.com - the OFFICIAL Rubik’s Cubing organization
 * 
 =======
 ## 🎯 Supported Algorithms
 
-Algently currently focuses on the core algorithm sets used in CFOP:
+Rubixify currently focuses on the core algorithm sets used in CFOP:
 
 | Set     | Description                   |
 | ------- | ----------------------------- |
@@ -58,17 +58,17 @@ Each case includes visual references and algorithm notation to make learning eas
 
 ## 🧩 Learn → Recognize → Solve
 
-Algently is designed around a simple practice loop:
+Rubixify is designed around a simple practice loop:
 
 **Learn the algorithm** → **Recognize the case** → **Practice the execution** → **Track your progress** → **Repeat**
 
-Instead of simply memorizing move sequences, Algently helps you connect **what you see on the cube** with **what you need to execute**.
+Instead of simply memorizing move sequences, Rubixify helps you connect **what you see on the cube** with **what you need to execute**.
 
 ## ⏱️ Practice Sessions
 
 Use the built-in timer to turn algorithm practice into measurable training sessions.
 
-Track your solves and use averages to see how your execution improves over time. Combined with WCA-style scrambles, Algently provides a convenient practice environment without needing multiple tools.
+Track your solves and use averages to see how your execution improves over time. Combined with WCA-style scrambles, Rubixify provides a convenient practice environment without needing multiple tools.
 
 ## 📖 Roadmap
 
@@ -88,7 +88,7 @@ Contributions, suggestions, and bug reports are welcome!
 
 If you have an idea that could make algorithm learning or speedcubing practice better, feel free to open an issue or submit a pull request.
 
-Like Algently? consider giving the repository a **star ⭐**!
+Like Rubixify? consider giving the repository a **star ⭐**!
 
 ---
 ## 🔗 Resources
@@ -101,5 +101,5 @@ Like Algently? consider giving the repository a **star ⭐**!
 
 * [World Cube Association](https://www.worldcubeassociation.org/)
 
-Note: Algently is an independent project and is not affiliated with, endorsed by, or officially associated with the resources listed above unless explicitly stated otherwise.
+Note: Rubixify is an independent project and is not affiliated with, endorsed by, or officially associated with the resources listed above unless explicitly stated otherwise.
 >>>>>>> 5fdf2bb6c3568072a814b1de14bffcbf928a83a7
