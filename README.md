@@ -121,10 +121,6 @@ Rubixify builds on the broader speedcubing community and its collection of learn
 - [VisualCube](https://github.com/tdecker91/visualcube) — Cube visualization resource.
 - [SpeedCubeShop](https://speedcubeshop.com/) — Speedcubing equipment and accessories.
 
-These resources have helped shape the wider speedcubing ecosystem and provide useful references for cubers of all experience levels.
+---
 
-
-* [World Cube Association](https://www.worldcubeassociation.org/)
-
-Note: Algently is an independent project and is not affiliated with, endorsed by, or officially associated with the resources listed above unless explicitly stated otherwise.
->>>>>>> 5fdf2bb6c3568072a814b1de14bffcbf928a83a7
+**Disclaimer:** Rubixify is an independent project and is not affiliated with, endorsed by, sponsored by, or officially associated with any third-party organizations or services mentioned on this website.
