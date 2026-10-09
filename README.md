@@ -1,6 +1,5 @@
 # 🧊 Rubixify — Master the Rubik’s Cube
 THE ULTIMATE GUIDE TO SPEEDCUBING
----
 
 ## ✨ Features
 
