@@ -51,6 +51,8 @@
 /* ─── Reset & Base ───────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; color-scheme: light; }
+/* Hide the text caret everywhere */
+* { caret-color: transparent; }
 
 body {
   background-color: #FFFFFF;
