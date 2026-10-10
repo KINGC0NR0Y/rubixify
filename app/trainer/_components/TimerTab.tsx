@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { RefreshCw, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { generateScramble, parseScramble } from '@/lib/scramble';
 import {
-  Solve, getSolves, addSolve, deleteSolve, updateSolve, clearSolves,
+  Solve, useSolves, addSolve, deleteSolve, updateSolve, clearSolves,
   calcAo, formatTime, effectiveTime,
 } from '@/lib/session-store';
 
@@ -60,36 +60,38 @@ function ScrambleViz({ alg, size = 100 }: { alg: string; size?: number }) {
 
 export function TimerTab() {
   const [scramble, setScramble]             = useState(() => generateScramble());
-  const [moves, setMoves]                   = useState<string[]>([]);
-  const [playerStep, setPlayerStep]         = useState(0);
+  const [stepState, setStepState]         = useState({ scramble: '', n: 0 });
   const [phase, setPhase]                   = useState<Phase>('idle');
   const [inspectionLeft, setInspectionLeft] = useState(15);
   const [solveStart, setSolveStart]         = useState(0);
   const [elapsed, setElapsed]               = useState(0);
-  const [solves, setSolves]                 = useState<Solve[]>([]);
+  const solves                              = useSolves();
   const [lastSolve, setLastSolve]           = useState<Solve | null>(null);
 
   // Parse scramble into move tokens
-  useEffect(() => {
-    const m = parseScramble(scramble);
-    setMoves(m);
-    setPlayerStep(0);
-  }, [scramble]);
+  const moves = useMemo(() => parseScramble(scramble), [scramble]);
 
-  // Load solves from localStorage on mount
-  useEffect(() => { setSolves(getSolves()); }, []);
+  // Virtual-cube step resets whenever the scramble changes.
+  const playerStep = stepState.scramble === scramble ? stepState.n : 0;
+  const setPlayerStep = (u: number | ((s: number) => number)) =>
+    setStepState(prev => {
+      const cur = prev.scramble === scramble ? prev.n : 0;
+      return { scramble, n: typeof u === 'function' ? u(cur) : u };
+    });
 
   const newScramble = useCallback(() => setScramble(generateScramble()), []);
 
   // Inspection countdown
   useEffect(() => {
     if (phase !== 'inspecting') return;
-    if (inspectionLeft <= 0) {
-      setPhase('running');
-      setSolveStart(Date.now());
-      return;
-    }
-    const t = setTimeout(() => setInspectionLeft(l => l - 1), 1000);
+    if (inspectionLeft <= 0) return;
+    const t = setTimeout(() => {
+      setInspectionLeft(l => l - 1);
+      if (inspectionLeft <= 1) {
+        setPhase('running');
+        setSolveStart(Date.now());
+      }
+    }, 1000);
     return () => clearTimeout(t);
   }, [phase, inspectionLeft]);
 
@@ -110,8 +112,7 @@ export function TimerTab() {
       plusTwo: false,
       timestamp: Date.now(),
     };
-    const all = addSolve(solve);
-    setSolves(all);
+    addSolve(solve);
     setLastSolve(solve);
     setPhase('stopped');
     newScramble();
@@ -172,16 +173,16 @@ export function TimerTab() {
   const toggleDnf = (id: string) => {
     const s = solves.find(s => s.id === id);
     if (!s) return;
-    setSolves(updateSolve(id, { dnf: !s.dnf, plusTwo: false }));
+    updateSolve(id, { dnf: !s.dnf, plusTwo: false });
   };
 
   const togglePlusTwo = (id: string) => {
     const s = solves.find(s => s.id === id);
     if (!s) return;
-    setSolves(updateSolve(id, { plusTwo: !s.plusTwo, dnf: false }));
+    updateSolve(id, { plusTwo: !s.plusTwo, dnf: false });
   };
 
-  const removeSolve = (id: string) => setSolves(deleteSolve(id));
+  const removeSolve = (id: string) => { deleteSolve(id); };
 
   const fmtAo = (v: number | null) =>
     v === null ? '—' : !isFinite(v) ? 'DNF' : formatTime(v);
@@ -364,7 +365,7 @@ export function TimerTab() {
               SESSION — {solves.length} SOLVE{solves.length !== 1 ? 'S' : ''}
             </span>
             <button
-              onClick={() => { clearSolves(); setSolves([]); setLastSolve(null); }}
+              onClick={() => { clearSolves(); setLastSolve(null); }}
               className="flex items-center gap-1"
               style={{
                 background: 'none', border: 'none', color: '#888',

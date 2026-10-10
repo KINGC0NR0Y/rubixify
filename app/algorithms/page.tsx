@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useSyncExternalStore } from 'react';
 import { Search, Filter, SlidersHorizontal, X } from 'lucide-react';
 import { allAlgorithms, Category } from '@/lib/algorithms';
 import AlgorithmCard from '@/components/AlgorithmCard';
@@ -15,20 +15,21 @@ const categories: { label: string; value: Category | 'All'; color: string; textL
 
 export default function AlgorithmsPage() {
   const [query, setQuery]       = useState('');
-  const [category, setCategory] = useState<Category | 'All'>('All');
+  const [pickedCategory, setCategory] = useState<Category | 'All' | null>(null);
   const [maxMoves, setMaxMoves] = useState<number>(30);
   const [sort, setSort]         = useState<'number' | 'popularity' | 'moves'>('number');
   const [showFilters, setShowFilters] = useState(false);
 
   // Honor a `?category=` link (e.g. from the homepage CFOP cards).
-  useEffect(() => {
-    const param = new URLSearchParams(window.location.search).get('category');
-    if (!param) return;
-    const match = categories.find(
-      (c) => c.value !== 'All' && c.value.toLowerCase() === param.toLowerCase(),
-    );
-    if (match) setCategory(match.value);
-  }, []);
+  const param = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get('category') ?? '',
+    () => '',
+  );
+  const urlCategory = categories.find(
+    (c) => c.value !== 'All' && c.value.toLowerCase() === param.toLowerCase(),
+  )?.value;
+  const category: Category | 'All' = pickedCategory ?? urlCategory ?? 'All';
 
   const results = useMemo(() => {
     const filtered = allAlgorithms.filter((a) => {

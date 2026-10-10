@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { Shuffle, Eye, EyeOff, CheckCircle, XCircle, RotateCcw, ArrowRight } from 'lucide-react';
 import { ollAlgorithms, pllAlgorithms, Algorithm } from '@/lib/algorithms';
 import CubeViz from '@/components/CubeViz';
@@ -34,54 +34,49 @@ function buildOptions(pool: Algorithm[], current: Algorithm): Algorithm[] {
   return [...wrong, current].sort(() => Math.random() - 0.5);
 }
 
+interface Question {
+  current: Algorithm;
+  options: Algorithm[];
+  startedAt: number;
+}
+
+function makeQuestion(pool: Algorithm[]): Question {
+  const current = pickRandom(pool);
+  return { current, options: buildOptions(pool, current), startedAt: performance.now() };
+}
+
+const noopSubscribe = () => () => {};
+
 export function QuizTab() {
   const [mode, setMode]       = useState<Mode>('OLL');
-  const [current, setCurrent] = useState<Algorithm>(ollAlgorithms[0]);
   const [revealed, setRevealed] = useState(false);
   const [results, setResults] = useState<Result[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
-  const [options, setOptions] = useState<Algorithm[]>([]);
-  const caseStartRef = useRef(Date.now());
+  // Questions are random, so they are only shown once hydrated (avoids SSR mismatch).
+  const hydrated = useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const [initial] = useState(() => makeQuestion(ollAlgorithms));
+  const [picked, setPicked] = useState<Question | null>(null);
+  const { current, options, startedAt } = picked ?? initial;
 
   const pool = mode === 'OLL' ? ollAlgorithms : pllAlgorithms;
 
-  useEffect(() => {
-    const c = pickRandom(ollAlgorithms);
-    setCurrent(c);
-    setOptions(buildOptions(ollAlgorithms, c));
-    caseStartRef.current = Date.now();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (options.length > 0) setOptions(buildOptions(pool, current));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
-
-  const next = useCallback(() => {
-    const c = pickRandom(pool);
-    setCurrent(c);
-    setOptions(buildOptions(pool, c));
+  function next() {
+    setPicked(makeQuestion(pool));
     setRevealed(false);
     setSelected(null);
-    caseStartRef.current = Date.now();
-  }, [pool]);
+  }
 
   function switchMode(m: Mode) {
     setMode(m);
-    const p = m === 'OLL' ? ollAlgorithms : pllAlgorithms;
-    const c = pickRandom(p);
-    setCurrent(c);
-    setOptions(buildOptions(p, c));
+    setPicked(makeQuestion(m === 'OLL' ? ollAlgorithms : pllAlgorithms));
     setRevealed(false);
     setSelected(null);
     setResults([]);
-    caseStartRef.current = Date.now();
   }
 
-  function handleGuess(id: string) {
+  function handleGuess(id: string, clickedAt: number) {
     if (selected) return;
-    const responseMs = Date.now() - caseStartRef.current;
+    const responseMs = Math.max(0, Math.round(clickedAt - startedAt));
     const correct = id === current.id;
     setSelected(id);
     setRevealed(true);
@@ -98,6 +93,8 @@ export function QuizTab() {
     results.length > 0
       ? Math.round((results.filter(r => r.correct).length / results.length) * 100)
       : null;
+
+  if (!hydrated) return <div style={{ minHeight: 320 }} />;
 
   return (
     <div>
@@ -205,7 +202,7 @@ export function QuizTab() {
             return (
               <button
                 key={opt.id}
-                onClick={() => handleGuess(opt.id)}
+                onClick={e => handleGuess(opt.id, e.timeStamp)}
                 disabled={!!selected}
                 style={{
                   background: bg, color,

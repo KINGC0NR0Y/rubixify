@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { BarChart3, RefreshCw } from 'lucide-react';
+import { BarChart3 } from 'lucide-react';
 import { ollAlgorithms, pllAlgorithms } from '@/lib/algorithms';
 import {
-  Solve, QuizResult, getSolves, getQuizResults, clearSolves, clearQuizResults,
+  useSolves, useQuizResults, clearSolves, clearQuizResults,
   calcAo, formatTime, effectiveTime,
 } from '@/lib/session-store';
 
@@ -18,15 +17,8 @@ const comicBox = {
 const ALL_ALGS = [...ollAlgorithms, ...pllAlgorithms];
 
 export function AnalyticsTab() {
-  const [solves, setSolves]           = useState<Solve[]>([]);
-  const [quizResults, setQuizResults] = useState<Record<string, QuizResult>>({});
-
-  const reload = () => {
-    setSolves(getSolves());
-    setQuizResults(getQuizResults());
-  };
-
-  useEffect(() => { reload(); }, []);
+  const solves      = useSolves();
+  const quizResults = useQuizResults();
 
   // ── Session stats ─────────────────────────────────
   const ao5   = calcAo(solves, 5);
@@ -108,21 +100,6 @@ export function AnalyticsTab() {
 
   return (
     <div>
-      {/* Refresh */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
-        <button
-          onClick={reload}
-          className="flex items-center gap-1"
-          style={{
-            background: '#fff', border: '2px solid #0A0A0A', boxShadow: '2px 2px 0 #0A0A0A',
-            borderRadius: 2, padding: '4px 12px', fontSize: '0.72rem', fontWeight: 800,
-            cursor: 'pointer', fontFamily: 'var(--font-bangers, Bangers, cursive)', letterSpacing: '0.08em',
-          }}
-        >
-          <RefreshCw size={11} /> REFRESH
-        </button>
-      </div>
-
       {/* ── Overview stats ────────────────────────────── */}
       {solves.length > 0 && (
         <div style={{ marginBottom: 20 }}>
@@ -366,7 +343,7 @@ export function AnalyticsTab() {
       <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
         {solves.length > 0 && (
           <button
-            onClick={() => { clearSolves(); setSolves([]); }}
+            onClick={() => { clearSolves(); }}
             style={{
               background: '#fff', border: '2px solid #0A0A0A', borderRadius: 2,
               padding: '5px 12px', fontSize: '0.68rem', fontWeight: 700, color: '#888', cursor: 'pointer',
@@ -377,7 +354,7 @@ export function AnalyticsTab() {
         )}
         {Object.keys(quizResults).length > 0 && (
           <button
-            onClick={() => { clearQuizResults(); setQuizResults({}); }}
+            onClick={() => { clearQuizResults(); }}
             style={{
               background: '#fff', border: '2px solid #0A0A0A', borderRadius: 2,
               padding: '5px 12px', fontSize: '0.68rem', fontWeight: 700, color: '#888', cursor: 'pointer',

@@ -1,18 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Heart, ArrowRight } from 'lucide-react';
-import { getFavorites } from '@/lib/favorites';
+import { useFavorites } from '@/lib/favorites';
 import { getAlgorithmById } from '@/lib/algorithms';
 import AlgorithmCard from '@/components/AlgorithmCard';
 import Link from 'next/link';
 
 export default function FavoritesPage() {
-  const [favIds, setFavIds] = useState<string[]>([]);
-
-  useEffect(() => {
-    setFavIds(getFavorites());
-  }, []);
+  const favIds = useFavorites();
 
   const algorithms = favIds
     .map((id) => getAlgorithmById(id))

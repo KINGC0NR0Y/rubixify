@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import { Heart, Move } from 'lucide-react';
 import { Algorithm, getVizAlg } from '@/lib/algorithms';
-import { toggleFavorite, isFavorite } from '@/lib/favorites';
-import { useState, useEffect } from 'react';
+import { toggleFavorite, useFavorites } from '@/lib/favorites';
 import CubeViz from './CubeViz';
 
 const pillClass: Record<string, string> = {
@@ -24,16 +23,11 @@ interface Props {
 }
 
 export default function AlgorithmCard({ alg }: Props) {
-  const [fav, setFav] = useState(false);
-
-  useEffect(() => {
-    setFav(isFavorite(alg.id));
-  }, [alg.id]);
+  const fav = useFavorites().includes(alg.id);
 
   function handleFav(e: React.MouseEvent) {
     e.preventDefault();
-    const next = toggleFavorite(alg.id);
-    setFav(next.includes(alg.id));
+    toggleFavorite(alg.id);
   }
 
   const accent = categoryAccent[alg.category] ?? '#0045AD';

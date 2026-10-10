@@ -1,13 +1,9 @@
 import Link from 'next/link';
 import {
   BookOpen,
-  Target,
-  Star,
   Timer,
   BarChart3,
   Cpu,
-  Search,
-  Smartphone,
   ArrowRight,
 } from 'lucide-react';
 import { AnimatedHero } from '@/components/ui/animated-hero-section-1';

@@ -26,7 +26,10 @@ const AXIS = { x: 0, y: 1, z: 2 } as const;
 
 export default function CubeViz({ alg, category, size = 80, state }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const [ready, setReady] = useState(false);
+  const [readyKey, setReadyKey] = useState('');
+
+  const key = cubeCacheKey({ alg, category: category as Category, state, style: { size } });
+  const ready = readyKey === key || svgCache.has(key);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -34,12 +37,10 @@ export default function CubeViz({ alg, category, size = 80, state }: Props) {
     let cancelled = false;
 
     const input = { alg, category: category as Category, state, style: { size } };
-    const key = cubeCacheKey(input);
 
     const cached = svgCache.get(key);
     if (cached) {
       el.innerHTML = cached;
-      setReady(true);
       return;
     }
 
@@ -72,7 +73,7 @@ export default function CubeViz({ alg, category, size = 80, state }: Props) {
             svg.setAttribute('height', '100%');
           }
           svgCache.set(key, el.innerHTML);
-          if (!cancelled) setReady(true);
+          if (!cancelled) setReadyKey(key);
         } catch {
         }
       })
@@ -81,7 +82,7 @@ export default function CubeViz({ alg, category, size = 80, state }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [alg, category, size, state]);
+  }, [key, alg, category, size, state]);
 
   return (
     <div

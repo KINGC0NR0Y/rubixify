@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Heart, Copy, Check, Move, Star, Tag, Lightbulb, ChevronRight } from 'lucide-react';
 import { Algorithm, getVizAlg } from '@/lib/algorithms';
 import type { CubeState } from '@/lib/cubeImage';
-import { toggleFavorite, isFavorite } from '@/lib/favorites';
+import { toggleFavorite, useFavorites } from '@/lib/favorites';
 import CubeViz from './CubeViz';
 import AlgorithmCard from './AlgorithmCard';
 
@@ -40,18 +40,13 @@ const algBox = {
 } as const;
 
 export default function AlgorithmDetail({ alg, related }: Props) {
-  const [fav, setFav]       = useState(false);
+  const fav = useFavorites().includes(alg.id);
   const [copied, setCopied] = useState(false);
   const [vizState, setVizState] = useState<CubeState>('recognition');
   const accent = categoryColor[alg.category] ?? '#0045AD';
 
-  useEffect(() => {
-    setFav(isFavorite(alg.id));
-  }, [alg.id]);
-
   function handleFav() {
-    const next = toggleFavorite(alg.id);
-    setFav(next.includes(alg.id));
+    toggleFavorite(alg.id);
   }
 
   function handleCopy() {
