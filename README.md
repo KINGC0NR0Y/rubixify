@@ -1,6 +1,5 @@
-# 🧊 Rubixify — Master the Rubik’s Cube
-### THE ULTIMATE GUIDE TO SPEEDCUBING
-
+# 🧊 Rubixify — The Ultimate Rubik's Cube Algorithm Database
+URL Coming Soon!
 ## ✨ Features
 
 ### 📚 Comprehensive Algorithm Library
